@@ -1,0 +1,12 @@
+@CHARSET "ISO-8859-1";
+
+DIV.pagButton {
+	position: relative;
+}
+DIV.pagButton img{
+	display: block;
+	position: relative;
+}
+div#tweets{
+	float:none;
+}

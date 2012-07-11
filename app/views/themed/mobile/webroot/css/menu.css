@@ -1,0 +1,189 @@
+@charset "utf-8";
+/* CSS Document */
+div#submenu{
+	margin-top: 2px;
+	margin-bottom: 5px;
+	width:100%;
+	/*background-color:yellow;*/
+	height: 19px;
+	position:relative;
+	float: left;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: rgb(137,195,63);
+	overflow: hidden;
+	padding-left: 3px;
+}
+div#submenu ul#sections{
+	list-style-type: none;
+	height: 19px;
+}
+div#submenu ul#sections li{
+	position: relative;
+	margin-right: 2px;
+	margin-top: 4px;
+	display: block;
+	float: left;
+	max-width: 33%;
+	line-height: 19px;
+	padding: 0px 3px;
+	background-color: #60882C;
+	font-weight: bold;
+	-moz-border-radius: 5px 5px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
+	-khtml-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 0px 0px;
+	/*border-top-color: black;
+	broder-left-color: black;
+	border-right-color: black;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-right-width: 1px;*/
+	-moz-box-shadow: 0 0 2px 1px #999999;
+	-webkit-box-shadow: 0 0 2px 1px #999999;
+	box-shadow: 0 0 2px 1px #999999;
+	color: white;	
+}
+div#submenu ul#sections li.selected{
+	z-index: 100;
+	margin-top: 1px;
+	/*margin-right: 0px;*/
+	background-color: #89C33F;
+	border-style: none;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 700;
+	-moz-box-shadow: 0 0 2px 1px #E7F3D9;
+	-webkit-box-shadow: 0 0 2px 1px #E7F3D9;
+	box-shadow: 0 0 2px 1px #E7F3D9;
+}
+div#submenu ul#sections li:hover{
+	cursor: pointer;
+}
+div#menu{
+	background-color: #999999;
+	min-width: 240px;
+	max-width: 100%;
+	height: 26px;
+	clear: both;
+	margin-left: auto;
+	margin-right: auto;
+}
+div#menu img{
+	height: 20px;
+	width: 20px;
+}
+#menu ul{
+padding:0px;
+min-width: 240px;
+max-width: 620px;
+background-color: #999999;
+display: block;
+}
+#menu li a{
+display:block;
+color:#333333;
+text-decoration:none;
+/*height:23px;*/
+max-width: 63px;
+padding: 0px 10px;
+outline: none;
+font-family: 'Ubuntu', sans-serif;
+font-size: 9px;
+margin-top: 2px;
+margin-bottom: 1px;
+}
+#menu li a:active {
+  outline: none;
+}
+
+#menu li{
+background-color: #999999;
+list-style:none;
+float:left;
+border-left-style: none;
+border-left-width:thin;
+border-left-color: #AFCDAB;
+font-size:10px;
+}
+#menu li.separator{
+	/*border-right-color: rgb(114,112,111);*/
+	/*border-right-color: -moz-linear-gradient(left top,  blue,  #000000);*/
+
+	border: 2px solid #999;
+	border-bottom-style:none;
+	border-top-style:none;
+	border-left-style:none;
+-moz-border-right-colors: #555 #999 #ccc;
+	margin-right: 1px;
+
+}
+#menu li:hover{
+background: #88BF82 url(../img/mnu_selected.png) repeat-x;
+-moz-border-radius:2px 2px 2px 2px; 
+-webkit-border-radius: 2px 2px 2px 2px;
+color:#333333;
+}
+#menu li a:hover{
+color:#333333;
+}
+
+#menu ul li ul{
+position: absolute;
+	width: 10em;
+	margin-left: -1000em; /* using left instead of display to hide menus because display: none isn't read by screen readers */
+	margin-top:0px;
+}
+#menu ul li:hover ul{
+	margin-left: 1px;
+}
+#menu ul li ul li {
+	width: 100px;
+}
+
+#menu ul li ul li ul{
+	display: none;
+position: absolute;
+	width: 10em;
+	margin-top:0px;
+}
+#menu ul li ul li:hover ul{
+	display: block;
+	margin-left: 140px;
+	top: 0px;
+}
+
+#menu ul li:hover ul li{
+	/*background-image: url(../img/submenu_background.png);*/
+	background-color: #dededd;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+#menu ul li:hover ul li:hover{
+	/*background: green url(../img/mnu_selected.png) repeat-x;*/
+	background: transparent url(../img/mnu_selected.png) repeat-x;
+	color:#333333;
+}
+
+#menu ul li ul li{
+clear:both;
+border-style:none;
+width: 100%;
+display:block
+float: left;
+
+}
+#menu ul li ul li a{
+color:#333333;
+display:block
+float: left;
+font-weight: normal;
+}
+#menu ul li ul li a:hover{
+color:black;
+font-weight: bold;
+}
+
+

@@ -1,0 +1,147 @@
+@charset "utf-8";
+/* CSS Document */
+body { background:url(/img/splash/back.jpg) repeat-x #639944}
+#contenedor { 
+	width: 882px;
+	height: 378px;
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -189px;   
+    margin-left: -442px;
+	background:#00FF00;
+	background: url(/img/splash/logo.png) no-repeat;
+
+}
+#h_1 { 
+	width: 345px;
+	height: 378px;
+	position:absolute;
+	overflow:hidden;
+}
+#h_2 { 
+	width: 498px;
+	height: 378px;
+	float: right;
+	margin: 0 0 0 38px;
+}
+#txt { 
+	width: 335px;
+	height: 80px;
+	margin: 133px 0 0 0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	color:#ffffff;
+	text-align:right;
+}
+#txt a { 
+	color:#ffffff;
+	text-decoration: underline;
+}
+#txt2 { 
+	width: 335px;
+	height: 80px;
+	margin: 133px 0 0 0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	color:#86c03f;
+	text-align:right;
+	display:none;
+}
+#login { 
+	width: 323px;
+	height: 75px;
+	background:url(/img/splash/login.png) no-repeat;
+	background-position: 0px 5px;
+	float:left;
+}
+#invitacion { 
+	width: 323px;
+	margin: 0 0 0 100px;
+	height: 75px;
+	background:url(/img/splash/mail.png) no-repeat;
+	background-position: 0px 0px;
+	float:left;
+}
+#confirmacion { 
+	width: 323px;
+	/*margin: 0 0 0 50px;*/
+	height: 75px;
+	float:right;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	color:#ccc;
+	padding: 5px 0 0 10px
+}
+.ok {
+	display: block;
+	float: left;
+	height: 80px;
+	width: 79px;
+	background:url(/img/splash/ok.png);
+	background-position: -3px -10px;
+	border:none;
+	cursor:pointer;
+	margin: 0 0 0 10px;
+	/*text-indent: -9000px;*/
+	}
+.ok:hover {
+background-position: -3px -100px;
+}
+input:-webkit-autofill {
+background-color: #509c46 !important;
+}
+.campo {
+	display: block;
+	line-height: 25px;
+	font-size: 13px;
+	height: 25px;
+	width: 225px;
+	/*background:url(/img/splash/trans.gif);*/
+	background-color: #509c46;
+	border: none;
+	float:left;
+	margin: 4px 0 0 6px;
+	color: #CCCCCC
+}
+
+#campos {
+	float: left;
+	height: 67px;
+	/*width: 230px;*/
+	width: 330px;
+	float:left;
+	margin: 5px 0 0 0;
+}
+#c_video {
+	height: 273px;
+	width: 475px;
+	float:left;
+	margin: 51px 0 0 0;
+	/*background:url(/img/splash/backvideo.png);*/
+}
+#video {
+	height: 253px;
+	width: 453px;
+	float:left;
+	margin: 10px 0 0 10px;
+	/*background:url(/img/splash/video.jpg);*/
+}
+
+#slide {
+	width: 1312px;
+	height: 80px;
+	position:absolute;
+	left: 22px;
+	top: 237px;
+}
+
+#mail { 
+	height: 25px;
+	width: 225px;
+	margin: 3px 0 0 6px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	color:#ccc;
+	padding: 3px 0 0 10px
+}

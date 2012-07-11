@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+
+div#content{
+	padding-top: 10px;
+}
+div.addsRow{
+	width: 100%;
+}
+div.cates{
+	float: left;
+	margin-right: 15px;
+	padding: 5px;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: #dededd;
+	background-color: #f0f0f0;
+}
+p.cates{
+	font-weight: bolder;
+	margin: 0px 0px 10px 5px;
+}
+div.input{
+	float: left;
+	height: 23px;
+}
+input#AdName, input#AdLink{
+	height: 23px;
+}
+select#AdTwitter{
+	line-height: 25px;
+	height: 25px;
+	/*float: left;*/
+	vertical-align: middle;
+}
+select#AdTwitter option{
+	line-height: 25px;
+	height: 25px;
+	vertical-align: middle;
+}
+div#twitter label{
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	float: left;
+	margin-right: 10px;
+}
+div.cates div.checkbox{
+	float: none;
+	margin-bottom: 2px;
+}
+div.cates label{
+	margin-left: 5px;
+}
+div.adsRow div.input label{
+	font-weight: bolder;
+	margin-right: 5px;
+	margin-left: 15px;
+}
+select#AdPriority{
+	height: 23px;
+	margin-left: 15px;
+	float: left;
+}
+imput#AdsImage{
+	float: left;
+}
+div.submit{
+	margin-left: 15px;
+}
+div#button{
+	float: left;
+	margin-left: 15px;
+}
+div.preview{
+	float: left;
+	margin-top: 0px;
+	width: 1090px;
+	padding-bottom: 10px;
+	text-align: center;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: #dededd;
+	background-color: #f0f0f0;
+}
+img#prvImg{
+	height: 124px;
+}
+
+/*Publicidades*/
+table#adsList tr td img{
+	max-width: 500px;
+}
+table#adsList tr:hover{
+	background-color: #afcdab;
+}

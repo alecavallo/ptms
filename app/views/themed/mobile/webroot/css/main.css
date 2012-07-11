@@ -1,0 +1,264 @@
+@CHARSET "ISO-8859-1";
+*{
+margin:0px;
+padding:0px;
+}
+div#debug{
+	width: 240px;
+}
+.aqua{
+	color:#00A99D;
+}
+.black20{
+	color: #cccccc;
+}
+.green{
+	/*color: #006837;*/
+	color: rgb(137,195,63);
+}
+.grey{
+	color: rgb(131,130,129);
+}
+a{
+	text-decoration:none;
+	color:#000000;
+}
+a:visited{
+	color:#333333;
+}
+a:hover{
+	text-decoration: underline;
+	color: rgb(137,195,63);
+}
+body{
+font-family: 'Arimo', sans-serif;
+font-size:10px;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+/*width: 240px;*/
+/*height: 320px;*/
+/*overflow:scroll;*/
+background-color: #dededd;
+}
+
+div.header{
+	height: 33px;
+	min-width: 240px;
+	max-width: 100%;
+	margin-left:auto;
+	margin-right: auto;
+	margin-bottom: 1px;
+	background-color: #89c33f;
+	background-image: url(../img/headerGradient.png);
+	background-repeat: repeat-x; 
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+}
+div.header img#logo{
+	width: 120px;
+	
+	margin: 6px 0px 0px 3px;
+}
+div.header div.searchbox{
+	float: right;
+}
+div.header img#search{
+	height: 20px;
+	margin-top: 6px;
+	margin-right: 3px;
+}
+div.header a.submit{
+	float: right;
+}
+div#container{
+	background-color: white;
+	min-width:240px;
+	max-width:98%;
+	/*height: 320px;*/
+	/*overflow:scroll;*/
+	overflow: hidden;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+div.title{
+	width: 93%;
+	height: 17px;
+	margin-left:auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	margin-top: 7px;
+	border-color: #999999;
+	border-style:solid;
+	border-width: 1px;
+	padding: 2px 3px 5px 3px;
+	-moz-box-shadow: 0 0 4px 1px #999999;
+	-webkit-box-shadow: 0 0 4px 1px #999999;
+	box-shadow: 0 0 4px 1px #999999;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;	
+	border-radius: 5px;	
+	vertical-align: middle;
+	
+}
+h1.greyTitle{
+	font-family: 'Ubuntu', sans-serif;
+	/*color:#171717;*/
+	color: rgb(131,130,129);
+	font-size:15px;
+	vertical-align: middle;
+}
+h4.section {
+	/*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+	font-size: 4px;
+	font-weight: bolder;
+	text-transform:uppercase;
+}
+
+/*columnas*/
+div#colLeft, div#colCenter, div#colRight{
+	width: 100%;
+	float: left;
+	margin-bottom: 5px;
+	margin-left: 1px;
+	position: relative;
+	overflow: hidden;
+}
+
+/*noticias*/
+div.tNews, div.twitterNews{
+	width:100%;
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;
+	border-bottom-color: #999999;
+	margin-bottom: 2px;
+}
+div.tNews div.icon, div.twitterNews div.icon{
+	position: relative;
+	width: 14%;
+	float: left;
+}
+div.tNews div.icon img, div.twitterNews div.icon img{
+	/*height: 40px;*/
+	width: 100%;
+}
+div.tNews div.tContent, div.twitterNews div.tContent{
+	position: relative;
+	width: 81%;
+	float: right;
+}
+div.tNews h3, div.twitterNews h3{
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 11px;
+	color:#171717;
+}
+div#searchContainer{
+	top: 10px;
+	left: 50%;
+	background-color: white;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;	
+	border-color: #008f45;
+	border-style: solid;
+	border-width: 1px;
+	float: right;
+	position: absolute;
+	height: 55px;
+	width: 140px;
+	z-index: 5000;
+	padding: 7px 5px;
+}
+div#searchContainer h3.searchLabel{
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 11px;
+	color: rgb(131,130,129);
+	margin-bottom: 3px;
+}
+div#searchContainer div{
+	float: left;
+}
+div#searchContainer input{
+	width: 75px;
+	float: left;
+	margin-right: 3px;
+}
+div#searchContainer input[type=submit]{
+	width: 52px;
+}
+div#footerMobile{
+	background-color: #f0f0f0;
+	text-align: right;
+}
+div#footerMobile a{
+	color: rgb(137,195,63);
+	text-decoration: underline;	
+}
+div#footerMobile a:visited{
+	color: rgb(137,195,63);
+	text-decoration: underline;	
+}
+
+/*MARQUEE*/
+div#marqueeContainer{
+	/* Safari 4-5, Chrome 1-9 */
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#fafafa));
+	/* Safari 5.1, Chrome 10+ */
+	background: -webkit-linear-gradient(top, #ffffff, #fafafa);
+	/* Firefox 3.6+ */
+	background: -moz-linear-gradient(top, #ffffff, #fafafa);
+	/* IE 10 */
+	background: -ms-linear-gradient(top, #ffffff, #fafafa);
+	/* Opera 11.10+ */
+	background: -o-linear-gradient(top, #ffffff, #fafafa);
+	background: linear-gradient(top, #ffffff, #fafafa);
+	-pie-background: linear-gradient(top, #ffffff, #fafafa);
+	behavior: url(css/PIE.htc);
+
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 30px;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: #fafafa;
+	margin-left: 0px;
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+div#marquee{
+	margin: 4px 6px;
+	height: 20px;
+	/*line-height: 20px;*/
+	position: relative;
+	font-size: 8px;
+	color: #838281;
+}
+div#marquee a{
+	color: #666666;
+}
+
+span#prev, span#next{
+	border-style: solid;
+	border-width: 1px;
+	border-color: #838281;
+	color: #dddddd;
+	height: 20px;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	float: left;
+	text-align: center;
+	font-weight: bolder;
+	font-size: 15px;
+	margin-left: 5px;
+	margin-top: 4px;
+	cursor: pointer;
+}
+span#next{
+	clear: right;
+	margin-right: 7px;
+}

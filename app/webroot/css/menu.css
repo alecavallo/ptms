@@ -1,0 +1,134 @@
+@charset "utf-8";
+/* CSS Document */
+div#menu{
+	background: transparent url(../img/mnu_selected.png) repeat-x;
+}
+#menu ul{
+padding:0px;
+margin-left: 80px;
+}
+#menu li a{
+display:block;
+color:#333333;
+text-decoration:none;
+height:30px;
+width: 100%;
+padding: 0px 10px;
+outline: none;
+font-size: 13px;
+font-weight: bold;
+}
+#menu li a:active {
+  outline: none;
+}
+
+#menu li{
+list-style:none;
+line-height: 30px;
+float:left;
+margin-left:-1px;
+/*border-right-style: none;
+border-right-width:thin;
+border-right-color: #AFCDAB;*/
+border-left-style: none;
+border-left-width:thin;
+border-left-color: #AFCDAB;
+font-weight:400;
+font-size:14px;
+}
+#menu li.separator{
+	/*border-right-color: rgb(114,112,111);*/
+	/*border-right-color: -moz-linear-gradient(left top,  blue,  #000000);*/
+
+	border: 2px solid #999;
+	border-bottom-style:none;
+	border-top-style:none;
+	border-left-style:none;
+-moz-border-right-colors: #555 #999 #ccc;
+	margin-right: 1px;
+
+}
+#menu li:hover{
+background: #88BF82 url(../img/mnu_selected.png) repeat-x;
+-moz-border-radius:2px 2px 2px 2px; 
+-webkit-border-radius: 2px 2px 2px 2px;
+color:#333333;
+}
+#menu li a:hover{
+color:#333333;
+}
+
+#menu ul li ul{
+/*float: left;
+clear: both;
+margin: 0px;
+border-style:none;
+display:block
+float: left;
+z-index: 10px;*/
+position: absolute;
+	width: 10em;
+	margin-left: -1000em; /* using left instead of display to hide menus because display: none isn't read by screen readers */
+	margin-top:0px;
+}
+#menu ul li:hover ul{
+	margin-left: 1px;
+}
+#menu ul li ul li {
+	width: 100px;
+}
+
+#menu ul li ul li ul{
+	display: none;
+position: absolute;
+	width: 10em;
+	margin-top:0px;
+}
+#menu ul li ul li:hover ul{
+	display: block;
+	margin-left: 140px;
+	top: 0px;
+}
+
+#menu ul li:hover ul li{
+	/*background-image: url(../img/submenu_background.png);*/
+	background-color: #dededd;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+#menu ul li:hover ul li:hover{
+	/*background: green url(../img/mnu_selected.png) repeat-x;*/
+	background: transparent url(../img/mnu_selected.png) repeat-x;
+	color:#333333;
+}
+
+#menu ul li ul li{
+clear:both;
+border-style:none;
+width: 100%;
+display:block
+float: left;
+
+}
+#menu ul li ul li a{
+color:#333333;
+display:block
+float: left;
+font-weight: normal;
+}
+#menu ul li ul li a:hover{
+color:black;
+font-weight: bold;
+}
+
+/*twitter trends*/
+#menu div#pTweets {
+	height: 30px;
+	min-width: 120px;
+	float: right;
+	/*background-color: red;*/
+	font-weight: bold;
+	line-height: 30px;
+	padding: 0px 15px;
+}
+
