@@ -283,7 +283,7 @@ class CategoriesController extends AppController {
 		
 		
 		
-				$news = Cache::read ( "news{$id}", 'long' );
+				//$news = Cache::read ( "news{$id}", 'long' );
 				if (empty($news)){
 					$newsPapers = array();
 					$i=0;
@@ -300,15 +300,18 @@ class CategoriesController extends AppController {
 								'User'		=>	array(),
 								'Media'		=>	array()
 							),
-							'limit'	=>	50,
-							'order'	=>	"News.rating desc, News.visits desc, News.created asc, rand()"
+							//'limit'	=>	300,
+							'order'	=>	"News.rating desc, News.visits desc, News.created desc, rand()"
 						)
 					);
 					//debug($news);
 					$aux=array();
 					$includedIds = array();
 					foreach ($news as $key=>$value) {
+						/*debug($value['News']['feed_id']);
+						debug($includedIds);*/
 						if(!in_array($value['News']['feed_id'], $includedIds)){
+							
 							$includedIds[]=$value['News']['feed_id'];
 							$aux[]=$value;
 						}						
@@ -339,7 +342,7 @@ class CategoriesController extends AppController {
 					$blogs = array();
 					$i=0;
 					$blogs = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 2 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 2 DAY)) AND News.category_id={$id}",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 5 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 5 DAY)) AND News.category_id={$id}",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>2),
