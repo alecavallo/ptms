@@ -3,7 +3,7 @@
 <div id="orderIndicator" onclick="showHide($('orderPicker'))"><span id="order">Rating</span>▼</div>
 <div id="orderPicker" style="display: none;">
 <?php 
-	echo $this->Html->para('order', $paginator->sort('Rating', 'rating'), array('onclick'=>"alert('hola');"));
+	echo $this->Html->para('order', $paginator->sort('Rating', 'rating'));
 	echo $this->Html->para('order', $paginator->sort('Nombre', 'first_name'));
 	echo $this->Html->para('order', $paginator->sort('Apellido', 'last_name'));
 	echo $this->Html->para('order', $paginator->sort('Alias', 'alias'));
