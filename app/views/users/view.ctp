@@ -28,6 +28,40 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		<p id="webPage">
 			<?php echo $this->Html->link($user['Source']['url'],$user['Source']['url'],array('target'=>"blank"))?>
 		</p>
+		<br/>
+		<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+		<?php if(!empty($user['User']['alias'])){?>
+		<script>
+		new TWTR.Widget({
+		  version: 2,
+		  type: 'search',
+		  search: 'from:@<?php echo $user['User']['alias']?> OR to:@<?php echo $user['User']['alias']?>',
+		  interval: 40000,
+		  title: 'Todo lo que se habla de',
+		  subject: '@<?php echo $user['User']['alias']?>',
+		  width: 'auto',
+		  height: 300,
+		  theme: {
+		    shell: {
+		      background: '#838281',
+		      color: '#ffffff'
+		    },
+		    tweets: {
+		      background: '#ffffff',
+		      color: '#444444',
+		      links: '#8ac33f'
+		    }
+		  },
+		  features: {
+		    scrollbar: false,
+		    loop: true,
+		    live: true,
+		    timestamp: false,
+		    behavior: 'default'
+		  }
+		}).render().start();
+		</script>
+		<?php }?>
 	</div>
 	<br clear="both"/>
 	<br clear="both"/>
