@@ -67,7 +67,7 @@ class PagesController extends AppController {
  * @access public
  */
 	function display() {
-		//$this->layout='splash';
+		$this->layout='splash';
 		$path = func_get_args();
 
 		$count = count($path);

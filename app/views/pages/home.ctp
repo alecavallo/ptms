@@ -1,9 +1,8 @@
 <!-- Periodismo ciudadano y nacional. Agregador de noticias -->
 <div id="contenedor">
 	<div id="h_1">
-		<div id="txt">Estamos en la fase de <strong>beta cerrada</strong>, realizando las &uacute;ltimas pruebas del sistema, si quieres testear la versi&oacute;n, haz <a href="javascript:login();">click aqui</a> y pide una invitaci&oacute;n.</div>
-		<div id="txt2">Estamos en la fase de <strong>beta cerrada</strong>, realizando las &uacute;ltimas pruebas del sistema, si quieres testear la versi&oacute;n, haz click aqui y pide una invitaci&oacute;n.</div>
-		<div id="slide">
+		<div id="txt">Estamos en la fase de <strong>beta cerrada</strong>, realizando las &uacute;ltimas pruebas del sistema, si quieres ser uno de los primeros en utilizar la aplicación, haz <a href="http://registracion.posteamos.com" target="_self">click aqui</a> y pide una invitaci&oacute;n.</div>
+		<!-- <div id="slide">
 			  <div id="login">
 					<div id="campos">
 					  <?php
@@ -34,12 +33,12 @@
 				</div>
 
 
-		</div>
+		</div> -->
 	</div>
 <div id="h_2">
 	<div id="c_video">
 
-			<iframe src="http://player.vimeo.com/video/21000084?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" width="475" height="267" frameborder="0"></iframe>
+			<iframe src="http://player.vimeo.com/video/45605534?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" width="475" height="267" frameborder="0"></iframe>
 
 	</div>
 </div>
