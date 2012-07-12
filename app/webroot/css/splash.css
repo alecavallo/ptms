@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-body { background:url(/img/splash/back.jpg) repeat-x #639944}
+body { background:url(/img/splash_bkg.png) repeat-x #639944}
 #contenedor { 
 	width: 882px;
 	height: 378px;
