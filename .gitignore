@@ -4,7 +4,6 @@
 output/
 
 # Temporary file directory
-tmp/
 .settings
 /.buildpath
 /.project
