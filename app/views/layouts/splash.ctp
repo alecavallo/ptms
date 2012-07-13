@@ -6,7 +6,7 @@
 <meta name="description" content="Posteamos.com, periodismo ciudadano y nacional">
 <meta name="keywords" content="Posteamos, posteamos, Posteamos.com, posteamos.com, postea, posteá, posta, noticias, información, informacion, actualidad, Argentina, argentina, Latinoamérica, Latinoamerica, latinoamérica, latinoamerica, sucesos, novedades, tecnología, política, espectáculos, paparazzi, farándula, diarios, santa fe, noticias locales, periodismo ciudadano, agregador de noticias">
 
-<title>Posteamos.com | Noticias nacionales &gt; agregador de noticias</title>
+<title>Posteamos.com | Un sitio de noticias interactivo y participativo</title>
 <?php
 	echo $this->Html->css('splash');
 	echo $this->Html->script('jquery');
