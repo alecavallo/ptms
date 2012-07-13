@@ -8,3 +8,8 @@ output/
 /.buildpath
 /.project
 /app\config/database.php
+/app\tmp\cache/cake_menu_items
+/app\tmp\cache\models/*
+/app\tmp\logs/
+/app\tmp\logs/
+/app\tmp\logs/
