@@ -1,0 +1,12 @@
+[submodule "app/plugins/facebuk"]
+	path = app/plugins/facebuk
+	url = git://github.com/webtechnick/CakePHP-Facebook-Plugin
+[submodule "app/plugins/facebook"]
+	path = app/plugins/facebook
+	url = git://github.com/webtechnick/CakePHP-Facebook-Plugin
+[submodule "app/plugins/file_upload"]
+	path = app/plugins/file_upload
+	url = git://github.com/webtechnick/CakePHP-FileUpload-Plugin.git
+[submodule "app/plugins/twitter"]
+	path = app/plugins/twitter
+	url = git://github.com/fnitschmann/CakePHP-Twitter-Plugin.git
