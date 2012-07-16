@@ -2,8 +2,16 @@
 div#colLeft{
 	height: 100%;
 	position: relative;
-	min-height: 750px;
+	min-height: 808px;
 	margin-right: 30px;
+}
+div#pendingAds{
+	/*background-color: red;*/
+	float: left;
+	min-height: 808px;
+	/*margin-left: 30px;*/
+	width: 324px;
+	padding-top: 20px;
 }
 img.degradee{
 	width: 56%;
