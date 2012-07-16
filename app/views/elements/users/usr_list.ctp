@@ -25,7 +25,11 @@
 			<?php 
 				$name = $this->Html->tag('span', "{$user['User']['first_name']} {$user['User']['last_name']}", array('class'=>"name"));
 				$nick = $this->Html->tag('span', $user['User']['alias'], array('class'=>"nick"));
-				echo $this->Html->link($name." - ".$nick, array('controller'=>"users",'action'=>"view", $user['User']['id']), array('escape'=>false));
+				if(!empty($nick)){
+					echo $this->Html->link($name." - ".$nick, array('controller'=>"users",'action'=>"view", $user['User']['id']), array('escape'=>false));
+				}else {
+					echo $this->Html->link($name, array('controller'=>"users",'action'=>"view", $user['User']['id']), array('escape'=>false));
+				}
 			?>
 		</div>
 		<div class="desc"><?php echo $user['User']['description'];?>&nbsp;</div>
