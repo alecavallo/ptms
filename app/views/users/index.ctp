@@ -19,6 +19,9 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		<?php echo $this->element('news'.DS.'pendings', array('categories'=>$categories))?>
 	</div>
 	<div id="pendingAds" class="colRight">
+		<?php
+		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
+		?>
 		<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-6965617047977932";
 		/* Anuncio columnas y pendientes 1 */
@@ -49,6 +52,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		<script type="text/javascript"
 		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 		</script>
+		<?php }?>
 	</div>
 	
 	<br clear="all"/>
