@@ -3,7 +3,7 @@
 <head>
 <?php echo $this->Html->charset('utf-8'); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content="Posteamos.com, periodismo ciudadano y nacional">
+<meta name="description" content="Posteamos.com se proyecta como un sitio web de noticias, interactivo y participativo, que se nutre de contenido posteado por sus usuarios y la sindicaci�n de contenido de medios tradicionales, Blogs y Tweets. Los usuarios pueden escribir art�culos, enlaces a contenido externo y comentar, o comparar noticias presentadas por otros usuarios, medios o periodistas.">
 <meta name="keywords" content="Posteamos, posteamos, Posteamos.com, posteamos.com, postea, posteá, posta, noticias, información, informacion, actualidad, Argentina, argentina, Latinoamérica, Latinoamerica, latinoamérica, latinoamerica, sucesos, novedades, tecnología, política, espectáculos, paparazzi, farándula, diarios, santa fe, noticias locales, periodismo ciudadano, agregador de noticias">
 
 <title>Posteamos.com | Un sitio de noticias interactivo y participativo</title>
