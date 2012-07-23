@@ -30,6 +30,9 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		google_ad_height = 250;
 		//-->
 		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
 		<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-6965617047977932";
 		/* Anuncio columnas y pendientes 2a */
@@ -38,9 +41,9 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		google_ad_height = 250;
 		//-->
 		</script>
-		<!-- <script type="text/javascript"
+		<script type="text/javascript"
 		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>-->
+		</script>
 		<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-6965617047977932";
 		/* Anuncio columnas y pendientes 3 */
