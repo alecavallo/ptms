@@ -283,7 +283,7 @@ class CategoriesController extends AppController {
 		
 		
 		
-				//$news = Cache::read ( "news{$id}", 'long' );
+				$news = Cache::read ( "news{$id}", 'long' );
 				if (empty($news)){
 					$newsPapers = array();
 					$i=0;
@@ -320,7 +320,7 @@ class CategoriesController extends AppController {
 					if (count($aux)<10 && count($aux)!=count($news)) {
 						$aux = array_merge($aux,array_slice($news, count($aux), 10-count($aux)));
 					}
-					$news = array_slice($aux, 0, 10);
+					$news = array_slice($aux, 0, 8);
 					Cache::write ( "news{$id}", $newsPapers, 'long' );
 				}
 				$shown=array();
@@ -371,7 +371,7 @@ class CategoriesController extends AppController {
 					if (count($aux)<10 && count($aux)!=count($blogs)) {
 						$aux = array_merge($aux,array_slice($blogs, count($aux), 10-count($aux)));
 					}
-					$blogs = array_slice($aux, 0, 10);
+					$blogs = array_slice($aux, 0, 8);
 
 					Cache::write ( "blogs{$id}", $blogs, 'long' );
 				}
@@ -381,7 +381,6 @@ class CategoriesController extends AppController {
 				}
 				//genero el conjunto de ids para el SQL
 				$this->set('shown',$shown);
-				
 				//agrego publicidad en posición aleatoria
 				if (!empty($blogsAds)) {
 					//$a= array_splice($blogs, rand(2,4), 0, array('Ad'=>$blogsAds[0]));
