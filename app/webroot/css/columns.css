@@ -76,15 +76,17 @@ div#pendings{
 	padding-right: 10px;
 }
 div#pendings img.degradee{
-	width: 28%;
+	width: 16%;
 	float: left;
 }
 div#categoryIndicator{
 	cursor: pointer;
-	width: 76px;
+	width: 144px;
 	float: left;
 	color: #838281;
 	margin-left: 5px;
+	text-align: right;
+	line-height: 19px;
 }
 div#categoryPicker{
 	border-color: rgb(222,222,221);
@@ -101,6 +103,7 @@ div#pendings div#rows{
 	border-right-width: 1px;
 	border-right-color: rgb(222,222,221);
 	min-height: 750px;
+	width: inherit;
 	float: left;
 	position: relative;
 	
@@ -114,6 +117,7 @@ div#pendings div#rows div.newsRows img{
 	height: 60px;
 	float: left;
 	margin-right: 15px;
+	margin-bottom:20px;
 }
 
 /*********************************************/

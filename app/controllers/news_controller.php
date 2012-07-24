@@ -1153,7 +1153,7 @@ function search(){
 
 
 	function write(){
-		$this->layout="admin";
+		$this->layout="default";
 		if ($this->Session->check('newsAdd') && $this->referer() == "/news/add/step:2") {
 			$this->data = $this->Session->read('newsAdd');
 		}
