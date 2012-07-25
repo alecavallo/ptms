@@ -959,7 +959,8 @@ function search(){
 				'Media'		=>	array()
 
 			),
-			'limit'	=>	10
+			'limit'	=>	10,
+			'order'	=>	"News.created desc, News.visits desc, News.rating desc"
 		)
 	);
 	$this->set('news', $news);
@@ -976,7 +977,8 @@ function search(){
 				'Media'		=>	array()
 
 			),
-			'limit'	=>	10
+			'limit'	=>	10,
+			'order'	=>	"News.created desc, News.visits desc, News.rating desc"
 		)
 	);
 	$this->set('blogs', $blogs);
