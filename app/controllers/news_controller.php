@@ -9,7 +9,7 @@ class NewsController extends AppController {
 
 	var $name = 'News';
 	var $uses = array('News','LastPost', 'User', 'Vote','Parameter', 'ExcludedWord', 'YoutubeFavorite');
-	var $components= array(/*'Security',*/'Twitter.Twitter','RequestHandler','Session','Auth', 'Twitter.Twitter');
+	var $components= array(/*'Security',*/'Phptwitter.Twitter','RequestHandler','Session','Auth', 'Twitter.Twitter');
 	var $helpers = array('Text', 'Js' => array('Prototype'), 'Form', 'Paginator');
 	var $paginate = array('limit' => 1);
 	
