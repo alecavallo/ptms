@@ -12,7 +12,7 @@
 	 * @copyright (c) 2011 media-n (www.media-n.net)
 	 * @license MIT License - http://www.opensource.org/licenses/mit-license.php
 	 */
-	 App::import('Vendor', 'Twitter.HttpSocketOauth');
+	 App::import('Vendor', 'Phptwitter.HttpSocketOauth');
 
 	 class TwitterComponent extends Object {
 	 	var $name = 'Twitter';
