@@ -10,7 +10,4 @@
 [submodule "app/plugins/file_upload"]
         path = app/plugins/file_upload
         url = git://github.com/webtechnick/CakePHP-FileUpload-Plugin.git
-[submodule "app/plugins/twitter"]
-        path = app/plugins/twitter
-        url = git://github.com/fnitschmann/CakePHP-Twitter-Plugin.git
 
