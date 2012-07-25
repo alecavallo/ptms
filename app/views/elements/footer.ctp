@@ -12,7 +12,7 @@
   </div>
 </div>
 <div id="footer_2"></div>
-<div id="footer_3" class="copy"><div id="termsContainer"><a href="terminos-y-condiciones.html">Términos y condiciones</a>   l   <a href="que-es-posteamos.html">Que es Posteamos?</a>   l   <a href="#">Publicidad</a></div></div>
+<div id="footer_3" class="copy"><div id="termsContainer"><a href="terminos-y-condiciones.html">Términos y condiciones</a>   l   <a href="que-es-posteamos.html">Que es Posteamos?</a>   l   <a href="mailto:info@posteamos.com?subject=Contacto%20Publicidad" target="_blank">Publicidad</a></div></div>
 
 
 </div>
