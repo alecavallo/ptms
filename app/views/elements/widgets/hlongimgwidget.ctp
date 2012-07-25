@@ -7,6 +7,7 @@ if (array_key_exists('paging', $data)) {
 
 $data = $data['data'];
 $image=$data[0];
+$n=$data[0];
 $par['wId']='image';
 $paginator->options(array(
 			'url'	=>	array('controller'=>"medias", 'action'=>"index", $par['categoryId']),
@@ -51,9 +52,9 @@ $float = empty($float)?'left':$float;
 			</div>
 			<?php
 				echo $html->link(
-					$html->image($image['Media']['url'],array('alt'=>$image['News']['title'], 'id'=>"link")),
-					array('controller'=>"news", 'action'=>"view", $image['News']['id']),
-					array('escape'=>false)
+					$html->image($n['Media']['url'],array('alt'=>$n['News']['title'], 'id'=>"link")),
+					$n['News']['link'],
+					array('escape'=>false, 'target'=>"blank")
 				);
 			?>
 			<script type="text/javascript">

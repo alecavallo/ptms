@@ -35,7 +35,7 @@ class MediasController extends AppController {
 				'conditions'	=> array('Media.type'=>1),
 				'contain'	=>	array(
 					'News'	=>	array(
-						'fields'	=> array('News.id', 'News.title','News.rating', 'News.visits', 'News.votes', 'News.user_id'),
+						'fields'	=> array('News.id', 'News.title','News.rating', 'News.visits', 'News.votes', 'News.user_id', 'News.link'),
 						'conditions'	=>	"News.created > DATE_SUB(NOW(),INTERVAL 7 DAY) ".$categoryConditions,
 						'Category'	=>	array(
 							//'conditions'=>$categoryConditions

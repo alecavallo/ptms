@@ -41,8 +41,8 @@ $paginator->options(array(
 	<?php
 		echo $html->link(
 			$html->image($image['Media']['url'],array('alt'=>$image['News']['title'], 'id'=>"link")),
-			array('controller'=>"news", 'action'=>"view", $image['News']['id']),
-			array('escape'=>false)
+			$image['News']['link'],
+			array('escape'=>false, 'target'=>"blank")
 		);
 	?>
 	<script type="text/javascript">
