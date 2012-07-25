@@ -5,7 +5,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 //echo $this->Html->script('common',array('inline'=>false));
 ?>
 <div id="content">
-		<?php echo $this->element('news'.DS.'marquee')?>
+		<?php echo $this->element('news'.DS.'marquee', array('cache'=>'30 minutes'))?>
     	<div id="colLeft">
 			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
@@ -22,7 +22,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 				}
 			?>
         	</div>
-        	<?php echo $this->element("twitter_trends");?>
+        	<?php echo $this->element("twitter_trends", array('cache'=>'3 minutes'));?>
        </div>
         <div id="colCenter">
         	<h1 class="greyTitle">Medios</h1>
@@ -126,14 +126,14 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 					'wTitle'	=>	"Posts en imágenes",
 					'float'	=>	"left"
 				);
-        		echo $this->element("widgets".DS. "hlongimgwidget", array('par'=>$parameters));
+        		echo $this->element("widgets".DS. "hlongimgwidget", array('par'=>$parameters,'cache'=>'1 hour'));
         		$param2 = array(
 					'wId'		=>	"videos",
 					'wTitle'	=>	"Videos populares de youtube",
         			'float'		=>	"right",
         			'category'	=>	""
 				);
-        		echo $this->element("widgets".DS. "hlongvidwidget", array('par'=>$param2));
+        		echo $this->element("widgets".DS. "hlongvidwidget", array('par'=>$param2,'cache'=>'12 hours'));
         	?>
 
                 <br clear="all"/>
