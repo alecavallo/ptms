@@ -3,7 +3,7 @@ class TwtrController extends AppController {
 
 	var $name = 'Twtr';
 	var $helpers = array('Text', 'Ajax', 'Javascript', 'Html', 'Cache');
-	var $components = array('Twitter.Twitter');
+	var $components = array('Phptwitter.Twitter');
 	var $uses = array('Parameter', 'Feed');
 
 	function beforeFilter() {
@@ -104,6 +104,7 @@ class TwtrController extends AppController {
 		$this->autoLayout=false;
 		//$this->layout = 'ajax';
 		$this->autoRender=false;
+
 		if ($nonCached || ($timeline = Cache::read ( "twtrTimeline{$twId}", 'vShort' )) === false) {
 			$timeline = array();
 			$twtrToken = $this->Parameter->find('first',array('conditions'=>array('key'=>'twtr-oauth-token')));
@@ -117,6 +118,7 @@ class TwtrController extends AppController {
 			$this->Twitter->loginTwitterUser($twtrToken, $twtrTokenPassword);
 			$this->Twitter->setupApp($twtrConsumerKey, $twtrConsumerSecret);
 			$tweets = $this->Twitter->homeTimeline();
+			//$tweets = $this->Twitter->getDirectMessagesSent();
 			//debug($tweets);
 			//debug($this->Twitter->accountRateLimitStatus());
 
@@ -235,10 +237,10 @@ class TwtrController extends AppController {
 			$twtrTokenPassword = $this->Parameter->find('first',array('conditions'=>array('key'=>'twtr-oauth-token-secret')));
 			$twtrTokenPassword = $twtrTokenPassword['Parameter']['value'];
 			$this->Twitter->loginTwitterUser($twtrToken, $twtrTokenPassword);
-			$tweets = $this->Twitter->apiRequest('get', "/1/lists/statuses.json?slug={$twtrList}&owner_screen_name=posteamos&include_entities=false", '');
+			$tweets = $this->Twitter->apiRequest('get', "/1/lists/statuses.json?slug={$twtrList}&owner_screen_name=posteamos&include_entities=false&per_page=50", '');
 			$tweets = json_decode($tweets, true);
 			if (empty($tweets)) {//si hubo un fallo, reintento la operación
-				$tweets = $this->Twitter->apiRequest('get', "/1/lists/statuses.json?slug={$twtrList}&owner_screen_name=posteamos&include_entities=false", '');
+				$tweets = $this->Twitter->apiRequest('get', "/1/lists/statuses.json?slug={$twtrList}&owner_screen_name=posteamos&include_entities=false&per_page=50", '');
 				$tweets = json_decode($tweets, true);
 			}
 			//debug($tweets);

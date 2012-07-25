@@ -4,7 +4,7 @@ class CategoriesController extends AppController {
 	var $name = 'Categories';
 	var $helpers = array('Text', 'Cache', 'Paginator');
 
-	var $components= array('Twitter.Twitter');
+	var $components= array('Phptwitter.Twitter');
 	var $uses = array('News','Category', 'Parameter');
 	
 	/*se setea el tema para mobil*/
@@ -321,7 +321,7 @@ class CategoriesController extends AppController {
 						$aux = array_merge($aux,array_slice($news, count($aux), 10-count($aux)));
 					}
 					$news = array_slice($aux, 0, 8);
-					Cache::write ( "news{$id}", $newsPapers, 'long' );
+					Cache::write ( "news{$id}", $news, 'long' );
 				}
 				$shown=array();
 				foreach ($news as $row) {
