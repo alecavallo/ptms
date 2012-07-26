@@ -112,12 +112,24 @@ div#pendings div#rows div.newsRows{
 	clear: both;
 	margin-bottom: 30px;
 }
-div#pendings div#rows div.newsRows img{
+div#pendings div#rows div.newsRows img.avatar{
 	width: 60px;
 	height: 60px;
 	float: left;
 	margin-right: 15px;
 	margin-bottom:20px;
+}
+
+div.vote_buttons{
+	float: right;
+	margin-right: 12px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+div.vote_buttons img{
+	height: 17px;
+	width: 17px;
+	margin-left: 20px;
 }
 
 /*********************************************/

@@ -23,11 +23,14 @@ $selected = isset($selected)?$selected:'Todas';
 		<?php 
 		foreach ($data as $row) {
 			$image = !empty($row['Feed']['Source']['User'])?$row['Feed']['Source']['User']['avatar']:"empty.jpg";
-			$image = $this->Html->image($image);
+			$image = $this->Html->image($image,array('alt'=>"",'class'=>"avatar"));
 			$section = $this->Html->tag('h4', $row['Category']['name'], array('class'=> "section grey"));
 			$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), $row['News']['link'], array('target'=>'blank', 'escape'=>false));
 			$summary = $this->Html->para('summary', $this->Text->truncate($row['News']['summary'], 250, array('ending'=>"...", 'html'=>true, 'exact'=>false)));
-			echo $this->Html->div('newsRows', $image.$section.$title.$summary);
+			$up = $this->Ajax->link($this->Html->image('OK.png'), "/visits/incrementaContador/{$row['News']['id']}/2", array('escape'=>false));
+			$down = $this->Ajax->link($this->Html->image('NO.png'), "/visits/incrementaContador/{$row['News']['id']}/-1", array('escape'=>false));
+			$vote = $this->Html->div('vote_buttons',$up.$down);
+			echo $this->Html->div('newsRows', $image.$section.$title.$summary.$vote);
 		}
 		?>
 	</div>

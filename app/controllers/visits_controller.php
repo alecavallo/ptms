@@ -12,7 +12,7 @@ var $name = 'Visits';
 		$this->Auth->allow();
 	}
 
-	function incrementaContador($id){
+	function incrementaContador($id,$multiplier=1){
 		$this->autoRender=false;
 		$this->layout='ajax';
 		// esta funcion se ejecuta solo si se llama por post
@@ -22,7 +22,7 @@ var $name = 'Visits';
 			// Aumenta el contador de la noticia...
 			$this->News->recursive=-1;
 			$this->News->contain();
-			$result = $this->News->updateAll(array('visits'=>'visits+1'),array('News.id' => $id));
+			$result = $this->News->updateAll(array('visits'=>'visits+'.$multiplier),array('News.id' => $id));
 		}
    }
 }
