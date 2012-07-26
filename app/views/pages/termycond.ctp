@@ -1,7 +1,7 @@
 <?php echo $this->Html->css(array('texts'), 'stylesheet', array('inline'=>false));?>
 <div id="content">
 <br/>
-<h3>LEGALES</h3>
+<h3>T&eacute;rminos y condiciones</h3>
 <h4>Acceso al sitio web</h4>
 
 <p>El acceso a este Sitio Web es libre y gratuito.</p>

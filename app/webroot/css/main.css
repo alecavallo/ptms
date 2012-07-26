@@ -1767,7 +1767,7 @@ div#marquee a{
 span#prev, span#next{
 	border-style: solid;
 	border-width: 1px;
-	border-color: #838281;
+	border-color: #dddddd;
 	color: #dddddd;
 	height: 20px;
 	width: 20px;
