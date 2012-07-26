@@ -9,6 +9,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
     	<div id="colLeft">
 			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
+			<cake:nocache>
 			<div id="tweets">
 			<?php
 				foreach ($twitters as $row) {
@@ -22,6 +23,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 				}
 			?>
         	</div>
+        	</cake:nocache>
         	<?php echo $this->element("twitter_trends", array('cache'=>'3 minutes'));?>
        </div>
         <div id="colCenter">

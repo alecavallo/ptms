@@ -26,10 +26,12 @@ class NewsController extends AppController {
 
 	function index() {
 		$this->set("title_for_layout","Portada");
+		$this->helpers[] = 'Cache';
+
 		
 		$usr=$this->Auth->user();
 
-		$this->disableCache(); //TODO desactivar??
+		//$this->disableCache(); //TODO desactivar??
 		
 		if ((!$this->Session->check('ads'))){
 			$this->loadModel('Ad');
