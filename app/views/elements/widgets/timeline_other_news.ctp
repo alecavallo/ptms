@@ -15,7 +15,7 @@
 				echo $usr."<span style='font-weight: 400'>{$news['Category']['name']}</span>";
 			?>
 		</h4>
-		<h3><?php echo $html->link($text->truncate(__($news['title'], true),100, array('ending'=>'...', 'exact'=>false, 'html'=>true)),$news['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"new Ajax.Request('/visits/incrementaContador/{$news['id']}'); return true;"));?></h3>
+		<h3><?php echo $html->link($text->truncate(__($news['title'], true),95, array('ending'=>'...', 'exact'=>false, 'html'=>true)),$news['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"new Ajax.Request('/visits/incrementaContador/{$news['id']}'); return true;"));?></h3>
 		<!-- <div class="photo">
 			<?php
 			if (!empty($news['Media']) && !empty($news['Media']['url'])) {
@@ -25,7 +25,7 @@
 		</div>-->
 		<p class="summary">
 			<?php
-				echo $text->truncate(__(Sanitize::clean(html_entity_decode($news['summary'],ENT_COMPAT,'UTF-8'),array('remove_html'=>true,'carriage'=>true,'odd_spaces'=>true)), true),150, array('ending'=>'...', 'exact'=>false, 'html'=>true));
+				echo $text->truncate(__(Sanitize::clean(html_entity_decode($news['summary'],ENT_COMPAT,'UTF-8'),array('remove_html'=>true,'carriage'=>true,'odd_spaces'=>true)), true),145, array('ending'=>'...', 'exact'=>true, 'html'=>true));
 			?>
 		</p>
 	</div>
