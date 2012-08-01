@@ -333,7 +333,7 @@
 			'engine' => 'File',
 			'duration'=> '+1 days',
 			'probability'=> 100,
-			'path' => CACHE . 'short' . DS,
+			'path' => CACHE . 'vlong' . DS,
 		));
 		Cache::config('usernames', array(
 			'engine' => 'File',

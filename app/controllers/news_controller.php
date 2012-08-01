@@ -32,8 +32,13 @@ class NewsController extends AppController {
 		$usr=$this->Auth->user();
 
 		//$this->disableCache(); //TODO desactivar??
+		if($this->Session->check('ads')){//si existe la variable de sesión la uso
+			$ads = $this->Session->read('ads');
+		}else{ //sino trato de recuperarla de cache
+			$ads = Cache::read ( "ads", 'vLong' );
+		}
 		
-		if ((!$this->Session->check('ads'))){
+		if (empty($ads)){
 			$this->loadModel('Ad');
 			$ads = array();
 			$ads[1]['data'] = $this->Ad->get(1);
@@ -65,30 +70,29 @@ class NewsController extends AppController {
 						break;
 						
 						case 2: //facebook
-							
-							$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
-							if (!array_key_exists('name', $facebook) || empty($facebook['name'])) {
-								$facebook = FB::api("/{$value['Ad']['link']}/"); //reintento de obtener	 los datos identificatorios de la cuenta
-							}
-							$aux = array(
-								'name' => $facebook['name'],
-								'nickname' => $facebook['username'],
-								'image'	=>	$facebook['picture'],
-								'link'	=>	$facebook['link'],
-								'id'	=>	$facebook['id']
-							);
-							
-							$facebook = FB::api("/{$value['Ad']['link']}/feed");
-							foreach ($facebook['data'] as $value) {
-								if ($value['type']!='question' && $value['from']['id']==$aux['id'] && array_key_exists('message', $value) && !empty($value['message'])) {
-									if (!array_key_exists('message', $value) || empty($value['message'])) {
-										continue;
-									}
-									$aux['text']=str_ireplace("\n", " ", $value['message']); 
-									$aux['pubLink']=array_key_exists('actions', $value)?$value['actions'][0]['link']:$aux['link'];
-									break;
+								$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
+								if (!array_key_exists('name', $facebook) || empty($facebook['name'])) {
+									$facebook = FB::api("/{$value['Ad']['link']}/"); //reintento de obtener	 los datos identificatorios de la cuenta
 								}
-							}
+								$aux = array(
+									'name' => $facebook['name'],
+									'nickname' => $facebook['username'],
+									'image'	=>	$facebook['picture'],
+									'link'	=>	$facebook['link'],
+									'id'	=>	$facebook['id']
+								);
+								
+								$facebook = FB::api("/{$value['Ad']['link']}/feed");
+								foreach ($facebook['data'] as $value) {
+									if ($value['type']!='question' && $value['from']['id']==$aux['id'] && array_key_exists('message', $value) && !empty($value['message'])) {
+										if (!array_key_exists('message', $value) || empty($value['message'])) {
+											continue;
+										}
+										$aux['text']=str_ireplace("\n", " ", $value['message']); 
+										$aux['pubLink']=array_key_exists('actions', $value)?$value['actions'][0]['link']:$aux['link'];
+										break;
+									}
+								}
 							$ads[1]['data'][$key]['facebook']= $aux;
 							
 						break;
@@ -219,8 +223,9 @@ class NewsController extends AppController {
 			$ads[5]['data'] = $this->Ad->get(5);
 			
 			$this->Session->write('ads', $ads);
+			Cache::write ( "ads", $ads, 'vLong' );
 		}else {
-			$ads = $this->Session->read('ads');
+			//$ads = $this->Session->read('ads');
 		}
 		
 
