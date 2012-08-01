@@ -1298,6 +1298,7 @@ div.twitterNews{
 	clear: both;
 	margin-bottom: 17px;
 	width: 100%;
+	position: relative;
 	/*background-color: yellow;*/
 }
 div.tNews div.icon, div.twitterNews div.icon{
@@ -1536,6 +1537,17 @@ div.completed div.indicator{
 	background: transparent url('../img/indicator-02.png');
 }
 
+div#news_content #colLeft{
+position:relative;
+float:left;
+clear:left;
+width:30%;
+padding-top: 20px;
+overflow: hidden;
+min-height: 1200px;
+max-height: 1505px;
+}
+
 div.newsItem{
 	margin-bottom: 10px;
 	clear: all;
@@ -1614,13 +1626,15 @@ a.nextBtn:visited, a.prevBtn:visited {
 }
 
 div.optionBox{
-	width: 650px;
-	min-height: 150px;
+	min-height: 21px;
 	border-color: rgb(196,196,196);
 	border-style: dashed;
 	border-width: thin;
 	padding: 10px 10px;
-	margin-bottom: 30px;
+	margin-top: 30px;
+}
+div.optionBox#tags{
+	min-height: 60px;
 }
 
 div.lightGreenBkg{
@@ -1635,16 +1649,14 @@ input[type="text"].writeSc, textarea.writeSc{
 }
 div.optionBox select {
 	display: block;
-	margin-left: 10px;
-	/*background-color: rgb(250,250,250);
-	border-width: thin;
-	border-color: rgb(250,250,250);*/
 }
 div.optionBox label{
 	display: block;
 	font-weight: bold;
 	font-size: 17px;
 	margin-bottom: 5px;
+	margin-right: 10px;
+	float: left;
 }
 .lSelector {
 	width: 150px;
