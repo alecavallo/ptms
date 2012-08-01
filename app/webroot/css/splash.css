@@ -27,12 +27,12 @@ body { background:url(/img/splash_bkg.png) repeat-x #639944}
 }
 #txt { 
 	width: 335px;
-	height: 80px;
+	padding: 15px 5px;
 	margin: 133px 0 0 0;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:15px;
 	color:#ffffff;
-	text-align:right;
+	text-align:center;
 }
 #txt a { 
 	color:#ffffff;
