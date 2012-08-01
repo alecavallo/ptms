@@ -51,14 +51,6 @@ class User extends AppModel {
 			),
 		),
 		'alias' => array(
-			'alphanumeric' => array(
-				'rule' => array('onlyLetters','alias'),
-				'message' => 'El nick solo debe contener letras',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
 			'notempty' => array(
 				'rule' => array('notempty'),
 				'message' => 'El Nick name no puede ser vacío',
