@@ -11,15 +11,11 @@ echo $this->Html->script('prototype',array('inline'=>false));
 			<h3 id="std1">Escribe el artículo</h3>
 		</div>
 		<div class="step">
-			<div class="indicator" id="st2"><h3>2</h3></div>
-			<h3 id="std2">Opciones</h3>
-		</div>
-		<div class="step">
-			<div class="indicator" id="st3"><h3>3</h3></div>
+			<div class="indicator" id="st3"><h3>2</h3></div>
 			<h3 id="std3">Previsualizar</h3>
 		</div>
 		<div class="step">
-			<div class="indicator" id="st4"><h3>4</h3></div>
+			<div class="indicator" id="st4"><h3>3</h3></div>
 			<h3 id="std4">Publicar o Guardar</h3>
 		</div>
 	</div>
@@ -43,6 +39,61 @@ echo $this->Html->script('prototype',array('inline'=>false));
 			if (!empty($errors['body'])) {
 				echo $html->div('error-message',$errors['body']);
 			}
+			
+			/*creo select para categorías*/
+			$cateSelect = $this->Form->label('Category',__('Categoría:',true));
+			$cateSelect .= $this->Form->select('Category', $categories, null, array('empty'=>__('Seleccione una categoría',true)));
+			echo $this->Html->div('optionBox lightGreenBkg',$cateSelect,array('id'=>'categories'));
+			/*creo box para tags*/
+			$pageTags = $this->Form->label('tags',__('Tags:',true))."<br />";
+			$pageTags .= $this->Form->text('Tags',array('id'=>"tagsInput"));
+			$pageTags .= $this->Form->hidden('TagsList');
+			$pageTags .= $this->Form->hidden('coordinates');
+			
+			$pageTags .= $this->Html->div('tagsSet',"",array('id'=>'tagsSet'));
+			$pageTags .= "<br />";
+
+			/*escucho los clicks hechos en los tags para quitarlos de twitter también*/
+			$this->Js->buffer("function closess(elem){var parent = $(elem).ancestors()[0]; parent.remove(); var search = '';
+				$$('.tagsSet div span.txt').each(function(s){search += s.innerHTML + ' OR '});
+				if( search.length > 4){
+					search = search.substring(0, search.length-4);
+				}
+				}");
+			echo $this->Js->writeBuffer(array('inline'=>true, 'onDomReady'=>false));
+			echo $this->Html->div('optionBox',$pageTags,array('id'=>'tags'));
+
+			/*escucho las keys presionadas para validar y detectar un input*/
+			$tagsValidation = "
+			if(event.keyCode==13 || event.keyCode==188){
+				event.stop();
+				var newTag = new Element('div',{'class': 'tag'});
+				var textBox = $('tagsInput');
+				$('NewsTagsList').value = $('NewsTagsList').value+'|#|'+textBox.value;
+
+				newTag.update($('tagsInput').innerHTML+'<span class=\"txt\">'+textBox.value+'</span>'+'   <span onclick=\"closess($(this));\" class=\\'green close\\'><strong>x</stong></span>');
+				textBox.value='';
+				var container = $('tagsSet');
+				container.appendChild(newTag);
+				var search = '';
+				$$('.tagsSet div span.txt').each(function(s){search += s.innerHTML + ' OR '});
+				if( search.length > 4){
+					search = search.substring(0, search.length-4);
+				}
+
+			}";
+			//$this->Js->buffer($tagsValidation);
+			//echo $this->Js->writeBuffer(array('inline'=>true, 'onDomReady'=>false));
+			$this->Js->get('#tags');
+  			$this->Js->event('keydown',$tagsValidation,array('stop'=>false));
+  			echo $this->Js->writeBuffer();
+
+
+
+			/*creo select para país*/
+  			echo $this->Form->hidden('Country',array('value'=>1));
+			
+			
 			$buttons = $this->Form->submit(__('Siguiente',true),array('id'=>"createNews"));
 			echo $this->Html->div('right',$buttons,array('style'=>"margin-right: 30px; width: 309px; font-size: 15px"));
 		?>

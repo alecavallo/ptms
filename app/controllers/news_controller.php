@@ -1099,6 +1099,14 @@ function search(){
 																		'User'
 														)
 													));
+			if (empty($noticia)) {
+				$noticia = $this->News->find('first',array(
+							 'conditions' => array("News.id" => $id),
+							 'contain' => array('Category' => array('limit' => 1),
+												'User'
+								)
+							));
+			}
 
 
 			// Esta en el arreglo de la noticia pero , se envia en vairable separada
@@ -1167,6 +1175,9 @@ function search(){
 
 		$ckfinderPath = 'js/ckfinder/';
    		$this->set('ckfinderPath', $ckfinderPath);
+   		
+   		$categories = $this->News->Category->find('list');
+		$this->set('categories',$categories);
 
 		if (!empty($this->data)) {
 			$encoding = getEncoding($this->data['News']['title']." ".$this->data['News']['summary']." ".$this->data['News']['body']);
@@ -1190,6 +1201,8 @@ function search(){
 			$this->data['News']['body'] = @html_entity_decode($this->data['News']['body'],ENT_QUOTES,$encoding);
 			$usr = $this->Auth->user();
 			$this->data['News']['user_id'] = $usr['User']['id'];
+			
+			$this->data['News']['category_id'] = $this->data['News']['Category'];
 
 			$this->News->create($this->data);
 			if ($this->News->validates()) {
@@ -1280,7 +1293,7 @@ function search(){
 	}
 
 	function preview($action){
-		$this->layout="admin";
+		$this->layout="default";
 		if (!$this->Session->check('newsAdd') && $action=="step:3") {
 			$this->flash(__("No se puede previsualizar la noticia. Intentelo nuevamente", true), array('controller'=>"news",'action'=>'add'));
 			return ;
@@ -1296,6 +1309,7 @@ function search(){
 			 	$this->set('newsLink',Router::url(array('controller'=>"news",'action'=>"view",$this->News->id),true));
 			 	$this->set('published',false);
 			 	$this->Session->delete('newsAdd');
+			 	$this->flash("La noticia se ha cargado correctamente!", "/columnas-pendientes.html", 3);
 			 }else {
 			 	$this->set('newsLink',null);
 			 	$this->Session->setFlash(__('No se ha podido crear la noticia. Inténtelo nuevamente más tarde...', true));
@@ -1308,6 +1322,8 @@ function search(){
 			 	$this->set('newsLink',Router::url(array('controller'=>"news",'action'=>"view",$this->News->id),true));
 			 	$this->set('published',true);
 			 	$this->Session->delete('newsAdd');
+			 	$this->flash("La noticia se ha cargado correctamente!", "/columnas-pendientes.html", 3);
+			 	return;
 			 }else {
 			 	$this->set('newsLink',null);
 			 	$this->Session->setFlash(__('No se ha podido crear la noticia. Inténtelo nuevamente más tarde...', true));
@@ -1323,7 +1339,6 @@ function search(){
 		$this->News->Category->recursive = -1;
 		$category = $this->News->Category->find('first',array('conditions'=>array('id'=>$news['News']['category_id'])));
 		$news['Category'][0] = $category['Category'];
-		$this->layout="admin";
 		$news['News']['id']=0;
 		$news['News']['created'] = date('Y M D H:i:s');
 		$news['News']['modified'] = date('Y M D H:i:s');

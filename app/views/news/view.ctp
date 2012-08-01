@@ -95,15 +95,11 @@ if (isset($preview) && $preview == true) {
 			<h3 id="std1">Escribe el artículo</h3>
 		</div>
 		<div class="step completed">
-			<div class="indicator" id="st2"><h3>2</h3></div>
-			<h3 id="std2">Opciones</h3>
-		</div>
-		<div class="step completed">
-			<div class="indicator" id="st3"><h3>3</h3></div>
+			<div class="indicator" id="st3"><h3>2</h3></div>
 			<h3 id="std3">Previsualizar</h3>
 		</div>
 		<div class="step">
-			<div class="indicator" id="st4"><h3>4</h3></div>
+			<div class="indicator" id="st4"><h3>3</h3></div>
 			<h3 id="std4">Publicar o Guardar</h3>
 		</div>
 	</div>
@@ -183,8 +179,7 @@ if (isset($preview) && $preview == true) {
 						$buttons = $this->Html->link(__('Anterior',true),array('controller'=>"news", 'action'=>"add", "step:2"), array('class'=>"prevBtn"));
 						$buttons .= $this->Html->link(__('Publicar',true),array('controller'=>"news", 'action'=>"add", "publicar"), array('class'=>"nextBtn"));
 						$buttons .= $this->Html->tag('br',null,array('clear'=>"both"));
-						$buttons .= $this->Html->link(__('Guardar',true),array('controller'=>"news", 'action'=>"add", "guardar"), array('class'=>"nextBtn"));
-						echo $this->Html->div('right',$buttons,array('style'=>"margin-right: 30px; width: 309px; font-size: 15px"));
+						echo $this->Html->div('right',$buttons,array('style'=>"margin-right: 30px; margin-bottom: 15px; width: 309px; font-size: 15px"));
 					}
 				?>
 
