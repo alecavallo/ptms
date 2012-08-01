@@ -53,7 +53,12 @@ class CategoriesController extends AppController {
 		$this->disableCache(); /*TODO desactivar??*/
 
 
-		if (!$this->Session->check('ads')){
+		if($this->Session->check('ads')){//si existe la variable de sesión la uso
+			$ads = $this->Session->read('ads');
+		}else{ //sino trato de recuperarla de cache
+			$ads = Cache::read ( "cate_{$id}_ads", 'vLong' );
+		}
+		if (empty($ads)){
 			$this->loadModel('Ad');
 			$ads = array();
 			$ads[1]['data'] = $this->Ad->get(1,$id);
@@ -203,9 +208,9 @@ class CategoriesController extends AppController {
 			
 			$ads[5]['data'] = $this->Ad->get(5,$id);
 			
-			$this->Session->write('ads', $ads);
+			Cache::write ( "ads", $ads, 'vLong' );
 		}else {
-			$ads = $this->Session->read('ads');
+			//$ads = $this->Session->read('ads');
 		}
 		
 
