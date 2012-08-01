@@ -230,8 +230,8 @@ function Twitter(){
 							  url: twitterUrl+query,
 							  cache: false,
 							  success: function (data,textStatus){
-								  	console.log(data);
-								  	console.log(textStatus);
+								  	//console.log(data);
+								  	//console.log(textStatus);
 								  	callback(data);
 							  },
 							  failure: function(data, textStatus){
