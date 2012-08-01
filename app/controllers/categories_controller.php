@@ -2,7 +2,7 @@
 class CategoriesController extends AppController {
 
 	var $name = 'Categories';
-	var $helpers = array('Text', 'Cache', 'Paginator');
+	var $helpers = array('Js'=>array('Prototype'), 'Text', 'Cache', 'Paginator');
 
 	var $components= array('Phptwitter.Twitter');
 	var $uses = array('News','Category', 'Parameter');
@@ -392,11 +392,11 @@ class CategoriesController extends AppController {
 				$this->Category->recursive=-1;
 				$category = $this->Category->find('first', array('conditions'=>array('id'=>$id)));
 
-				$tweets = $this->requestAction("twtr/getList/0/".($category['Category']['name']));
+				//$tweets = $this->requestAction("twtr/getList/0/".($category['Category']['name']));
 
 				$this->set('category', $category);
-				$this->set('twitters', $tweets[0]);
-				$this->set('lastTweet', $tweets[1]);
+				//$this->set('twitters', $tweets[0]);
+				//$this->set('lastTweet', $tweets[1]);
 
 				$this->render('index');
 	}
