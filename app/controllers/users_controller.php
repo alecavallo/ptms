@@ -241,7 +241,7 @@ class UsersController extends AppController {
 	}
 	function admin_index() {
 		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
+		$this->set('users', $this->User->find('all'));
 	}
 
 	function admin_view($id = null) {
