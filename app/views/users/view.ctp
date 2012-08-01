@@ -4,7 +4,47 @@ echo $this->Html->script(array('prototype', 'Marquee'),array('inline'=>false, 'o
 echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inline'=>false, 'once'=>true));
 ?>
 <div id="content">
-	<div id="ads"></div>
+	<div id="ads">
+	
+		<?php
+		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
+		?>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 1 */
+		google_ad_slot = "2925543696";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 2a */
+		google_ad_slot = "3802193888";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 3 */
+		google_ad_slot = "1111764142";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<?php }?>
+	
+	</div>
 	<div id="newsList">
 		<?php 
 		foreach ($news as $row) {
@@ -66,4 +106,19 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 	<br clear="both"/>
 	<br clear="both"/>
 	<br clear="both"/>
+	<?php
+		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
+	?>
+	<script type="text/javascript"><!--
+	google_ad_client = "ca-pub-6965617047977932";
+	/* Footer-Bloque Anuncios */
+	google_ad_slot = "6067688955";
+	google_ad_width = 728;
+	google_ad_height = 15;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+	<?php }?>
 </div>

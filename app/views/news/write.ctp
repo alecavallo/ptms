@@ -100,10 +100,48 @@ echo $this->Html->script('prototype',array('inline'=>false));
 	<?php echo $this->Form->end();?>
 	<br clear="all"/>
 	</div>
-	<!-- <div id="colRight">
+	<div id="colRight">
+	
+		<?php
+		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
+		?>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 1 */
+		google_ad_slot = "2925543696";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 2a */
+		google_ad_slot = "3802193888";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 3 */
+		google_ad_slot = "1111764142";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<?php }?>
 
-	<br clear="all"/>
-</div> -->
+		<br clear="all"/>
+	</div>
 <script type="text/javascript">
 
 	var ck_newsContent = CKEDITOR.replace( 'NewsBody',
@@ -131,3 +169,19 @@ echo $this->Html->script('prototype',array('inline'=>false));
   	$this->Js->event('click',"$('helpMsg').update('Ingrese el copete. Caso contrario, será seleccionado el primer párrafo del cuerpo de la noticia');");
   	$this->Js->event('blur',"$('helpMsg').update('Aquí usted puede crear su propia noticia!');");
   ?>
+  	<?php
+		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
+	?>
+	<script type="text/javascript"><!--
+	google_ad_client = "ca-pub-6965617047977932";
+	/* Footer-Bloque Anuncios */
+	google_ad_slot = "6067688955";
+	google_ad_width = 728;
+	google_ad_height = 15;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+	<?php }?>
+</div>
