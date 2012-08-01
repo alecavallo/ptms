@@ -76,11 +76,9 @@ function Twitter(){
 					  dataType: "json"
 				});
 				
-				/*if(appUsername != false){
-					console.log(appUsername.User.first_name+' '+appUsername.User.last_name);
-				}else{
-					console.log(appUsername);
-				}*/
+				if(appUsername == false){
+					console.log(elm.user.name);
+				}
 				
 				if(appUsername != false){
 					//console.log(appUsername.User.first_name+' '+appUsername.User.last_name);
