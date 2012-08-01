@@ -25,9 +25,9 @@
 				$name = $this->Html->tag('span', "{$user['User']['first_name']} {$user['User']['last_name']}", array('class'=>"name"));
 				$nick = $this->Html->tag('span', $user['User']['alias'], array('class'=>"nick"));
 				if(!empty($nick)){
-					echo $this->Html->link($name." - ".$nick, array('controller'=>"users",'action'=>"view", $user['User']['id']), array('escape'=>false));
+					echo $this->Html->link($name." - ".$nick, "/columna/".$user['User']['alias'].".html", array('escape'=>false));
 				}else {
-					echo $this->Html->link($name, array('controller'=>"users",'action'=>"view", $user['User']['id']), array('escape'=>false));
+					echo $this->Html->link($name, "/columna/".$user['User']['alias'].".html", array('escape'=>false));
 				}
 			?>
 		</div>
