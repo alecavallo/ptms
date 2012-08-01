@@ -11,14 +11,7 @@
 <!--
 var page = 1;
 
-var m4 = new Marquee({
-	element: "marquee",
-	life: 5,
-	change: function(){
-		//$("ex4lst").down("li.active").removeClassName("active");
-		//$("ex4lst").down(m4.current).addClassName("active");
-	}
-});
+var m = new Marquee();
 
 function getNews(){
 
@@ -32,10 +25,16 @@ function getNews(){
 	      var data = [];
 	      $A(news).each(function(q, i){
 		      //alert(q.News.title);
-	    	  data.push({message: t.evaluate({msg:q.News.title, author:q.Feed.Source.name, category:q.Category.name, url:q.News.link, newsId:q.News.id})});
+	    	  data.push({text: t.evaluate({msg:q.News.title, author:q.Feed.Source.name, category:q.Category.name, url:q.News.link, newsId:q.News.id})});
 	    	  //alert('salió!!');
 	      });
-	      m4.load(data);
+	      m.load(data, jQuery('#marquee'));
+	      jQuery('#prev').click(function(){
+	      	m.prev();
+	      });
+	      jQuery('#next').click(function(){
+	      	m.next();
+	      });
 	      page++;
 	    },
 	    onFailure: function(){ alert('Volver marquesina al principio'); }
@@ -44,8 +43,6 @@ function getNews(){
 
 document.observe("dom:loaded", function (event) {
 	getNews();
-	$('prev').observe('click', function(){m4.previous();});
-	$('next').observe('click', function(){m4.next();});
 });
 
 //-->
