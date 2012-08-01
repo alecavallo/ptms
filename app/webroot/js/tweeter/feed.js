@@ -77,7 +77,7 @@ function Twitter(){
 				});
 				
 				if(appUsername == false){
-					console.log(elm.user.name);
+					console.log(elm.user.name+" -- "+elm.user.screen_name);
 				}
 				
 				if(appUsername != false){
