@@ -191,7 +191,7 @@ function Twitter(){
 			gresultsPerpage = resultsPerpage;
 			if(typeof(sinceId) == 'undefined' || sinceId == 0){
 				var query= "/1/lists/statuses.json?slug="+listName+"&owner_screen_name="+userScreenName+"&per_page="+resultsPerpage+"&page="+page+"&include_entities=true&callback=?";
-				var res = this.requestAction(query, 0, retFunction);
+				var res = this.requestAction(query, retFunction);
 			}else{
 				var query= "/1/lists/statuses.json?slug="+listName+"&owner_screen_name="+userScreenName+"&per_page="+resultsPerpage+"&page="+page+"&include_entities=true&since_id="+sinceId+"&callback=?";
 				var res = this.requestAction(query, retFunction);
