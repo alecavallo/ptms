@@ -6,6 +6,7 @@
 		echo $this->Form->input('first_name');
 		echo $this->Form->input('last_name');
 		echo $this->Form->input('alias');
+		echo $this->Form->input('avatar');
 		echo $this->Form->input('last_signup');
 		echo $this->Form->input('rating');
 		echo $this->Form->input('city_id');
