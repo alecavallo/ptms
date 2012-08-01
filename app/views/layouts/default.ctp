@@ -71,6 +71,7 @@ echo $scripts_for_layout;
 ?>
 <script>
 function SDEffect(element){
+	window.element = element;
 	setTimeout("element.show()",3000);
 	new Effect.SlideDown(element, {duration:4,delay:0});
 	new Effect.SlideUp(element, {duration:5,delay:17});

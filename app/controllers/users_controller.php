@@ -8,6 +8,28 @@ class UsersController extends AppController {
 	var $components = array('Email','RequestHandler');
 	var $view = 'Theme';
 
+	function getUsername($alias){
+		header('Content-type: application/json');
+		header('Cache-Control: public, max-age=3600, s-maxage=3600');
+		header('Pragma: public');
+		//$this->layout='ajax';
+		$this->autoLayout=false;
+		$this->autoRender=false;
+		$ret = Cache::read ( "un".$alias, 'usernames' );
+		if (empty($ret)){
+			$this->User->recursive = -1;
+			$ret = $this->User->find('first',
+				array(
+					'conditions'=>array('alias'=>$alias),
+					'fields'	=>	array('User.first_name','User.last_name','User.avatar')
+				)
+			);
+			Cache::write ( "un".$alias, $ret, 'usernames' );
+		}
+		
+		return json_encode($ret);
+		
+	}
 	function beforeFilter() {
 		parent::beforeFilter();
         $this->Auth->allow('register','invite');
@@ -135,14 +157,14 @@ class UsersController extends AppController {
 		$this->set('ok',$ok);
 	}
 
-	function view($id = null) {
-		if (!$id) {
+	function view($alias = null) {
+		if (!$alias) {
 			$this->Session->setFlash(__('El usuario no existe', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		
 		$user = $this->User->find('first', array(
-			'conditions'=>array('User.id'=>$id),
+			'conditions'=>array('User.alias'=>$alias),
 			'contain'	=>	array(
 				'City'	=>	array(
 					'State'	=>	array()
@@ -150,7 +172,7 @@ class UsersController extends AppController {
 				'Source'	=>	array()
 			)
 		));
-		
+		$id = $user['User']['id'];
 		$news = $this->User->News->find('all',array(
 			'fields'	=>	array('News.id', 'News.title', 'News.summary', 'News.created', 'News.visits', 'News.votes', 'News.link'),
 			'conditions'	=>	array('News.user_id'=>$id),

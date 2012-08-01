@@ -1,5 +1,6 @@
 <?php
-echo $this->Html->script(array('prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
+echo $this->Html->script(array('tweeter/jquery',  'underscore', 'tweeter/feed', 'prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
+//echo $this->Html->script(array('prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
 echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inline'=>false, 'once'=>true));
 //echo $this->Html->script('scriptaculous',array('inline'=>false));
 //echo $this->Html->script('common',array('inline'=>false));
@@ -12,16 +13,14 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			<cake:nocache>
 			<div id="tweets">
 			<?php
-				foreach ($twitters as $row) {
-					$aux['text'] = $row['text'];
-					$aux['username'] = $row['user'];
-					$aux['profile_img'] = $row['profile_img'];
-					//$aux['Category'] = "";
-					$aux['Category']['name'] = $row['category'];
-					$aux['created'] = $row['created'];
-					echo $this->element("widgets".DS."timeline_twitter", array('tweet'=>$aux));
-				}
+				echo $this->element("templates".DS."timeline_twitter");
 			?>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					window.t = new Twitter();
+					t.getHomeFeed(0);
+				});
+			</script>
         	</div>
         	</cake:nocache>
         	<?php echo $this->element("twitter_trends", array('cache'=>'3 minutes'));?>
@@ -144,7 +143,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
             <br clear="all"/>
     </div>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
     var i=0;
     var page=1;
     var maxTweets = 14;
@@ -280,4 +279,4 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			}
 
 		);
-	</script>
+	</script> -->

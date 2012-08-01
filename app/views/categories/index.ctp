@@ -1,6 +1,6 @@
 <?php
-echo $this->Html->script(array('prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
-echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inline'=>false, 'once'=>true));
+echo $this->Html->script(array('tweeter/jquery',  'underscore', 'tweeter/feed', 'prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
+echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once'=>true));
 //echo $this->Html->script('scriptaculous',array('inline'=>false));
 //echo $this->Html->script('common',array('inline'=>false));
 ?>
@@ -10,19 +10,15 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
 			<div id="tweets">
+			<script type="text/javascript">
+				var section = "<?php echo str_ireplace(" & ", "-", $category['Category']['name']) ?>";
+				jQuery(document).ready(function(){
+					window.t = new Twitter();
+					t.getList('posteamos',section,50,1);
+				});
+			</script>
 			<?php
-				foreach ($twitters as $row) {
-
-						$aux['text'] = $row['text'];
-						$aux['username'] = $row['user'];
-						$aux['profile_img'] = $row['profile_img'];
-						//$aux['Category'] = "";
-						$aux['Category']['name'] = $row['category'];
-						$aux['created'] = $row['created'];
-						echo $this->element("widgets".DS."timeline_twitter", array('tweet'=>$aux));
-
-				}
-
+				echo $this->element("templates".DS."timeline_twitter", array('cache'=>"1 hour"));
 			?>
         	</div>
         	<?php echo $this->element("twitter_trends");?>
@@ -145,7 +141,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
             <br clear="all"/>
     </div>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
     var i=0;
     var page=1;
     var maxTweets = 15;
@@ -266,4 +262,5 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			}
 
 		);
-	</script>
+	</script> -->
+	<?php echo $this->element("templates".DS."timeline_twitter", array('tweet'=>$aux));?>
