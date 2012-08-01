@@ -35,12 +35,12 @@
 	Router::connect('/news/postea', array('controller' => 'News', 'action' => 'write'));
 	Router::connect('/news/add', array('controller' => 'News', 'action' => 'write'));
 	Router::connect('/news/add/step:1', array('controller' => 'News', 'action' => 'write'));
-	Router::connect('/news/add/step:2', array('controller' => 'News', 'action' => 'options'));
+	//Router::connect('/news/add/step:2', array('controller' => 'News', 'action' => 'options'));
 	Router::connect('/news/add/:sAct',
 		array('controller' => 'News', 'action' => 'preview'),
 		array(
 			'pass'	=>	array('sAct'),
-			'sAct'	=>	'step\:3|guardar|publicar'
+			'sAct'	=>	'step\:2|guardar|publicar'
 		)
 	);
 	//Router::connect('/news/add/step:4', array('controller' => 'News', 'action' => 'save'));
@@ -49,3 +49,45 @@
 	//terminos y condiciones
 	Router::connect('/terminos-y-condiciones.html', array('controller' => "pages", "action" => "display", "termycond"));
 	Router::connect('/que-es-posteamos.html', array('controller' => "pages", "action" => "display", "qesposteamos"));
+	
+	Router::parseExtensions('html');
+	Router::connect('/seccion/:name',
+		array('controller'=>"Categories", 'action'=>'view', '3'),
+		array('name'=>"politica")
+	);
+	Router::connect('/seccion/:name',
+		array('controller'=>"Categories", 'action'=>'view', '4'),
+		array('name'=>"economia-empresas")
+	);
+	Router::connect('/seccion/:name',
+		array('controller'=>"Categories", 'action'=>'view', '7'),
+		array('name'=>"cultura-espectaculos")
+	);
+	Router::connect('/seccion/:name',
+		array('controller'=>"Categories", 'action'=>'view', '8'),
+		array('name'=>"deportes")
+	);
+	Router::connect('/seccion/:name',
+		array('controller'=>"Categories", 'action'=>'view', '11'),
+		array('name'=>"tecno-ciencia")
+	);
+	Router::connect('/seccion/:name',
+		array('controller'=>"Categories", 'action'=>'view', '16'),
+		array('name'=>"sociedad")
+	);
+	
+	Router::connect('/:col',
+		array('controller'=>"Users", 'action'=>'index'),
+		array('col'=>"columnas-pendientes")
+	);
+	Router::connect('/:col',
+		array('controller'=>"News", 'action'=>'write'),
+		array('col'=>"postea")
+	);
+	Router::connect('/columna/:alias',
+		array('controller'=>"Users", 'action'=>'view'),
+		array(
+			'pass'	=>	array('alias'),
+			'alias'	=>	"[a-zA-z0-9]+"
+		)
+	);
