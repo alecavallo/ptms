@@ -47,7 +47,8 @@ class AppController extends Controller {
 		$admin = Configure::read('Routing.prefixes');
 		$admin=$admin[0];
 		//debug($this->params);
-		if ((!isset($this->params[$admin]) || !$this->params[$admin]) && ($this->params['controller'] != "News" && $this->params['action'] != "write")){
+		
+		if ((!isset($this->params[$admin]) || !$this->params[$admin]) && ($this->params['controller'] != "News" || $this->params['action'] != "write")){
 			$this->Auth->allow();
 		}
 		

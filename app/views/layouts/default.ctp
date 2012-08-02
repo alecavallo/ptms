@@ -46,7 +46,7 @@ echo $scripts_for_layout;
 <body>
 <?php echo $this->Facebook->init();?>
 <div class="header" id="header">
-	<?php echo $html->link($html->image("logo_posteamos.png", array('alt'=>"Posteamos.com", 'id'=>"logo")),array('controller'=>"news",'action'=>'index'), array('escape'=>false))?>
+	<?php echo $html->link($html->image("logo_posteamos.png", array('alt'=>"Posteamos.com", 'id'=>"logo")),"/", array('escape'=>false))?>
 
 	<?php
 		$search = $form->create('News', array('id'=>"topSearch", 'type'=>"post", 'controller'=>"news", 'action'=>"search"));
