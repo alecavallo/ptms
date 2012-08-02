@@ -10,11 +10,15 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
 			<div id="tweets">
+			<div id="loading">
+				<p>Conect&aacute;ndose con twitter...</p>
+				<img alt="cargando" src="/img/loading.gif"/>
+			</div>
 			<script type="text/javascript">
 				var section = "<?php echo str_ireplace(" & ", "-", $category['Category']['name']) ?>";
 				jQuery(document).ready(function(){
 					window.t = new Twitter();
-					t.getList('posteamos',section,50,1);
+					t.getList('posteamos',section,50,1,'#tweets');
 				});
 			</script>
 			<?php

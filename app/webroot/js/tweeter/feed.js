@@ -4,6 +4,8 @@
 jQuery.noConflict();
 
 function Twitter(){
+	var firstCall= true;
+	var tDomelm;
 	var twitterUrl = "http://api.twitter.com";
 	var glistName="";
 	var gresultsPerpage=0;
@@ -21,7 +23,7 @@ function Twitter(){
 	
 	var retFunction= function(data){
 		
-		var feedSpeed = 3500;
+		var feedSpeed = 6000;
 		var tweetsPerColumn=12;
 		var initial=true;
 		var delay=1;
@@ -92,7 +94,11 @@ function Twitter(){
 					var row = "";
 					row = _.template(template, tmplData);
 					if(cnt < tweetsPerColumn && initial){
-						jQuery('#tweets').prepend(row);
+						if(firstCall == true){
+							jQuery(tDomelme).html('');
+							firstCall = false;
+						}
+						jQuery(tDomelme).prepend(row);
 						cnt++;
 						//retFunction(data,cnt);
 						//setTimeout(function(){retFunction(data,cnt)}, 1001);
@@ -100,7 +106,7 @@ function Twitter(){
 						
 						setTimeout(function(){
 							//var c = index+1;
-							jQuery('#tweets').prepend(row);
+							jQuery(tDomelme).prepend(row);
 							jQuery('div.twitterNews:last').remove();
 						}, feedSpeed*(delay));
 						cnt++;
@@ -117,7 +123,7 @@ function Twitter(){
 								},
 									1000, 'linear',
 									function(){
-										//jQuery('#tweets').prepend(row);
+										//jQuery(container).prepend(row);
 										return true;
 									}
 							);
@@ -137,7 +143,7 @@ function Twitter(){
 			//jQuery.proxy(function(){
 				setTimeout(function(){
 					//alert('Recursion!!!!');
-					t.getList('posteamos',glistName,gresultsPerpage,1);
+					t.getList('posteamos',glistName,gresultsPerpage,1, tDomelme);
 				},feedSpeed*(delay+delta));
 			//}, this)
 		
@@ -150,17 +156,17 @@ function Twitter(){
 		var tweetsPerColumn=12;
 		sinceId = data[1];
 		var tweets = data[0];
-		var container = jQuery('#tweets');
+		//var container = jQuery('#tweets');
 		var count=1;
 		var delay=1;
 		var feedSpeed = 3000;
 		jQuery.each(tweets,function(idx, row){
 			if(typeof(row)!= 'undefined' || row != 'undefined'){
 				if(count < tweetsPerColumn){
-						container.prepend(row);
+					tDomelme.prepend(row);
 				}else{
 					setTimeout(function(){
-						container.prepend(row);
+						tDomelme.prepend(row);
 						jQuery('div.twitterNews:last').remove();
 					}, feedSpeed*delay);
 					delay++;
@@ -183,7 +189,10 @@ function Twitter(){
 			retFunction(data);
 		},
 		
-		getList: function(userScreenName, listName, resultsPerpage, page){
+		getList: function(userScreenName, listName, resultsPerpage, page, container){
+			if(typeof container != 'undefined'){
+				tDomelme = jQuery(container);
+			}
 			wrapper = 't.getListWrapper';
 			glistName = listName;
 			gresultsPerpage = resultsPerpage;

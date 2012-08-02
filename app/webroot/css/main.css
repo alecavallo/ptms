@@ -389,6 +389,16 @@ overflow: hidden;
 	margin-bottom: 10px;
 	clear: right;
 }
+div#tweets div#loading{
+	text-align: center;
+	color: #171717;
+    font-family: 'Ubuntu',sans-serif;
+    font-size: 14px;
+	
+}
+div#tweets div#loading p{
+	margin-bottom: 10px;
+}
 
 #colCenter{
 	position:relative;
