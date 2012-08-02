@@ -1,4 +1,8 @@
 @CHARSET "ISO-8859-1";
+body{
+	min-width: 1264px;
+}
+	
 div#content{
 	min-width: 1225px;
 }
