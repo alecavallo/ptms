@@ -23,7 +23,7 @@ function Twitter(){
 	
 	var retFunction= function(data){
 		
-		var feedSpeed = 6000;
+		var feedSpeed = 7000;
 		var tweetsPerColumn=12;
 		var initial=true;
 		var delay=1;
@@ -159,7 +159,7 @@ function Twitter(){
 		//var container = jQuery('#tweets');
 		var count=1;
 		var delay=1;
-		var feedSpeed = 6000;
+		var feedSpeed = 7000;
 		jQuery.each(tweets,function(idx, row){
 			if(typeof(row)!= 'undefined' || row != 'undefined'){
 				if(count < tweetsPerColumn){
