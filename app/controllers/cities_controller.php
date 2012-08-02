@@ -120,6 +120,43 @@ class CitiesController extends AppController {
 		header("Content-type: application/json");
 		echo json_encode($data);
 	}
+	
+	function getAll($limit = null) {
+		//$this->disableCache();
+		if($this->RequestHandler->isAjax()){
+			$this->autoLayout=false;
+			$this->autoRender=false;
+		}else {
+			$this->cakeError('error404');
+		}
+		$data = Cache::read( "allCities", 'vLong' );
+		if(!empty($data) || $data == false){
+			if(!empty($limit)){
+				if (!is_numeric($limit)) {
+					$limit=0;
+				}
+				$sql = "Select City.id, City.name, State.name, Country.name from cities City inner join states State on State.id = City.state_id inner join countries Country on Country.id=State.country_id limit {$limit};";
+				$query = $this->City->query($sql);
+			}else {
+				$sql = "Select City.id, City.name, State.name, Country.name from cities City inner join states State on State.id = City.state_id inner join countries Country on Country.id=State.country_id;";
+				$query = $this->City->query($sql);
+			}
+	
+			$data=array();
+			foreach ($query as $row) {
+				$json = array();
+				$json['value'] = $row['City']['name'].", ".$row['State']['name'].", ".$row['Country']['name'];
+				$json['id'] = $row['City']['id'];
+				$data[] = $json;
+			}
+			$data = json_encode($data);
+			Cache::write ( "allCities", $data, 'vLong' );
+		}
+		header("Content-type: application/json; charset=utf-8");
+		header('Cache-Control: public, max-age=3600, s-maxage=3600');
+		header('Pragma: public');
+		echo $data;
+	}
 
 	function add() {
 		if (!empty($this->data)) {

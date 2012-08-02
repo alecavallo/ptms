@@ -6,10 +6,13 @@
  */
 class JqautocompleteHelper extends AppHelper {
 
-	var $helpers = array("Js", "Html", "Form");
+	var $helpers = array("Js"=>"Jquery", "Html", "Form");
 	var $data;
+	
 
-	function searchbox($elmId, $data, $options = array(), $htmlOptions=array()) {
+	function searchbox($elmId, $data, $isUrl=false, $options = array(), $htmlOptions=array()) {
+		
+    	$this->Js->JqueryEngine->jQueryObject = 'jQuery';
 		$htmlOptions = array_merge($htmlOptions, array('type'=>"text",'div'=>false));
 		$input = $this->Form->input($elmId,$htmlOptions);
 		$dfltOptions = array(
@@ -25,8 +28,8 @@ class JqautocompleteHelper extends AppHelper {
 			'retrieveLimit'		=>	"50",
 			'extraParams'		=>	"",
 			'matchCase'			=>	"false",
-			'minChars'			=>	1,
-			'keyDelay'			=>	400,
+			'minChars'			=>	2,
+			'keyDelay'			=>	200,
 			'resultsHighlight'	=>	"true",
 			'neverSubmit'		=>	"false",
 			'selectionLimit'	=>	"false",
@@ -63,15 +66,7 @@ class JqautocompleteHelper extends AppHelper {
 		$optList = substr($optList, 0, -2);
 		$optList .= "}";
 		$searchbox="";
-		if (!empty($data) && is_array($data)) {
-			$this->set($data);
-			$dataList = "data = {items: [";
-			foreach ($data as $value) {
-				$dataList .= "{value: \"{$value}\"},";
-			}
-			$dataList .= substr($searchbox, 0, count_chars($searchbox)-1);
-			$dataList .= "]};";
-			$this->Js->buffer($dataList);
+		if (!empty($data) && $isUrl==false) {
 			$elName = explode(".", $elmId);
 			if (count($elName) == 1) {
 				$domId = $elName;
@@ -79,9 +74,9 @@ class JqautocompleteHelper extends AppHelper {
 				$elName[1] = Inflector::camelize($elName[1]);
 				$domId = implode("", $elName);
 			}
-			$searchbox .= "$(\"{$domId}\").autoSuggest(data.items, {$optList});";
+			//$searchbox .= "jQuery(document).ready(function(){jQuery(\"{$elmId}\").autoSuggest({$data}, {$optList})});";
+			$searchbox .= "jQuery(\"#$domId\").autoSuggest({$data}, {$optList});";
 			$this->Js->buffer($searchbox);
-
 			//echo $this->Js->writeBuffer(array('inline'=>true, 'safe'=>true));
 		}else {
 			$elName = explode(".", $elmId);
@@ -91,12 +86,12 @@ class JqautocompleteHelper extends AppHelper {
 				$elName[1] = Inflector::camelize($elName[1]);
 				$domId = implode("", $elName);
 			}
-			$searchbox = "$(\"#$domId\").autoSuggest(\"".Router::url($data,true)."\", {$optList});";
+			$searchbox = "jQuery(\"#$domId\").autoSuggest(\"".Router::url($data,true)."\", {$optList});";
 			$this->Js->buffer($searchbox);
 			//echo $this->Js->writeBuffer(array('inline'=>true, 'safe'=>true));
 		}
 		echo $this->Html->css('autoSuggest', null, array('inline'=>false));
-		echo $this->Html->script('jquery',array('inline'=>false,'once'=>true));
+		//echo $this->Html->script('jquery',array('inline'=>false,'once'=>true));
 		echo $this->Html->script('jquery.autoSuggest.minified',array('inline'=>false,'once'=>true));
 
 

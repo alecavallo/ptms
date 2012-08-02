@@ -1342,7 +1342,10 @@ div.twitterNews p.summary{
 }
 div.users {
 	width:495px;
-	float: right;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 div.users hr {
 	background-color: #cfcfcf;
