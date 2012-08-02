@@ -33,7 +33,7 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-	if(Router::url('/',true) == 'www.posteamos.com' || Router::url('/',true) == 'www.posteamos.com'){
+	if(Router::url('/',true) == 'http://www.posteamos.com/' || Router::url('/',true) == 'http://posteamos.com/'){
 		Router::connect('/postea', array('controller' => 'pages', 'action' => 'display', 'enconstruccion'));
 		Router::connect('/news/postea', array('controller' => 'pages', 'action' => 'display', 'enconstruccion'));
 	}else{
@@ -86,7 +86,7 @@
 	);
 	
 	
-	if(Router::url('/',true) == 'www.posteamos.com' || Router::url('/',true) == 'www.posteamos.com'){
+	if(Router::url('/',true) == 'http://www.posteamos.com/' || Router::url('/',true) == 'http://posteamos.com/'){
 		Router::connect('/:col',
 			array('controller' => 'pages', 'action' => 'display', 'enconstruccion'),
 			array('col'=>"columnas-pendientes")
