@@ -67,13 +67,15 @@ class PagesController extends AppController {
  * @access public
  */
 	function display() {
-		$this->helpers[] = 'Cache';
-		$this->cacheAction = '10 minutes';
+		/*$this->helpers[] = 'Cache';
+		$this->cacheAction = '10 minutes';*/
 		$path = func_get_args();
 		
 		if($path[0]=="home"){//si la página estática es el splash screen utilizar el layout específico, sino el default
 			$this->layout='splash';
-		}else {
+		}elseif($path[0]=="enconstruccion"){
+			$this->layout="enconstruccion";
+		}else{
 			$this->layout='default';
 		}
 

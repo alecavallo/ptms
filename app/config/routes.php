@@ -27,12 +27,19 @@
  * to use (in this case, /app/views/pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-	Router::connect('/news/postea', array('controller' => 'News', 'action' => 'write'));
+	if(Router::url('/',true) == 'www.posteamos.com' || Router::url('/',true) == 'www.posteamos.com'){
+		Router::connect('/postea', array('controller' => 'pages', 'action' => 'display', 'enconstruccion'));
+		Router::connect('/news/postea', array('controller' => 'pages', 'action' => 'display', 'enconstruccion'));
+	}else{
+		Router::connect('/news/postea', array('controller' => 'News', 'action' => 'write'));
+		Router::connect('/news/postea', array('controller' => 'News', 'action' => 'write'));
+	}
 	Router::connect('/news/add', array('controller' => 'News', 'action' => 'write'));
 	Router::connect('/news/add/step:1', array('controller' => 'News', 'action' => 'write'));
 	//Router::connect('/news/add/step:2', array('controller' => 'News', 'action' => 'options'));
@@ -47,8 +54,8 @@
 	Router::connect('/news/add', array('controller' => 'News', 'action' => 'write'));
 	
 	//terminos y condiciones
-	Router::connect('/terminos-y-condiciones.html', array('controller' => "pages", "action" => "display", "termycond"));
-	Router::connect('/que-es-posteamos.html', array('controller' => "pages", "action" => "display", "qesposteamos"));
+	Router::connect('/terminos-y-condiciones', array('controller' => "pages", "action" => "display", "termycond"));
+	Router::connect('/que-es-posteamos', array('controller' => "pages", "action" => "display", "qesposteamos"));
 	/**Registracion**/
 	Router::connect('/registracion', array('controller' => "Users", "action" => "register"));
 	
@@ -78,10 +85,19 @@
 		array('name'=>"sociedad")
 	);
 	
-	Router::connect('/:col',
+	
+	if(Router::url('/',true) == 'www.posteamos.com' || Router::url('/',true) == 'www.posteamos.com'){
+		Router::connect('/:col',
+			array('controller' => 'pages', 'action' => 'display', 'enconstruccion'),
+			array('col'=>"columnas-pendientes")
+		);
+	}else{
+		Router::connect('/:col',
 		array('controller'=>"Users", 'action'=>'index'),
-		array('col'=>"columnas-pendientes")
-	);
+		array('col'=>"columnas-pendientes"));
+	}
+	
+	
 	Router::connect('/:col',
 		array('controller'=>"News", 'action'=>'write'),
 		array('col'=>"postea")
