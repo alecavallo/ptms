@@ -5,6 +5,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 //echo $this->Html->script('scriptaculous',array('inline'=>false));
 //echo $this->Html->script('common',array('inline'=>false));
 ?>
+<?php echo $this->element('news'.DS.'popup'/*, array('cache'=>'30 minutes')*/)?>
 <div id="content">
 		<?php echo $this->element('news'.DS.'marquee', array('cache'=>'30 minutes'))?>
     	<div id="colLeft">

@@ -1,0 +1,110 @@
+@CHARSET "ISO-8859-1";
+/*
+#popupClose - this is referring to the anchor tag inside the popup conatainer.
+We'll absolute position and style it here
+*/
+#popupClose{  
+	font-size:20px;  
+	line-height:20px;  
+	position:absolute;
+	right:6px;  
+	top:4px;  
+	font-weight:700; 
+	display:block;
+	color: white;
+}
+#popupClose:hover{
+	color: white;
+	font-weight: bolder;
+	text-decoration: none;
+}
+
+/*
+#bgPopup - this is referring to the element that will cover the whole page 
+behind the popup and above the rest of the page.
+NOTE: if you are using z-index on the same level in the DOM - 
+	#bgPopup z-index needs to have the second highest value (behind #Popup)
+*/
+#bgPopup{
+	display:none; 
+	position:fixed;  
+	_position:absolute; /* hack for internet explorer 6*/  
+	height:100%;  
+	width:100%;  
+	top:0;  
+	left:0;  
+	background:#000000;   
+	z-index:10000;  
+}  
+
+/*
+#Popup - The popup container
+NOTE: if you are using z-index on the same level in the DOM - 
+	#Popup z-index needs to have the highest value.
+*/
+#Popup{  
+	display:none;  
+	position:fixed;  
+	_position:absolute; /* hack for internet explorer 6 */ 
+	/*background:#FFFFFF;*/
+	background:url(/img/splash_bkg.png) repeat-x #639944;
+	border:2px solid #cecece;  
+	z-index:20000;  
+	padding:12px;  
+	font-size:13px;  
+} 
+
+/*
+#myButton - The Button....  make it have Button-like properties
+*/
+#myButton{
+	display:block;
+	position:relative;
+	width:200px;
+	height:50px;
+	line-height:50px;
+	font-family:"Trebuchet MS";
+	font-size:14px
+	text-align:center;	
+}
+
+
+
+/**FRAGMENTO DEL SPLASH**/
+#contenedor { 
+	width: 800px;
+	height: 300px;
+	background:#00FF00;
+	background: url(/img/splash/logo.png) no-repeat;
+}
+#h_1 { 
+	width: 43%;
+	height: 289px;
+	position:absolute;
+	overflow:hidden;
+	float: left;
+}
+#txt { 
+	width: 340px;
+	padding: 15px 5px;
+	margin: 123px 0 0 0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#ffffff;
+	text-align:center;
+}
+
+#h_2 { 
+	width: 50%;
+	height: 310px;
+	float: right;
+	/*margin: 0 0 0 38px;*/
+	float: right;
+}
+#c_video {
+	height: 273px;
+	width: 400px;
+	float:right;
+	margin-top: 20px;
+	/*background:url(/img/splash/backvideo.png);*/
+}
