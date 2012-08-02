@@ -43,7 +43,7 @@ class AppController extends Controller {
             'username' => 'email',
             'password' => 'password'
         );
-        $this->Auth->loginRedirect = array('controller' => 'sources', 'action' => 'index', 'admin'=>true);
+        //$this->Auth->loginRedirect = array('controller' => 'sources', 'action' => 'index', 'admin'=>true);
 		$admin = Configure::read('Routing.prefixes');
 		$admin=$admin[0];
 		//debug($this->params);

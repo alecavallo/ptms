@@ -91,3 +91,6 @@
 			'alias'	=>	"[a-zA-z0-9]+"
 		)
 	);
+	
+	/**Registracion**/
+	Router::connect('/registracion.html', array('controller' => "Users", "action" => "register"));

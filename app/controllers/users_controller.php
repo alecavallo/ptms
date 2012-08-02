@@ -37,7 +37,7 @@ class UsersController extends AppController {
     }
 
 	function login(){
-		$this->layout="admin";
+		$this->layout="default";
 		if($this->Connect->user()){
 			if ($this->Connect->hasAccount) {
 				$this->User->contain('City.State.Country');
