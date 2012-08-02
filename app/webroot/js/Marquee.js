@@ -3,7 +3,7 @@ function Marquee(){
         anSpeed: 500,
         delay: 5000,
         changeDelay: 900,
-        animation: 'fade',
+        animation: 'fade'
     };
     
     var prevPressed = false;
