@@ -1480,19 +1480,20 @@ div.greenBox label{
 }
 
 div.greenBox input[type="submit"] {
-	background: transparent url(../img/iniciar-08.png) no-repeat;
-	background-position:top left;
+	background: transparent url(../img/iniciar.png) no-repeat;
+	/*background-position:top left;*/
 	width: 70px;
-	height:28px;
+	height:22px;
 	line-height: 22px;
 	text-align: center;
 	border-style: none;
 	float:right;
+	margin-right: 5px;
 	display: block;
 }
 div.greenBox input[type="submit"]:hover {
-	background: transparent url(../img/iniciar-08.png) no-repeat;
-	background-position:top right;
+	/*background: transparent url(../img/iniciar-08.png) no-repeat;
+	background-position:top right;*/
 }
 p#toregister{
 	text-align: right;
