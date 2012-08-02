@@ -25,7 +25,7 @@
 		</div>-->
 		<p class="summary">
 			<?php
-				echo $text->truncate(__(Sanitize::clean(html_entity_decode($news['summary'],ENT_COMPAT,'UTF-8'),array('remove_html'=>true,'carriage'=>true,'odd_spaces'=>true)), true),100, array('ending'=>'...', 'exact'=>true, 'html'=>true));
+				echo $text->truncate(__(Sanitize::clean(html_entity_decode($news['summary'],ENT_COMPAT,'UTF-8'),array('remove_html'=>true,'carriage'=>true,'odd_spaces'=>true)), true),110, array('ending'=>'...', 'exact'=>true, 'html'=>true));
 			?>
 		</p>
 	</div>
