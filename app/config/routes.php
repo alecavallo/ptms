@@ -49,6 +49,8 @@
 	//terminos y condiciones
 	Router::connect('/terminos-y-condiciones.html', array('controller' => "pages", "action" => "display", "termycond"));
 	Router::connect('/que-es-posteamos.html', array('controller' => "pages", "action" => "display", "qesposteamos"));
+	/**Registracion**/
+	Router::connect('/registracion', array('controller' => "Users", "action" => "register"));
 	
 	Router::parseExtensions('html');
 	Router::connect('/seccion/:name',
@@ -91,6 +93,3 @@
 			'alias'	=>	"[a-zA-z0-9]+"
 		)
 	);
-	
-	/**Registracion**/
-	Router::connect('/registracion.html', array('controller' => "Users", "action" => "register"));
