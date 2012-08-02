@@ -18,6 +18,39 @@ class AdsController extends AppController {
 	}
 
 
+	function click($id){
+		if($this->RequestHandler->isAjax()){
+			$this->layout='ajax';
+			$this->autoRender=false;
+		}else {
+			$this->cakeError('error404');
+		}
+		$clickList = Cache::read('clicklist', 'long');
+		debug($clickList);
+		if(empty($clickList)){
+			$clickList = array();
+		}
+		$count = 0;
+		foreach ($clickList as $row) {
+			if ($id == $row['adId'] && $_SERVER['HTTP_USER_AGENT'] == $row['browser'] && $_SERVER['REMOTE_ADDR'] == $row['ip'] && $count >= 5) {
+				return 0;
+				break;
+			}elseif($id == $row['adId'] && $_SERVER['HTTP_USER_AGENT'] == $row['browser'] && $_SERVER['REMOTE_ADDR'] == $row['ip'] && $count < 5){
+				$count++;
+			}
+		}
+
+		$clickList[] = array(
+			'browser' => $_SERVER['HTTP_USER_AGENT'],
+			'ip'	=>	$_SERVER['REMOTE_ADDR'],
+			'adId'	=>	$id
+		);
+		
+		$this->Ad->updateAll(array('Ad.clicks'=>"Ad.clicks+1"), array('Ad.id'=>$id));		
+		Cache::write('clicklist', $clickList, 'long');
+		//debug($_SERVER);
+		return 1;
+	}
 
 	function view($id = null) {
 		if (!$id) {

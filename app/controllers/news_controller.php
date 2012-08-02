@@ -37,9 +37,8 @@ class NewsController extends AppController {
 		}else{ //sino trato de recuperarla de cache
 			$ads = Cache::read ( "ads", 'vLong' );
 		}
-		
+		$this->loadModel('Ad');
 		if (empty($ads)){
-			$this->loadModel('Ad');
 			$ads = array();
 			$ads[1]['data'] = $this->Ad->get(1);
 			$ads[1]['displayed'] = array();
@@ -251,6 +250,9 @@ class NewsController extends AppController {
 				//incremento el contador de cantidad de visualizaciones
 				$ads[1]['displayed'][$i]++;
 			}
+			if(!empty($excludedAds)){
+				$this->Ad->updateAll(array('Ad.shows'=>"Ad.shows+1"), array('Ad.id'=>$excludedAds));
+			}
 		}else {
 			$adsToShow[1] = array();
 		}
@@ -262,21 +264,21 @@ class NewsController extends AppController {
 			$maxAds = 2;
 			$maxAds = count($ads[2]['data'])>=$maxAds?$maxAds:count($ads[2]['data']);
 			$i=0;
+			$adsToUpdate=array();
 			foreach ($ads[2]['data'] as $key => $ad) {
 				if($i >= $maxAds){
 					break;
 				}
 				if(!in_array($ad['Ad']['id'], $excludedAds)){
+					$adsToUpdate[]=$ad['Ad']['id'];
 					$adsToShow[2][] = $ad;
 					$ads[2]['displayed'][$key]++;
 					$i++;
 				}	
 			}
-			/*for ($i = 0; $i < $maxAds; $i++) {
-				$adsToShow[2][] = $ads[2]['data'][$i];
-				//incremento el contador de cantidad de visualizaciones
-				$ads[2]['displayed'][$i]++;
-			}*/
+			if(!empty($adsToUpdate)){
+				$this->Ad->updateAll(array('Ad.shows'=>"Ad.shows+1"), array('Ad.id'=>$adsToUpdate));
+			}
 			
 		}else {
 			$adsToShow[2] = array();

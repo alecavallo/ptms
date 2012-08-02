@@ -12,7 +12,7 @@
 		<!-- <div id="anuncio">Anuncio</div> -->
 		<h4 class="section grey">
 			<span style="font-weight: 400;">Anuncios</span>		</h4>
-		<h3><?php echo $html->link($ad['name'],$ad['link'], array('escape'=>false, 'target'=>"_blank"));?></h3>
+		<h3><?php echo $html->link($ad['name'],$ad['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"new Ajax.Request('/ads/click/{$ad['id']}'); return true;"));?></h3>
 		<div class="photo">
 		</div>
 		<p class="summary">
