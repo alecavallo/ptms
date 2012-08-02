@@ -16,14 +16,15 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			<?php
 				echo $this->element("templates".DS."timeline_twitter");
 			?>
-			<script type="text/javascript">
-				jQuery(document).ready(function(){
-					window.t = new Twitter();
-					t.getHomeFeed(0);
-				});
-			</script>
+			
         	</div>
         	</cake:nocache>
+        	<script type="text/javascript">
+				jQuery(document).ready(function(){
+					window.t = new Twitter();
+					t.getHomeFeed(0, '#tweets');
+				});
+			</script>
         	<?php echo $this->element("twitter_trends", array('cache'=>'3 minutes'));?>
        </div>
         <div id="colCenter">

@@ -95,10 +95,10 @@ function Twitter(){
 					row = _.template(template, tmplData);
 					if(cnt < tweetsPerColumn && initial){
 						if(firstCall == true){
-							jQuery(tDomelme).html('');
+							jQuery(tDomelm).html('');
 							firstCall = false;
 						}
-						jQuery(tDomelme).prepend(row);
+						jQuery(tDomelm).prepend(row);
 						cnt++;
 						//retFunction(data,cnt);
 						//setTimeout(function(){retFunction(data,cnt)}, 1001);
@@ -106,7 +106,7 @@ function Twitter(){
 						
 						setTimeout(function(){
 							//var c = index+1;
-							jQuery(tDomelme).prepend(row);
+							jQuery(tDomelm).prepend(row);
 							jQuery('div.twitterNews:last').remove();
 						}, feedSpeed*(delay));
 						cnt++;
@@ -143,7 +143,7 @@ function Twitter(){
 			//jQuery.proxy(function(){
 				setTimeout(function(){
 					//alert('Recursion!!!!');
-					t.getList('posteamos',glistName,gresultsPerpage,1, tDomelme);
+					t.getList('posteamos',glistName,gresultsPerpage,1, tDomelm);
 				},feedSpeed*(delay+delta));
 			//}, this)
 		
@@ -159,14 +159,14 @@ function Twitter(){
 		//var container = jQuery('#tweets');
 		var count=1;
 		var delay=1;
-		var feedSpeed = 3000;
+		var feedSpeed = 6000;
 		jQuery.each(tweets,function(idx, row){
 			if(typeof(row)!= 'undefined' || row != 'undefined'){
 				if(count < tweetsPerColumn){
-					tDomelme.prepend(row);
+					tDomelm.prepend(row);
 				}else{
 					setTimeout(function(){
-						tDomelme.prepend(row);
+						tDomelm.prepend(row);
 						jQuery('div.twitterNews:last').remove();
 					}, feedSpeed*delay);
 					delay++;
@@ -191,7 +191,7 @@ function Twitter(){
 		
 		getList: function(userScreenName, listName, resultsPerpage, page, container){
 			if(typeof container != 'undefined'){
-				tDomelme = jQuery(container);
+				tDomelm = jQuery(container);
 			}
 			wrapper = 't.getListWrapper';
 			glistName = listName;
@@ -205,7 +205,10 @@ function Twitter(){
 			}
 		},
 		
-		getHomeFeed: function(lastTweet){
+		getHomeFeed: function(lastTweet, container){
+			if(typeof container != 'undefined'){
+				tDomelm = jQuery(container);
+			}
 			jQuery.ajax({
 				  url: '/twtr/getTimeline/'+lastTweet,
 				  cache: false,
