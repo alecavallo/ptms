@@ -58,6 +58,7 @@ class CategoriesController extends AppController {
 		}else{ //sino trato de recuperarla de cache
 			$ads = Cache::read ( "cate_{$id}_ads", 'vLong' );
 		}
+		$this->loadModel('Ad');
 		if (empty($ads)){
 			$this->loadModel('Ad');
 			$ads = array();
