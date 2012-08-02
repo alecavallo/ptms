@@ -1,5 +1,5 @@
 <?php 
-	echo $this->Html->script(array('tweeter/jquery','Prototype', 'Effects'),array('inline'=>false, 'once'=>true));
+	echo $this->Html->script(array('tweeter/jquery','prototype', 'effects'),array('inline'=>false, 'once'=>true));
 	print $this->Html->scriptBlock('var jQuery = jQuery.noConflict();',array('inline' => false));
 ?>
 <script type="text/javascript">
