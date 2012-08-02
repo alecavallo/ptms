@@ -102,10 +102,14 @@ class NewsController extends AppController {
 				}
 				$ads[1]['displayed'][$key] = rand(0, 2);
 			}
-			//debug($ads[1]['data']);
+			//debug($ads[1]['displayed']);
+			$excludeAds = array();
+			/*foreach ($ads[1]['data'] as $ad){
+				$excludeAds[]=$ad['Ad']['id'];
+			}*/
 			array_multisort($ads[1]['displayed'], SORT_ASC, $ads[1]['data']);
 			
-			$ads[2]['data'] = $this->Ad->get(2);
+			$ads[2]['data'] = $this->Ad->get(2,0,$excludeAds);
 			$ads[2]['displayed'] = array();
 			foreach ($ads[2]['data'] as $key => $value) {
 				if($value['Ad']['socialnetwork']!=0){
@@ -159,9 +163,14 @@ class NewsController extends AppController {
 				}
 				$ads[2]['displayed'][$key] = rand(0, 2);
 			}
+			/*$excludeAds = array();
+			foreach ($ads[2]['data'] as $ad){
+				$excludeAds[]=$ad['Ad']['id'];
+			}*/
 			array_multisort($ads[2]['displayed'], SORT_ASC, $ads[2]['data']);
 			
-			$ads[3]['data'] = $this->Ad->get(3);
+			//$ads[3]['data'] = $this->Ad->get(3,0,$excludeAds);
+			$ads[3]['data'] = array();
 			$ads[3]['displayed'] = array();
 			foreach ($ads[3]['data'] as $key => $value) {
 				if($value['Ad']['socialnetwork']!=0){
@@ -233,10 +242,12 @@ class NewsController extends AppController {
 		$maxAds = 2;
 		$adsToShow = array();
 		//publicidades en medios
+		$excludedAds = array();
 		if(!empty($ads[1]['data'])){
 			$maxAds = count($ads[1]['data'])>=$maxAds?$maxAds:count($ads[1]['data']);
 			for ($i = 0; $i < $maxAds; $i++) {
 				$adsToShow[1][] = $ads[1]['data'][$i];
+				$excludedAds[]=$ads[1]['data'][$i]['Ad']['id'];
 				//incremento el contador de cantidad de visualizaciones
 				$ads[1]['displayed'][$i]++;
 			}
@@ -248,13 +259,25 @@ class NewsController extends AppController {
 		
 		//publicidades en blogs
 		if(!empty($ads[2]['data'])){
-			$maxAds = 1;
+			$maxAds = 2;
 			$maxAds = count($ads[2]['data'])>=$maxAds?$maxAds:count($ads[2]['data']);
-			for ($i = 0; $i < $maxAds; $i++) {
+			$i=0;
+			foreach ($ads[2]['data'] as $key => $ad) {
+				if($i >= $maxAds){
+					break;
+				}
+				if(!in_array($ad['Ad']['id'], $excludedAds)){
+					$adsToShow[2][] = $ad;
+					$ads[2]['displayed'][$key]++;
+					$i++;
+				}	
+			}
+			/*for ($i = 0; $i < $maxAds; $i++) {
 				$adsToShow[2][] = $ads[2]['data'][$i];
 				//incremento el contador de cantidad de visualizaciones
 				$ads[2]['displayed'][$i]++;
-			}
+			}*/
+			
 		}else {
 			$adsToShow[2] = array();
 		}
@@ -295,8 +318,9 @@ class NewsController extends AppController {
 		//obtengo las publicidades a mostrar por columna
 		//$newsAds = array_slice($ads['data'], 0, $adsPerColumn+1);
 		//$blogsAds = array_slice($ads['data'], $adsPerColumn+1, $adsPerColumn);
-		$newsAds= $ads[1]['data'];
-		$blogsAds=$ads[2]['data'];
+		
+		$newsAds= $adsToShow[1];
+		$blogsAds=$adsToShow[2];
 		$banner = $ads[4]['data'];
 		$this->set('banner', $banner);
 

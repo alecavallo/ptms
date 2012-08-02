@@ -59,16 +59,15 @@ class Ad extends AppModel {
 			};
 		}
 	}
-	function get($priority, $category=0){
+	function get($priority, $category=0, $excluded=array()){
 		if(is_int($priority) && $priority!=4){//todas las columnas excepto el banner central
 			$priority=array($priority, 5);
 		}
 		$conditions = array(
 			'priority'	=>	$priority,
 		);
-
-		if ($category > 0) {
-			//$conditions['category']	= $category;
+		if (!empty($excluded)) {
+			$conditions['id not']=$excluded;
 		}
 
 		if ($category==0) {
