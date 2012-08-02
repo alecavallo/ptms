@@ -17,6 +17,7 @@ We'll absolute position and style it here
 	color: white;
 	font-weight: bolder;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 /*
