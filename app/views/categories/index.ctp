@@ -7,6 +7,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 <div id="content">
 		<?php echo $this->element('news'.DS.'marquee',array('categoryId'=>$category['Category']['id']))?>
     	<div id="colLeft">
+    	<section>
 			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
 			<div id="tweets">
@@ -26,8 +27,10 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 			?>
         	</div>
         	<?php echo $this->element("twitter_trends");?>
+        </section>
        </div>
         <div id="colCenter">
+        <section>
         	<h1 class="greyTitle">Medios</h1>
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
@@ -67,9 +70,11 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 					}
 				}}
 			?>
+			</section>
 			</div>
 
         <div id="colRight">
+        <section>
         	<h1 class="greyTitle">Blogs</h1>
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
@@ -110,6 +115,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 					}
         		}
         	?>
+        </section>
         </div>
         
         <div id="adsContainer">
@@ -120,6 +126,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
         	?>
         </div>
         <div id="otherNewsContainer" class="otherNewsContainer">
+        <section>
 			<?php
 				$parameters = array(
 					'wId'	=>	"images",
@@ -140,6 +147,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
         	?>
 
                 <br clear="all"/>
+        </section>
         </div>
             <br clear="all"/>
             <br clear="all"/>

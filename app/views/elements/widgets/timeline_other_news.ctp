@@ -1,4 +1,5 @@
 <div class="tNews">
+<article>
 	<div class="icon">
 		<?php
 			if (!empty($news['Source']) && !empty($news['Source']['icon'])) {
@@ -9,6 +10,7 @@
 		?>
 	</div>
 	<div class="tContent">
+		<header>
 		<h4 class="section grey">
 			<?php 
 				$usr = !empty($news['User'])&&is_string($news['User'])? "<span style='font-weight: 700'>{$news['User']}</span> - ":"";
@@ -16,6 +18,7 @@
 			?>
 		</h4>
 		<h3><?php echo $html->link($text->truncate(__($news['title'], true),60, array('ending'=>'...', 'exact'=>false, 'html'=>true)),$news['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"new Ajax.Request('/visits/incrementaContador/{$news['id']}'); return true;"));?></h3>
+		</header>
 		<!-- <div class="photo">
 			<?php
 			if (!empty($news['Media']) && !empty($news['Media']['url'])) {
@@ -35,4 +38,5 @@
 	</div>
 
 	<br clear="both"/>
+</article>
 </div>

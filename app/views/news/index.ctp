@@ -9,6 +9,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 <div id="content">
 		<?php echo $this->element('news'.DS.'marquee', array('cache'=>'30 minutes'))?>
     	<div id="colLeft">
+    	<section>
 			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
 			<cake:nocache>
@@ -26,8 +27,10 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 				});
 			</script>
         	<?php echo $this->element("twitter_trends", array('cache'=>'3 minutes'));?>
+       </section>
        </div>
         <div id="colCenter">
+        <section>
         	<h1 class="greyTitle">Medios</h1>
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
@@ -71,9 +74,11 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 					}
 				}
 			?>
+			</section>
 			</div>
 
         <div id="colRight">
+        <section>
         	<h1 class="greyTitle">Blogs</h1>
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
@@ -114,6 +119,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 					}
 				}
         	?>
+        </section>
         </div>
         <div id="adsContainer">
         	<?php 
@@ -123,6 +129,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
         	?>
         </div>
         <div id="otherNewsContainer" class="otherNewsContainer">
+        <section>
 			<?php
 				$parameters = array(
 					'wId'	=>	"images",
@@ -140,145 +147,8 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
         	?>
 
                 <br clear="all"/>
+        </section>
         </div>
             <br clear="all"/>
             <br clear="all"/>
     </div>
-
-    <!-- <script type="text/javascript">
-    var i=0;
-    var page=1;
-    var maxTweets = 14;
-    //var max = 15;
-    var max = maxTweets;
-    var cont = [ ];
-    var elem = null;
-    var firstRun = true;
-    var aux = [ ];
-    var lastTweet = 0;
-    var ready = true;
-    function update(el, content){
-        
-		aux = content;
-        elem = el;
-        cont = content[0];
-        if(cont != null){
-        	max =  cont.length; //el máximo es igual a la cantidad de tweets recuperados
-        }
-        lastTweet = content[1];
-
-
-		if(max > 0){
-			ready = false;
-			r = cont[i];
-    		Element.update(elem, r+elem.innerHTML); //concateno el primer tweet obtenido con los ya existentes
-    		i=i+1;
-    		twts = $$('#tweets .twitterNews');
-    		first = twts[0];
-    		if (first.getHeight()+parseInt(first.getStyle('margin-bottom'), 10) > 0){
-    			firstHeight = first.getHeight()+parseInt(first.getStyle('margin-bottom'), 10);
-    		}
-    		parentPosition = first.cumulativeOffset();
-    		firstPosition = parentPosition.top-firstHeight;
-
-
-    		//alert(twts.length);
-
-    		first.setStyle({top: "-"+(firstHeight)+'px'});
-    		diff = parentPosition.top-first.cumulativeOffset().top;
-    		//if(diff<33){
-    			//alert("Pos Orig: "+parentPosition.top+" altura: "+firstHeight+" Pos Ahora: "+first.cumulativeOffset().top+" Diferencia: "+(diff));
-    		//}
-
-    		var effects = [ ];
-        	effects.push(new Effect.MoveBy(first, diff, 0, { sync: true }));
-         	effects.push(new Effect.Opacity(first, {duration:1, from:0, to:1.0}));
-    		if( firstRun==false){
-            	last = twts[twts.length-1];
-             	effects.push(new Effect.DropOut(last, {duration:3}));
-             	setTimeout("last.remove()", 3500);
-            }
-    		twts.each( function(tel){
-        			effects.push(new Effect.MoveBy(tel, diff, 0, { sync: true }));
-	    		}
-	        );
-    		new Effect.Parallel(
-         		effects,
-         		{duration: 1}
-         	);
-         	ready = true;
-		}else{
-			while (ready == false){
-				//do nothing
-			}
-			setTimeout("new Ajax.Request('/twtr/getTimeline/'+lastTweet,{ asynchronous:true, evalJSON:true, method: 'get', onSuccess: function(response){ response = eval(response.responseText); var elem = $('tweets'); i=0; update(elem, response);}})", 40000);
-			//new Ajax.Request('/twtr/getTimeline/'+lastTweet,{ asynchronous:true, evalJSON:true, method: 'get', onSuccess: function(response){ response = eval(response.responseText); var elem = $('tweets'); i=0; update(elem, response);}});
-			return;
-		}
-
-		if((twts.length-1)>= (maxTweets-1)){
-			//alert('A borrar: '+(twts.length-1));
-			firstRun = false;
-		}else{
-			//alert(twts.length-1);
-		}
-    	//i=i+1;
-    	if ( i < max){
-    		//alert('Llamo a update desde script');
-    		/*if(max > 17){
-            	alert(cont);
-        	}*/
-        	//alert(content);
-    		while (ready == false){
-				//do nothing
-			}
-    		setTimeout("update($('tweets'), aux)", 10000);
-    		return;
-    	}else{
-    		//alert('I mayor que max');
-    	}
-
-    	/*if(page == maxPages || max){
-    		page=0;
-    		i=max;
-    	}*/
-    	if((i>=max)){
-    		while (ready == false){
-				//do nothing
-			}
-    		setTimeout("new Ajax.Request('/twtr/getTimeline/'+lastTweet,{ asynchronous:true, evalJSON:true, method: 'get', onSuccess: function(response){ response = eval(response.responseText); var elem = $('tweets'); i=0; update(elem, response);}})", 40000);
-    		/*new Ajax.Request('/twtr/getTimeline/'+lastTweet,{
-				asynchronous:true,
-				evalJSON:true,
-				method: 'get',
-				onSuccess: function(response){
-					response = eval(response.responseText);
-					var elem = $('tweets');
-					i=0;
-					update(elem, response);
-				}
-			}
-
-			);*/
-    	}else{
-        	//alert(max);
-
-    	}
-    }
-
-
-
-		new Ajax.Request("/twtr/getTimeline/<?php echo $lastTweet;?>",{
-				asynchronous:true,
-				evalJSON:true,
-				method: 'get',
-				onSuccess: function(response){
-					response = eval(response.responseText);
-					var elem = $('tweets');
-					//alert('llamo luego de ajax');
-					update(elem, response);
-				}
-			}
-
-		);
-	</script> -->
