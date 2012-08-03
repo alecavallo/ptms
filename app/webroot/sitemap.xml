@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/]]></loc><priority>1</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/postea.html]]></loc><priority>0.3</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/columnas-pendientes.html]]></loc><priority>0.3</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/seccion/politica.html]]></loc><priority>1</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/seccion/economia-empresas.html]]></loc><priority>1</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/seccion/cultura-espectaculos.html]]></loc><priority>1</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/seccion/deportes.html]]></loc><priority>1</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/seccion/tecno-ciencia.html]]></loc><priority>1</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/seccion/sociedad.html]]></loc><priority>1</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/terminos-y-condiciones.html]]></loc><priority>1</priority>
+		</url>
+		<url>
+			<loc><![CDATA[http://www.posteamos.com/que-es-posteamos.html]]></loc><priority>1</priority>
+		</url>
+		
+	
+	</urlset>

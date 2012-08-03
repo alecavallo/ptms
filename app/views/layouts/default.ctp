@@ -122,5 +122,6 @@ document.observe("dom:loaded", function (event) {SDEffect($("searchPopup"));});
 //API init code is omitted
 
 </script>
+<a href="http://www.posteamos.com/sitemap.xml" style="display: none"> </a>
 </body>
 </html>
