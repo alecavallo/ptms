@@ -50,9 +50,9 @@ class CategoriesController extends AppController {
 		$this->set("title_for_layout","Categorías");
 		$usr=$this->Auth->user();
 
-		$this->disableCache(); /*TODO desactivar??*/
+		//$this->disableCache(); /*TODO desactivar??*/
 
-
+		
 		if($this->Session->check('ads')){//si existe la variable de sesión la uso
 			$ads = $this->Session->read('ads');
 		}else{ //sino trato de recuperarla de cache
@@ -208,8 +208,9 @@ class CategoriesController extends AppController {
 			array_multisort($ads[4]['displayed'], SORT_ASC, $ads[4]['data']);
 			
 			$ads[5]['data'] = $this->Ad->get(5,$id);
-			
-			Cache::write ( "ads", $ads, 'vLong' );
+			if(!empty($ads[1]['data']) || !empty($ads[2]['data'])){
+				Cache::write ( "cate_{$id}_ads", $ads, 'vLong' );
+			}
 		}else {
 			//$ads = $this->Session->read('ads');
 		}
