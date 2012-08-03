@@ -23,8 +23,8 @@ function Twitter(){
 	
 	var retFunction= function(data){
 		
-		var feedSpeed = 7000;
-		var tweetsPerColumn=12;
+		var feedSpeed = 7500;
+		var tweetsPerColumn=11;
 		var initial=true;
 		var delay=1;
 		var delta=1; //se le da 1 tiempo de accion de margen
@@ -43,6 +43,9 @@ function Twitter(){
 			if(data.length > 0){//si existen datos, aplico filtros de tweets
 				//filterTweets(elem, index)
 				data = jQuery.grep(data, filterTweets);
+			}
+			if(data.length > tweetsPerColumn){
+				data = data.slice(0,tweetsPerColumn+1);
 			}
 			if(data.length > 0){//rechequeo si existen tweets, cargo el id del mas reciente
 				if(sinceId == data[0].id){
@@ -63,30 +66,10 @@ function Twitter(){
 			var fSize = data.length;
 			console.log("A mostrar: "+fSize+" tuits;")
 			data.each(function(elm, index){
-				//console.log("iteracion: "+index);
-				var appUsername = false;
-				jQuery.ajax({
-					  url: '/users/getUsername/'+elm.user.screen_name,
-					  async: false,
-					  success: function (data,textStatus){
-						  appUsername = data;
-					  },
-					  failure: function(data, textStatus){
-						  //alert("Error!");
-						  console.log('Error conectandose al servidor. posteamos');
-					  },
-					  dataType: "json"
-				});
-				
-				if(appUsername == false){
-					console.log(elm.user.name+" -- "+elm.user.screen_name);
-				}
-				
-				if(appUsername != false){
-					//console.log(appUsername.User.first_name+' '+appUsername.User.last_name);
+				if(typeof(elm) != 'undefined'){
 					var tmplData = {
-							profile_img: appUsername.User.avatar,
-							username: appUsername.User.first_name+' '+appUsername.User.last_name,
+							profile_img: elm.user.profile_image_url,
+							username: elm.user.name,
 							category_name: glistName.replace("-"," & "),
 							text: jQuery.trim(elm.text),
 							created: elm.created_at
@@ -100,12 +83,9 @@ function Twitter(){
 						}
 						jQuery(tDomelm).prepend(row);
 						cnt++;
-						//retFunction(data,cnt);
-						//setTimeout(function(){retFunction(data,cnt)}, 1001);
 					}else{
 						
 						setTimeout(function(){
-							//var c = index+1;
 							jQuery(tDomelm).prepend(row);
 							jQuery('div.twitterNews:last').remove();
 						}, feedSpeed*(delay));
@@ -131,24 +111,15 @@ function Twitter(){
 					}
 					
 					
-				}else{
-					//console.log('no usuario '+cnt);
-					//setTimeout(function(){retFunction(data,cnt)}, 5001);
-					//return false;
-				}
-				
+				}				
 			}); //end foreach
 			
-			//console.log('Espero: '+(feedSpeed*(delay+delta)/1000/60)+" mins");
 			//jQuery.proxy(function(){
 				setTimeout(function(){
 					//alert('Recursion!!!!');
 					t.getList('posteamos',glistName,gresultsPerpage,1, tDomelm);
 				},feedSpeed*(delay+delta));
 			//}, this)
-		
-		
-		
 		}
 	};
 	
@@ -159,7 +130,7 @@ function Twitter(){
 		//var container = jQuery('#tweets');
 		var count=1;
 		var delay=1;
-		var feedSpeed = 7000;
+		var feedSpeed = 7500;
 		jQuery.each(tweets,function(idx, row){
 			if(typeof(row)!= 'undefined' || row != 'undefined'){
 				if(count < tweetsPerColumn){
@@ -267,8 +238,8 @@ function Twitter(){
 							  url: twitterUrl+query,
 							  cache: false,
 							  success: function (data,textStatus){
-								  	console.log(data);
-								  	console.log(textStatus);
+								  	//console.log(data);
+								  	//console.log(textStatus);
 								  	callback(data);
 							  },
 							  failure: function(data, textStatus){
