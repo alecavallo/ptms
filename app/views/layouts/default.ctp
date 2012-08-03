@@ -5,8 +5,15 @@
 <title>
 <?php __("Posteamos.com :: {$title_for_layout}")?>
 </title>
-<meta name="description" content="Posteamos.com se proyecta como un sitio web de noticias, interactivo y participativo, que se nutre de contenido posteado por sus usuarios y la sindicaci�n de contenido de medios tradicionales, Blogs y Tweets. Los usuarios pueden escribir art�culos, enlaces a contenido externo y comentar, o comparar noticias presentadas por otros usuarios, medios o periodistas.">
-<meta name="keywords" content="Posteamos, posteamos, Posteamos.com, posteamos.com, postea, posteá, posta, noticias, información, informacion, actualidad, Argentina, argentina, Latinoamérica, Latinoamerica, latinoamérica, latinoamerica, sucesos, novedades, tecnología, política, espectáculos, paparazzi, farándula, diarios, santa fe, noticias locales, periodismo ciudadano, agregador de noticias">
+<meta name="description" content="Posteamos.com se proyecta como un sitio web de noticias, interactivo y participativo, que se nutre de contenido posteado por sus usuarios y la sindicación de contenido de medios tradicionales, Blogs y Tweets. Los usuarios pueden escribir artículos, enlaces a contenido externo y comentar, o comparar noticias presentadas por otros usuarios, medios o periodistas.">
+<?php 
+	if(empty($meta) || !array_key_exists('keywords', $meta)){
+		echo $this->Html->meta('keywords', "posteamos, noticias, argentina, periódicos, diarios, tecnología, política, espectáculos, dolar, agregador de noticias");
+	}else {
+		echo $this->Html->meta('keywords', $meta['keywords']);
+	}
+?>
+
 <!-- <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
 <link href='http://fonts.googleapis.com/css?family=Arimo:400,400italic|Ubuntu:700' rel='stylesheet' type='text/css'>
 <?php
