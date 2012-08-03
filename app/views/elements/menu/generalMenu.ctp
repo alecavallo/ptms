@@ -1,4 +1,5 @@
 <div id="menu">
+<nav>
 	<?php
 		$menuItems = "";
 		$menuItems = Cache::read('menuItems', 'default');
@@ -19,4 +20,5 @@
 
 
 	?>
+</nav>
 </div>
