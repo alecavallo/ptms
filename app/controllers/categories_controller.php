@@ -54,7 +54,7 @@ class CategoriesController extends AppController {
 
 		
 		if($this->Session->check('ads')){//si existe la variable de sesión la uso
-			$ads = $this->Session->read('ads');
+			$ads = $this->Session->read("cate_{$id}_ads");
 		}else{ //sino trato de recuperarla de cache
 			$ads = Cache::read ( "cate_{$id}_ads", 'vLong' );
 		}
@@ -293,7 +293,7 @@ class CategoriesController extends AppController {
 		//ordeno nuevamente el array de publicidades
 		array_multisort($ads[4]['displayed'], SORT_ASC, $ads[4]['data']);
 		
-		$this->Session->write('ads', $ads);
+		$this->Session->write("cate_{$id}_ads", $ads);
 
 		//obtengo las publicidades a mostrar por columna
 		//$newsAds = array_slice($ads['data'], 0, $adsPerColumn+1);
