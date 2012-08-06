@@ -8,9 +8,16 @@
 <meta name="description" content="Posteamos.com se proyecta como un sitio web de noticias, interactivo y participativo, que se nutre de contenido posteado por sus usuarios y la sindicación de contenido de medios tradicionales, Blogs y Tweets. Los usuarios pueden escribir artículos, enlaces a contenido externo y comentar, o comparar noticias presentadas por otros usuarios, medios o periodistas.">
 <?php 
 	if(empty($meta) || !array_key_exists('keywords', $meta)){
-		echo $this->Html->meta('keywords', "posteamos, noticias, argentina, periódicos, diarios, tecnología, política, espectáculos, dolar, agregador de noticias");
+		echo $this->Html->meta('keywords', "posteamos,noticias,blogs,diarios,argentina,deportes,empresas,politica,economia,sociedad,tecnologia");
 	}else {
 		echo $this->Html->meta('keywords', $meta['keywords']);
+	}
+?>
+<?php 
+	if(empty($meta) || !array_key_exists('description', $meta)){
+		echo $this->Html->meta('description', "Un sitio de noticias interactivo y participativo");
+	}else {
+		echo $this->Html->meta('description', $meta['description']);
 	}
 ?>
 
@@ -115,7 +122,7 @@ document.observe("dom:loaded", function (event) {SDEffect($("searchPopup"));});
 //<![CDATA[
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-23677899-1']);
-  _gaq.push(['_setDomainName', '.posteamos.com']);
+  _gaq.push(['_setDomainName', 'posteamos.com']);
   _gaq.push(['_trackPageview']);
 
   (function() {
