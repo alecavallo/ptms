@@ -287,6 +287,7 @@ class Location extends AppModel {
 	}
 
 	function __getWhatIsMyIpAddress($ip){
+return array();
 		App::import('Core', 'HttpSocket');
 		$HttpSocket = new HttpSocket();
 		$results = $HttpSocket->get("http://whatismyipaddress.com/ip/{$ip}");
