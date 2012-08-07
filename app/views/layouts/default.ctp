@@ -27,7 +27,7 @@ echo $scripts_for_layout;
 <?php 
 	if(empty($meta) || !array_key_exists('description', $meta)){
 		//echo $this->Html->meta('description', "Un sitio de noticias interactivo y participativo");
-		echo '<meta name="description" content="Un sitio de noticias interactivo y participativo" />';
+		echo '<meta name="description" content="Posteamos.com, un sitio de noticias interactivo y participativo donde encontraras noticias publicadas a traves de medios, blogs y twitter" />';
 	}else {
 		echo $this->Html->meta('description', $meta['description']);
 	}
