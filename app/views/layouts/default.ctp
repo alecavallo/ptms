@@ -7,19 +7,24 @@
 </title>
 
 <?php 
-	if(empty($meta) || !array_key_exists('keywords', $meta)){
-		echo $this->Html->meta('keywords', "posteamos,noticias,blogs,diarios,argentina,deportes,empresas,politica,economia,sociedad,tecnologia");
-	}else {
-		echo $this->Html->meta('keywords', $meta['keywords']);
-	}
-?>
-<?php 
 	if(empty($meta) || !array_key_exists('description', $meta)){
 		echo $this->Html->meta('description', "Un sitio de noticias interactivo y participativo");
 	}else {
 		echo $this->Html->meta('description', $meta['description']);
 	}
 ?>
+<meta itemprop="name" content="Posteamos.com">
+<meta itemprop="description" content="Un sitio de noticias interactivo y participativo">
+<meta itemprop="image" content="http://www.posteamos.com/img/logofooter.jpg" />
+
+<?php 
+	if(empty($meta) || !array_key_exists('keywords', $meta)){
+		echo $this->Html->meta('keywords', "posteamos,noticias,blogs,diarios,argentina,deportes,empresas,politica,economia,sociedad,tecnologia");
+	}else {
+		echo $this->Html->meta('keywords', $meta['keywords']);
+	}
+?>
+
 
 <!-- <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
 <link href='http://fonts.googleapis.com/css?family=Arimo:400,400italic|Ubuntu:700' rel='stylesheet' type='text/css'>
