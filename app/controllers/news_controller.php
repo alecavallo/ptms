@@ -25,7 +25,7 @@ class NewsController extends AppController {
 	}
 
 	function index() {
-		$this->set("title_for_layout","Portada");
+		$this->set("title_for_layout","Portada - twitter, medios y blogs");
 		$this->helpers[] = 'Cache';
 
 		
