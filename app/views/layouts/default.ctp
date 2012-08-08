@@ -35,7 +35,7 @@ echo $scripts_for_layout;
 <?php 
 	if(empty($meta) || !array_key_exists('keywords', $meta)){
 		//echo $this->Html->meta('keywords', "posteamos,noticias,blogs,diarios,argentina,deportes,empresas,politica,economia,sociedad,tecnologia");
-		echo '<meta name="keywords" content="posteamos,noticias,diarios,argentina,deportes,empresas,politica,economia,sociedad,tecnologia,twitter,medios,blogs" />';
+		echo '<meta name="keywords" content="posteamos,noticias,diarios,argentina,deportes,empresas,politica,economia,sociedad,tecnologia,twitter,medios,blogs,ultimas noticias" />';
 	}else {
 		echo $this->Html->meta('keywords', $meta['keywords']);
 	}
