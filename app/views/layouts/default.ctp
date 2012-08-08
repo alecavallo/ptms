@@ -8,6 +8,7 @@
 
 <!-- <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
 <link href='http://fonts.googleapis.com/css?family=Arimo:400,400italic|Ubuntu:700' rel='stylesheet' type='text/css'>
+<meta name="bitly-verification" content="975f546379fd"/>
 <?php
 
 		echo $this->Html->meta('favicon.ico','favicon.ico',array('type' => 'icon'));
