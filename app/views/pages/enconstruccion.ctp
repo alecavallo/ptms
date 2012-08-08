@@ -32,6 +32,7 @@
 		<!-- FIN CONTDOWN -->
 	</div>
 <div id="h_2">
+	<a href="/" class="portada">Volver a portada</a>
 	<!-- <div id="c_video">
 
 			<iframe src="http://player.vimeo.com/video/45605534?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" width="475" height="267" frameborder="0"></iframe>

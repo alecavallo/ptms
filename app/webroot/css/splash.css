@@ -25,6 +25,18 @@ body { background:url(/img/splash_bkg.png) repeat-x #639944}
 	float: right;
 	margin: 0 0 0 38px;
 }
+a.portada {
+    color: white;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 20px;
+    display: block;
+    position: relative;
+    top: 160px;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15px;
+}
+
 #txt { 
 	width: 335px;
 	padding: 15px 5px;
