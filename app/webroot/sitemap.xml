@@ -33,12 +33,6 @@
 		<url>
 			<loc>http://www.posteamos.com/que-es-posteamos.html</loc><priority>1</priority><changefreq>yearly</changefreq>
 		</url>
-		<url>
-			<loc>http://www.twitter.com/posteamos</loc><priority>1</priority><changefreq>daily</changefreq>
-		</url>
-		<url>
-			<loc>http://www.facebook.com/posteamos.argentina</loc><priority>1</priority><changefreq>daily</changefreq>
-		</url>
 		
 	
 	</urlset>
