@@ -2,5 +2,7 @@ User-Agent: *
 Disallow: /js
 Disallow: /css
 Disallow: /visits/incrementaContador
-Disallow: ads/click
+Disallow: /ads/click
+Disallow: /news/getPopularVideos
+Disallow: /medias/index
 Sitemap: http://www.posteamos.com/sitemap.xml
