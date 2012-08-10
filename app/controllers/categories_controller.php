@@ -414,6 +414,60 @@ class CategoriesController extends AppController {
 
 				$this->Category->recursive=-1;
 				$category = $this->Category->find('first', array('conditions'=>array('id'=>$id)));
+				switch ($id) {
+					case 3:
+						$this->set("title_for_layout","Política");
+						$meta = array(
+							'keywords'	=>	"politica argentina,politica,pj,ucr,kirchnerismo,cfk,oposicion,blogs,twitter,diarios",
+							'description'	=> "twitters, blogs y diarios sobre política argentina"
+						);
+						$this->set('meta', $meta);
+					break;
+					case 4:
+						$this->set("title_for_layout","Economía & Empresas");
+						$meta = array(
+							'keywords'	=>	"economia argentina,economia,empresas,dolar,bolsa,blogs,twitter,diarios",
+							'description'	=> "twitters, blogs y diarios sobre economía argentina"
+						);
+						$this->set('meta', $meta);
+					break;
+					case 7:
+						$this->set("title_for_layout","Cultura & Espectáculos");
+						$meta = array(
+							'keywords'	=>	"cultura argentina,cultura,espectaculos,farandula,famosos,libros,agenda cultural,blogs,twitter,diarios",
+							'description'	=> "twitters, blogs y diarios sobre espacios culturales y noticias del espectáculo de argentina"
+						);
+						$this->set('meta', $meta);
+					break;
+					case 8:
+						$this->set("title_for_layout","Deportes");
+						$meta = array(
+							'keywords'	=>	"deportes argentina,deportes,futbol,basquet,tenis,primera,afa,olimìadas,mundial,blogs,twitter,diarios",
+							'description'	=> "twitters, blogs y diarios sobre deportes en argentina"
+						);
+						$this->set('meta', $meta);
+					break;
+					case 11:
+						$this->set("title_for_layout","Tecno & Ciencia");
+						$meta = array(
+							'keywords'	=>	"tecnologia,ciencia,iphone,apple,windows,android,diseño,blogs,twitter,diarios",
+							'description'	=> "twitters, blogs y diarios sobre tecnología y ciencia"
+						);
+						$this->set('meta', $meta);
+					break;
+					case 16:
+						$this->set("title_for_layout","Sociedad");
+						$meta = array(
+							'keywords'	=>	"argentina,sociedad,sociales,policiales,blogs,twitter,diarios",
+							'description'	=> "twitters, blogs y diarios sobre noticias sociales en argentina"
+						);
+						$this->set('meta', $meta);
+					break;
+					
+					default:
+						;
+					break;
+				}
 
 				//$tweets = $this->requestAction("twtr/getList/0/".($category['Category']['name']));
 
