@@ -13,6 +13,20 @@ div#colLeft{
 	margin-right: 30px;
 	width: 267px;
 }
+div#filters{
+	clear:both;
+	margin-bottom: 15px;
+}
+div#filters label{
+	font-weight: bolder;
+	margin-right: 5px;
+}
+span#reset{
+	font-weight: bolder;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
 div#pendingAds{
 	float: left;
 	min-height: 808px;
@@ -47,9 +61,11 @@ div#users{
 	border-right-width: 1px;
 	border-right-color: rgb(222,222,221);
 	float: left;
-	min-height: 750px;
+	height: 720px;
 	position: relative;
 	width: 99%;
+	overflow-x:hidden;
+	overflow-y: scroll;
 }
 div.usrRow{
 	width: 100%;

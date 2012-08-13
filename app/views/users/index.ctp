@@ -1,18 +1,27 @@
 <?php 
 echo $this->Html->css('columns', 'stylesheet', array('inline' => false ));
-echo $this->Html->script(array('prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
+echo $this->Html->script(array('tweeter/jquery', 'underscore', 'prototype', 'Marquee', 'columns/columns_controller'),array('inline'=>false, 'once'=>true));
 echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inline'=>false, 'once'=>true));
 ?>
+
+<script type="text/javascript">
+<!--
+	var users = <?php echo json_encode($users);?>;
+//-->
+</script>
 <div id="content">
 	<?php echo $this->element('news'.DS.'marquee')?>
 	<div id="colLeft" class="colLeft">
-		<?php 
-		    $this->Paginator->options(array(
-		    'update' => 'colLeft',
-		    'evalScripts' => true
-		    ));
-		?>
-		<?php echo $this->element('users'.DS.'usr_list',array('users', $users))?>
+		<h1 class="greyTitle" style="margin-bottom: 20px;">Columnas</h1>
+		<img src="/img/degradee.png" alt="" class="degradee"/>
+		<div id="filters">
+			<label for="filterbox">Buscar: </label><input id="filterbox" type="text"/><span id="reset">&nbsp;X&nbsp;</span>
+		</div>
+		<div id="users">
+		
+		</div>
+		
+		<?php echo $this->element('templates'.DS.'usrlist_template')?>
 		
 	</div>
 	<div id="pending">

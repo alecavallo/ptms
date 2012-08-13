@@ -36,6 +36,14 @@ class UsersController extends AppController {
 
     }
 
+    function getAll($limit=null){
+    	$this->autoRender=false;
+    	$this->layout = 'ajax';
+    	header('Content-type: application/json');
+    	$this->User->recursive = -1;
+    	$usrs = $this->User->find('all', array('fields'=>array('first_name', 'last_name', 'avatar', 'alias', 'description'),'order'=>"User.rating desc", 'limit'=>$limit));
+    	echo json_encode($usrs);
+    }
 	function login(){
 		$this->layout="default";
 		if($this->Connect->user()){
