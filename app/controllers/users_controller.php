@@ -91,6 +91,12 @@ class UsersController extends AppController {
 	}
 
 	function index($order="1-1") {
+		$this->set("title_for_layout","Columnas & Pendientes");
+		$meta = array(
+			'keywords'	=>	"usuarios, columnistas,columnas,pendientes,ultimas noticias,periodismo ciudadano,blogs",
+			'description'	=> "todas las noticias que podrían llegar a portada y los columnistas mas populares del sitio"
+		);
+		$this->set('meta', $meta);
 		switch ($order){
 			case '1-1':
 				$order = "User.rating desc";
@@ -200,6 +206,60 @@ class UsersController extends AppController {
 
 	function register() {
 		if (!empty($this->data)) {
+			debug($this->data);
+			
+			if (!empty($this->data['User']['avatar'])) {
+				$target = 50;
+				$folderName = WWW_ROOT."img".DS."avatars";
+				$filename = time().$this->data['User']['avatar']['name'];
+				$tmpFile = $this->data['User']['avatar']['tmp_name'];
+				$img = getimagesize($tmpFile);//obtengo datos de imagen
+				debug($img);
+				$width = $img[0];
+				$height = $img[1];
+				if ($width > $height) {
+					$percentage = ($target / $width);
+				} else {
+					$percentage = ($target / $height);
+				}
+				//obtengo nuevos valores ancho y alto de la imagen
+				$width = round($width * $percentage);
+				$height = round($height * $percentage);
+				switch ($img['mime']) {//cargo en memoria imagen origen y destino
+					case 'image/png':
+						$dst = imagecreatetruecolor($width, $height);
+						$orig = imagecreatefrompng($tmpFile);
+					break;
+					case 'image/jpeg':
+						$dst = imagecreatetruecolor($width, $height);
+						$orig = imagecreatefromjpeg($tmpFile);
+					break;
+					case 'image/gif':
+						$dst = imagecreatetruecolor($width, $height);
+						$orig = imagecreatefromgif($tmpFile);
+					break;
+					
+					default:
+						$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+						debug("No se pudo modificar el tamaño de la imágen");
+						unlink(WWW_ROOT.DS.$this->data['Ad']['url'][1]);
+						return;
+					break;
+				}
+				if(!imagecopyresampled($dst, $orig, 0, 0, 0, 0, $width, $height, $img[0], $img[1])){
+					$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+					debug("No se pudo modificar el tamaño de la imágen");
+				}else {
+					debug($folderName.DS.$filename);
+					if(imagepng($dst,$folderName.DS.$filename)){
+						$this->Session->setFlash("La imágen se ha guardado correctamente");
+					}else {
+						$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+						debug("No se pudo modificar el tamaño de la imágen");
+					}
+				}
+			}
+			die('0jo');
 			$city = $this->params['form']['as_values_city'];
 			$city = substr($city, 0, -1);
 			$this->data['User']['city_id']=$city;
