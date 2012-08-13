@@ -87,16 +87,9 @@
 	);
 	
 	
-	if(Router::url('/',true) == 'http://www.posteamos.com/' || Router::url('/',true) == 'http://posteamos.com/'){
-		Router::connect('/:col',
-			array('controller' => 'pages', 'action' => 'display', 'enconstruccion'),
-			array('col'=>"columnas-pendientes")
-		);
-	}else{
-		Router::connect('/:col',
-		array('controller'=>"Users", 'action'=>'index'),
-		array('col'=>"columnas-pendientes"));
-	}
+	Router::connect('/:col',
+	array('controller'=>"Users", 'action'=>'index'),
+	array('col'=>"columnas-pendientes"));
 	
 	
 	Router::connect('/:col',
