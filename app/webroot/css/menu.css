@@ -131,4 +131,21 @@ font-weight: bold;
 	line-height: 30px;
 	padding: 0px 15px;
 }
-
+div#snetworks{
+	float: right;
+	margin-right: 5px;
+ 	padding: 0px 0px 5px 0px;
+}
+div#snetworks span{
+	margin-left: 10px;
+	float: right;
+}
+div#snetworks iframe.twitter-follow-button{
+	margin-top: 0px;
+}
+div.fb-like{
+	float: right;
+}
+div.g-plusone{
+	width: 20px;
+}
