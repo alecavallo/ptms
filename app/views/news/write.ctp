@@ -1,9 +1,11 @@
 <?php
 echo $javascript->link('ckeditor/ckeditor.js',array('inline'=>false));
+echo $this->Html->script(array('tweeter/jquery', 'underscore', 'prototype'),array('inline'=>false, 'once'=>true));
+echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inline'=>false, 'once'=>true));
 
 echo $this->Html->script('prototype',array('inline'=>false));
 ?>
-
+<?php echo $this->element('betanotice'/*, array('cache'=>'30 minutes')*/)?>
 <div class="steps">
 	<div id="scontainer">
 		<div class="step completed">
@@ -20,6 +22,7 @@ echo $this->Html->script('prototype',array('inline'=>false));
 		</div>
 	</div>
 </div>
+
 <div id="news_content">
 
 	<div id="editNewscolLeft">

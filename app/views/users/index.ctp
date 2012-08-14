@@ -9,6 +9,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 	var users = <?php echo json_encode($users);?>;
 //-->
 </script>
+<?php echo $this->element('betanotice'/*, array('cache'=>'30 minutes')*/)?>
 <div id="content">
 	<?php echo $this->element('news'.DS.'marquee')?>
 	<div id="colLeft" class="colLeft">
