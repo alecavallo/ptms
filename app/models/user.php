@@ -18,16 +18,16 @@ class User extends AppModel {
 			'notempty' => array(
 				'rule' => array('notempty'),
 				'message' => 'El nombre no puede ser vacío',
-				//'allowEmpty' => false,
+				'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-			'alphanumeric' => array(
+			'alpha' => array(
 				'rule' => array('onlyLetters','first_name'),
 				'message' => 'El nombre solo puede contener letras',
 				'allowEmpty' => false,
-				'required' => true,
+				//'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -36,7 +36,7 @@ class User extends AppModel {
 			'notempty' => array(
 				'rule' => array('notempty'),
 				'message' => 'El apellido no puede ser vacío',
-				//'allowEmpty' => false,
+				'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -45,7 +45,7 @@ class User extends AppModel {
 				'rule' => array('onlyLetters', 'last_name'),
 				'message' => 'El apellido solo puede contener letras',
 				'allowEmpty' => false,
-				'required' => true,
+				//'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -74,7 +74,7 @@ class User extends AppModel {
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
+				'allowEmpty' => true,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -93,7 +93,7 @@ class User extends AppModel {
 				'rule' => array('alphanumeric', true),
 				'message' => 'La contraseña solo puede contener alfanuméricos y no debe ser vacía',
 				'allowEmpty' => false,
-				//'required' => false,
+				'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -101,7 +101,15 @@ class User extends AppModel {
 				'rule' => array('alphanumeric', true),
 				'message' => 'La contraseña solo puede contener alfanuméricos y no debe ser vacía',
 				'allowEmpty' => false,
-				//'required' => false,
+				'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+			'notEmpty' => array(
+				'rule' => 'notemptypasswd',
+				'message' => 'La contraseña está vacía',
+				'allowEmpty' => false,
+				'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -110,7 +118,7 @@ class User extends AppModel {
 			'rule' => array('identicalValues', 'password'),
 			'message' => 'La contraseñas no coinciden',
 			'allowEmpty' => false,
-			//'required' => false,
+			'required' => true,
 			//'last' => false, // Stop validation after this rule
 			//'on' => 'create', // Limit validation to 'create' or 'update' operations
 		),
@@ -123,6 +131,11 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+		),
+		'avatar'	=>	array(
+			'rule'	=>	'isUploadedImage',
+			'message'=>	array('Formato de imágen no válido. Solo estan permitidos JPG, PNG y GIF'),
+			'allowEmpty' => true,
 		),
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -183,6 +196,25 @@ class User extends AppModel {
 		)
 	);
 
+	function notemptypasswd(){
+		$val = array_shift($params);
+		return $val != Security::hash('', null, true);
+	}
+
+	function isUploadedImage($params){
+		$val = array_shift($params);
+		if($val['error'] == 4){
+			return true;
+		}
+		if (((isset($val['error']) && $val['error'] == 0) ||
+		(!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')) && (stripos($val['type'], 'image') !== false)) {
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
 	function identicalValues( $field=array(), $compare_field=null ){
         foreach( $field as $key => $value ){
             $v1 = $value;
@@ -196,10 +228,10 @@ class User extends AppModel {
         return TRUE;
     }
 
-	function onlyLetters($value,$field){
+	function onlyLetters($value,$field){		
 		$value = $value[$field];
 		$value = html_entity_decode($value, ENT_QUOTES);
-		$pattern = '(^[a-z|ñ|Ñ|á|é|í|ó|ú|à|è|ì|ò|ù|ä|ë|ï|ö|ü|â|ê|î|ô|û][a-z|ñ|Ñ| |á|é|í|ó|ú|à|è|ì|ò|ù|ä|ë|ï|ö|ü|â|ê|î|ô|û]*\'?[a-z|ñ|Ñ| |á|é|í|ó|ú|à|è|ì|ò|ù|ä|ë|ï|ö|ü|â|ê|î|ô|û]*[a-z|ñ|Ñ|á|é|í|ó|ú|à|è|ì|ò|ù|ä|ë|ï|ö|ü|â|ê|î|ô|û]$)';
+		$pattern = '(^[a-z|ñ|Ñ|á|é|í|ó|ú|à|è|ì|ò|ù|ä|ë|ï|ö|ü|â|ê|î|ô|û][a-z|ñ|Ñ| |á|é|í|ó|ú|à|è|ì|ò|ù|ä|ë|ï|ö|ü|â|ê|î|ô|û]*\'?[a-z|ñ|Ñ| |á|é|í|ó|ú|à|è|ì|ò|ù|ä|ë|ï|ö|ü|â|ê|î|ô|û]*[a-z|ñ|Ñ| |á|é|í|ó|ú|à|è|ì|ò|ù|ä|ë|ï|ö|ü|â|ê|î|ô|û]$)';
 		//$pattern=utf8_encode($pattern);
 		$aux=eregi($pattern,$value);
 

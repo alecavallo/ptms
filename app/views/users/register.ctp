@@ -17,18 +17,23 @@ jQuery.ajax({
 });
 </script>
 <div id="content">
+<br/>
+	<?php echo $this->Session->flash(); ?>
 	<div class="users form">
 		<h1><?php __('Registrate y empezá a compartir')?></h1>
 		<hr noshade="noshade"/>
-		<?php echo $this->Form->create('User');?>
+		<?php echo $this->Form->create('User', array('enctype' => 'multipart/form-data'));?>
 			<?php
 				echo $this->Form->input('email',array('label'=>__('E-mail:',true),'div'=>false));
-				echo $this->Form->input('password',array('label'=>__('Contraseña:',true),'div'=>false));
-				echo $this->Form->input('password_confirm',array('label'=>__('Confirmación:',true),'id'=>"password_confirm",'type'=>"password",'div'=>false));
-				echo $jqautocomplete->searchbox('User.city_id','window.cityList', false, array('startText'=>"Ciudad,Provincia,País",'minChars'=>2, 'key_delay'=>100, 'selectionLimit'=>1, 'limitText'=>"Para obtener una lista de ciudades debe introducir los datos de la siguiente manera: <b>ciduad,provincia,país</b>",'asHtmlID'=>"city",'selectedValuesProp'=>"id"), array('label'=>__('Ciudad:', true),'div'=>false));
-				echo $this->Form->input('alias',array('label'=>__('Nick:',true),'div'=>false));
+				echo $this->Form->input('password',array('label'=>__('Contraseña:',true),'div'=>false, 'value' => ''));
+				echo $this->Form->input('password_confirm',array('label'=>__('Confirmación:',true),'id'=>"password_confirm",'type'=>"password",'div'=>false, 'value' => ''));
+				//echo $jqautocomplete->searchbox('User.city_id','window.cityList', false, array('startText'=>"Ciudad,Provincia,País",'minChars'=>2, 'key_delay'=>100, 'selectionLimit'=>1, 'limitText'=>"Para obtener una lista de ciudades debe introducir los datos de la siguiente manera: <b>ciduad,provincia,país</b>",'asHtmlID'=>"city",'selectedValuesProp'=>"id"), array('label'=>__('Ciudad:', true),'div'=>false));
+				echo $this->Form->input('alias',array('label'=>__('Twitter alias:',true),'div'=>false));
+				echo $this->Form->input('posteamos_alias',array('label'=>__('Nick:',true),'div'=>false));
 				echo $this->Form->input('first_name',array('label'=>__('Nombre:',true),'div'=>false));
 				echo $this->Form->input('last_name',array('label'=>__('Apellido:',true),'div'=>false));
+				echo $this->Form->input('avatar', array('label'=>__('Foto:',true),'div'=>false,'type'=>'file'));
+				echo $this->Form->input('description',array('label'=>__('Descripción de tu perfil:',true),'div'=>false, 'type'=>"textarea"));
 			?>
 			<br clear="all"/>
 			<hr noshade="noshade"/>
