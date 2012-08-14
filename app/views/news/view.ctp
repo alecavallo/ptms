@@ -131,6 +131,18 @@ if (isset($preview) && $preview == true) {
 				<?php echo $news['News']['summary']?>
 			</div>
 			<?php $multimedia=null; echo $this->element("widgets".DS."multimedia", array('multimedia'=>$multimedia, 'newsId'=>$news['News']['id']));?>
+			<script type="text/javascript">
+				(function() {
+					var img = $$('img.fittedImg');
+					img.onload = function() {
+					    if(img.height > img.width) {
+					        img.setStyle({height: '100%', width: 'auto'});
+					    }else{
+					    	img.setStyle({height: 'auto', width: '100%'});
+					    }
+					};
+				}());
+			</script>
 			<?php echo nl2br(html_entity_decode($news['News']['body']))?>
 			<br />
 			<?php
@@ -146,17 +158,17 @@ if (isset($preview) && $preview == true) {
 						$img = $html->image('print-02.png',array('class'=>'link'));
 						echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
 						echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
-						$img = $html->image('photo-03.png',array('class'=>'link'));
-						echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
-						echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
-						$img = $html->image('mail-04.png',array('class'=>'link'));
-						echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
-						echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
-						$img = $html->image('comment-05.png',array('class'=>'link'));
-						echo $html->link($img,"#comments",array('escape'=>false));
-						echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
+						//$img = $html->image('photo-03.png',array('class'=>'link'));
+						//echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
+						//echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
+						//$img = $html->image('mail-04.png',array('class'=>'link'));
+						//echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
+						//echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
+						//$img = $html->image('comment-05.png',array('class'=>'link'));
+						//echo $html->link($img,"#comments",array('escape'=>false));
+						//echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
 						$img = $html->image('report_error-06.png',array('class'=>'link'));
-						echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
+						echo $html->link($img,"mailto:info@posteamos.com?subject=Error%20en%20la%20página",array('escape'=>false));
 					?>
 				</div>
 				<?php
@@ -176,7 +188,7 @@ if (isset($preview) && $preview == true) {
 					if (!isset($preview) || $preview == false) {
 						echo $facebook->comments(array('numpost'=>7));
 					}else {
-						$buttons = $this->Html->link(__('Anterior',true),array('controller'=>"news", 'action'=>"add", "step:2"), array('class'=>"prevBtn"));
+						$buttons = $this->Html->link(__('Anterior',true),"/postea.html", array('class'=>"prevBtn"));
 						$buttons .= $this->Html->link(__('Publicar',true),array('controller'=>"news", 'action'=>"add", "publicar"), array('class'=>"nextBtn"));
 						$buttons .= $this->Html->tag('br',null,array('clear'=>"both"));
 						echo $this->Html->div('right',$buttons,array('style'=>"margin-right: 30px; margin-bottom: 15px; width: 309px; font-size: 15px"));

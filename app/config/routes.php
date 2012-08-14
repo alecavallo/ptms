@@ -34,13 +34,13 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-	if(Router::url('/',true) == 'http://www.posteamos.com/' || Router::url('/',true) == 'http://posteamos.com/'){
+	/*if(Router::url('/',true) == 'http://www.posteamos.com/' || Router::url('/',true) == 'http://posteamos.com/'){
 		Router::connect('/postea', array('controller' => 'pages', 'action' => 'display', 'enconstruccion'));
 		Router::connect('/news/postea', array('controller' => 'pages', 'action' => 'display', 'enconstruccion'));
-	}else{
+	}else{*/
 		Router::connect('/news/postea', array('controller' => 'News', 'action' => 'write'));
 		Router::connect('/news/postea', array('controller' => 'News', 'action' => 'write'));
-	}
+	//}
 	Router::connect('/news/add', array('controller' => 'News', 'action' => 'write'));
 	Router::connect('/news/add/step:1', array('controller' => 'News', 'action' => 'write'));
 	//Router::connect('/news/add/step:2', array('controller' => 'News', 'action' => 'options'));

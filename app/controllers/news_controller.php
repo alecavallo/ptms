@@ -24,6 +24,21 @@ class NewsController extends AppController {
 		}
 	}
 
+function getComment(){
+		
+		$this->autoRender=false;
+		$this->layout='ajax';
+		$txt = <<<SCR
+<script>
+var idcomments_acct = '19f7342c71062346f906e674904d040b';
+var idcomments_post_id;
+var idcomments_post_url;
+</script>
+<script type="text/javascript" src="http://www.intensedebate.com/js/genericLinkWrapperV2.js"></script>
+SCR;
+		echo $txt;
+	}
+	
 	function index() {
 		$this->set("title_for_layout","Portada - twitter, medios y blogs");
 		$this->helpers[] = 'Cache';
@@ -535,7 +550,7 @@ class NewsController extends AppController {
 
 				$blogs = Cache::read ( "blogs", 'long' );
 				if (empty($blogs)){
-					$excludedSources=array(); //almaceno las fuentes que ya mostre
+					$excludedSources=array(-1,0); //almaceno las fuentes que ya mostre
 					$blogs = array();
 					$i=0;
 					$blogsPol = $this->News->find('all',array(
@@ -1234,9 +1249,91 @@ function search(){
 			$this->data['News']['user_id'] = $usr['User']['id'];
 			
 			$this->data['News']['category_id'] = $this->data['News']['Category'];
+			
+			/*analisis de imagen subida*/
+			$badImage = false;
+		if (!empty($this->data['News']['photo']['tmp_name'])) {
+					$target = 317;
+					$folderName = WWW_ROOT."img".DS."usrphotos";
+					$this->data['News']['photo']['name'] = Inflector::slug($this->data['News']['photo']['name']);
+					$filename = "tmp_".time()."_".$this->data['News']['user_id']."_".$this->data['News']['photo']['name'];
+					$filename = explode(".", $filename);
+					$filename = $filename[0].".jpg";
+					$tmpFile = $this->data['News']['photo']['tmp_name'];
+					$img = getimagesize($tmpFile);//obtengo datos de imagen
+					if (stripos($img['mime'], 'image') === false) {
+						$badImage = true;
+						$this->Session->setFlash("Formato de imágen no soportado");
+					}else{
+					
+						//debug($img);
+						$width = $img[0];
+						$height = $img[1];
+						if ($width > $height) {
+							$percentage = ($target / $width);
+						} else {
+							$percentage = ($target / $height);
+						}
+						if ($width < $target && $height < $target) {//si la foto es mas chica no la redimensiono
+							$percentage=1;
+						}
+						//obtengo nuevos valores ancho y alto de la imagen
+						$width = round($width * $percentage);
+						$height = round($height * $percentage);
+						switch ($img['mime']) {//cargo en memoria imagen origen y destino
+							case 'image/png':
+								$dst = imagecreatetruecolor($width, $height);
+								$orig = imagecreatefrompng($tmpFile);
+							break;
+							case 'image/jpeg':
+								$dst = imagecreatetruecolor($width, $height);
+								$orig = imagecreatefromjpeg($tmpFile);
+							break;
+							case 'image/gif':
+								$dst = imagecreatetruecolor($width, $height);
+								$orig = imagecreatefromgif($tmpFile);
+							break;
+							
+							default:
+								if(!$badImage){
+									$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+									$badImage = true;
+								}
+								debug("No se pudo modificar el tamaño de la imágen");
+								unlink($this->data['News']['photo']['tmp_name']);
+								return;
+							break;
+						}
+						if(!imagecopyresampled($dst, $orig, 0, 0, 0, 0, $width, $height, $img[0], $img[1])){
+							//$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+							debug("No se pudo modificar el tamaño de la imágen");
+						}else {
+							//debug($folderName.DS.$filename);
+							if(imagejpeg($dst,$folderName.DS.$filename)){
+								//$this->Session->setFlash("La imágen se ha guardado correctamente");
+							}else {
+								//$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+								debug("No se pudo modificar el tamaño de la imágen");
+							}
+						}
+						$avatarUrl = str_ireplace(WWW_ROOT, '', $folderName.DS.$filename);
+						$avatarUrl = str_ireplace("\\", "/", $avatarUrl);
+						$avatarUrl = "/".$avatarUrl;
+						$this->data['News']['photo'] = $avatarUrl;
+						$this->data['Media']['url'] = $avatarUrl;
+						$this->data['Media']['type'] = 1;
+						unset($this->data['News']['photo']);
+					}
+				}
+				debug($this->data);
+			
+			
 
+			
+			
+			
 			$this->News->create($this->data);
-			if ($this->News->validates()) {
+			if ($this->News->validates() && !$badImage) {
 				$this->Session->write('newsAdd',$this->data);
 				$this->set('errors', null);
 				if($this->referer() != "/news/add/step:2"){
@@ -1244,8 +1341,9 @@ function search(){
 				}
 			} else {
 				$errors = $this->News->invalidFields();
+				debug($errors);
 				$this->set('errors', $errors);
-				$this->Session->setFlash(__('No se ha podido crear la noticia. Corrija los errores e intente nuevamente', true));
+				$this->Session->setFlash(__('Debe elegir una categoría', true));
 			}
 		}
 	}
@@ -1326,10 +1424,10 @@ function search(){
 	function preview($action){
 		$this->layout="default";
 		if (!$this->Session->check('newsAdd') && $action=="step:3") {
-			$this->flash(__("No se puede previsualizar la noticia. Intentelo nuevamente", true), array('controller'=>"news",'action'=>'add'));
+			$this->flash(__("No se puede previsualizar la noticia. Intentelo nuevamente", true), "/postea.html");
 			return ;
 		}elseif(!$this->Session->check('newsAdd')) {
-			$this->flash(__("Su noticia ya ha sido procesada...", true), array('controller'=>"news",'action'=>'add'));
+			$this->flash(__("Su noticia ya ha sido procesada...", true), "/postea.html");
 			return ;
 		}
 		$news = $this->Session->read('newsAdd');
@@ -1349,7 +1447,18 @@ function search(){
 			break;
 			case 'publicar':
 			 $news['News']['published']=1;
+			 $tmpimgurl = $news['Media']['url'];
+			 $news['Media']['url'] = str_ireplace("/tmp", "/", $news['Media']['url']);
+			 rename(WWW_ROOT.str_ireplace("/", "\\", $tmpimgurl), WWW_ROOT.str_ireplace("/", "\\", $news['Media']['url']));
 			 if ($this->News->save($news)) {
+			 	$newsId =$this->News->id;
+			 	$media['Media'] = $news['Media'];
+			 	$media['Media']['news_id'] =  $newsId;
+			 	debug($media);
+			 	$this->News->Media->create($media);
+			 	if(!$this->News->Media->save()){
+			 		debug($this->News->Media->invalidFields());
+			 	}
 			 	$this->set('newsLink',Router::url(array('controller'=>"news",'action'=>"view",$this->News->id),true));
 			 	$this->set('published',true);
 			 	$this->Session->delete('newsAdd');
@@ -1380,7 +1489,12 @@ function search(){
 		$this->set('votes',0);
 		$pag = $this->requestAction("medias/getPagImages/-1");
 		$this->params['paging'] = $pag['paginatorData'];
-		$this->set('images', $pag['data']);
+		if (array_key_exists('Media', $news)) {
+			$this->set('images', array(array('Media'=>$news['Media'])));
+		}else {
+			$this->set('images', null);
+		}
+		
 		$this->set('videos', $pag['data']);
 		$this->set('relatedNews', $pag['data']);
 		$this->set('preview',true);
@@ -1540,4 +1654,5 @@ function search(){
 		$this->redirect(array('action' => 'index'));
 	}
 }
+	
 ?>

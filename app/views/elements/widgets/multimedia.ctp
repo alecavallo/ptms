@@ -34,7 +34,7 @@ $audioPagOptions = array(
 	<?php
 		$paginator->options = $photoPagOptions;
 	?>
-	<div id="fotos" class="content">
+	<div id="fotos" class="content" style="overflow:hidden">
 		<div class="imgListContainer" id="imgListContainer">
 			<div class="pagButtonsContainer">
 				<div class="pagButton left">

@@ -27,7 +27,7 @@ echo $this->Html->script('prototype',array('inline'=>false));
 	<h3><?php __('Publicar Nota')?></h3>
 	<hr noshade="noshade" style="background-color: #999999; height: 1px; border-style:none;"/>
 	<br/>
-	<?php echo $this->Form->create('News',array('id'=>"addNews", 'url'=>array('controller'=>"news",'action'=>"add",'step:1')));?>
+	<?php echo $this->Form->create('News',array('id'=>"addNews", 'enctype' => 'multipart/form-data', 'url'=>array('controller'=>"news",'action'=>"add",'step:1')));?>
 		<?php
 			echo $this->Form->input('title',array('label'=>__('Título:<br/>',true),'div'=>array('class'=>"newsItem"),'class'=>"writeSc"));
 
@@ -40,10 +40,18 @@ echo $this->Html->script('prototype',array('inline'=>false));
 				echo $html->div('error-message',$errors['body']);
 			}
 			
+			/*creo box para fotos*/
+			$img = $this->Form->label('tags',__('Foto:',true));
+			$img .= $this->Form->input('photo', array('label'=>false,'type'=>'file'));
+			echo $this->Html->div('optionBox',$img,array('id'=>'photo'));
+			
 			/*creo select para categorías*/
 			$cateSelect = $this->Form->label('Category',__('Categoría:',true));
 			$cateSelect .= $this->Form->select('Category', $categories, null, array('empty'=>__('Seleccione una categoría',true)));
 			echo $this->Html->div('optionBox lightGreenBkg',$cateSelect,array('id'=>'categories'));
+			
+			
+			
 			/*creo box para tags*/
 			$pageTags = $this->Form->label('tags',__('Tags:',true))."<br />";
 			$pageTags .= $this->Form->text('Tags',array('id'=>"tagsInput"));
@@ -184,4 +192,5 @@ echo $this->Html->script('prototype',array('inline'=>false));
 	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	</script>
 	<?php }?>
+	<br clear="all"/>
 </div>
