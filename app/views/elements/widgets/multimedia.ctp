@@ -27,10 +27,10 @@ $audioPagOptions = array(
 <?php //debug(array_merge($photoPagOptions,$dfltPagNumbers))?>
 <div id="mediaSlideshowContainer">
 	<div id="tabsContainer">
-		<div id="fotosTab" onmousedown="return false" onselectstart="return false" class="tab selected"><?php __('Fotos')?></div>
+		<!-- <div id="fotosTab" onmousedown="return false" onselectstart="return false" class="tab selected"><?php __('Fotos')?></div>
 		<?php if(!empty($videos[0]['Media']['url'])){?><div id="videosTab" onmousedown="return false" onselectstart="return false" class="tab"><?php __('Videos')?></div><?php }?>
 		<?php if(!empty($audios)){?><div id="audiosTab" onmousedown="return false" onselectstart="return false" class="tab"><?php __('Audios')?></div><?php }?>
-	</div>
+	</div>-->
 	<?php
 		$paginator->options = $photoPagOptions;
 	?>
