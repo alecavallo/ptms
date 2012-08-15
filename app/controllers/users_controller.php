@@ -279,7 +279,7 @@ class UsersController extends AppController {
 				return ;
 			}
 
-			//die('0jo');
+			$this->data['User']['registered']=1;
 			$this->User->create();
 			if ($this->User->save($this->data, array('validate'=>false))) {
 				$this->Session->setFlash(__('Bienvenido a posteamos! Por favor, introduzca su usuario y contraseña para comenzar a compartir!', true));
