@@ -276,3 +276,20 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 		);
 	</script> -->
 	<?php echo $this->element("templates".DS."timeline_twitter", array('tweet'=>$aux));?>
+	<script type="text/javascript">
+	//mostrar título completo en hover
+	jQuery(document).ready(function(){
+		jQuery("div.news").hover(
+	            function(){
+	            	window.dflt = jQuery(this).html();
+	            	//alert(window.dflt);
+	            	var id = jQuery(this).attr('id');
+	                jQuery('div#'+id+" h3 a").html(jQuery('div#'+id+" #title"+id).val());
+	    		},
+	    		function(){
+	        		//alert(window.dflt);
+					jQuery(this).html(dflt);
+	    		}
+	     );
+	});
+	</script>

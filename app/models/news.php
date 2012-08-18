@@ -314,6 +314,25 @@ class News extends AppModel {
 			'insertQuery' => ''
 		)
 	);*/
+	
+	function getUsersNews($hours=12, $limit=8, $page=0){
+		$sql = <<<QRY
+select News.id, News.title, News.summary, News.created, News.link, Category.id, Category.name, coalesce(User.id,Ruser.id) as User_id, coalesce(User.first_name,Ruser.first_name) as first_name, coalesce(User.last_name,Ruser.last_name) as last_name, coalesce(User.alias,User.posteamos_alias,Ruser.alias,Ruser.posteamos_alias) as alias, coalesce(User.avatar,Ruser.avatar) as avatar
+from news News
+left join feeds Feed on Feed.id=News.feed_id
+left join sources Source on Source.id=Feed.source_id
+inner join categories Category on Category.id=News.category_id
+left join users User on User.id = News.user_id
+left join users Ruser on Ruser.sources_id = Source.id
+where
+News.rating <= 30 AND News.created >= DATE_SUB(CURDATE(), INTERVAL {$hours} HOUR) AND (Feed.content_type=2 or Feed.content_type is null) and (User.id is not null or Ruser.id is not null)
+order by User.registered desc, News.created desc, rand()
+limit {$page},{$limit};
+QRY;
+	$result = $this->query($sql);
+	
+	return $result;
+	}
 
 }
 ?>

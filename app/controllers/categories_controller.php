@@ -87,6 +87,7 @@ class CategoriesController extends AppController {
 						case 2: //facebook
 							
 							$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
+							$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
 							$aux = array(
 								'name' => $facebook['name'],
 								'nickname' => $facebook['username'],
@@ -143,6 +144,7 @@ class CategoriesController extends AppController {
 						case 2: //facebook
 							
 							$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
+							$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
 							$aux = array(
 								'name' => $facebook['name'],
 								'nickname' => $facebook['username'],

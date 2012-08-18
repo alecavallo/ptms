@@ -133,10 +133,11 @@ font-weight: bold;
 }
 div#snetworks{
 	float: right;
+	margin-top: 5px;
 	margin-right: 5px;
  	padding: 0px 0px 5px 0px;
 }
-div#snetworks span{
+div#snetworks div{
 	margin-left: 10px;
 	float: right;
 }

@@ -2,13 +2,13 @@
 <?php $city = $session->read('City');?>
 <?php echo $this->Facebook->html();?>
 <head>
+<?php echo $this->Html->charset('utf-8'); ?>
 <title>
 <?php __("Posteamos.com :: {$title_for_layout}")?>
 </title>
 
 <!-- <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
 <link href='http://fonts.googleapis.com/css?family=Arimo:400,400italic|Ubuntu:700' rel='stylesheet' type='text/css'>
-<meta name="bitly-verification" content="975f546379fd"/>
 <?php
 
 		echo $this->Html->meta('favicon.ico','favicon.ico',array('type' => 'icon'));
@@ -24,7 +24,6 @@
 echo $scripts_for_layout;
 
 ?>
-<?php echo $this->Html->charset('utf-8'); ?>
 <?php 
 	if(empty($meta) || !array_key_exists('description', $meta)){
 		//echo $this->Html->meta('description', "Un sitio de noticias interactivo y participativo");
@@ -41,11 +40,11 @@ echo $scripts_for_layout;
 		echo $this->Html->meta('keywords', $meta['keywords']);
 	}
 ?>
-<meta itemprop="name" content="Posteamos.com">
+<!-- <meta itemprop="name" content="Posteamos.com">
 <meta itemprop="description" content="Un sitio de noticias interactivo y participativo">
-<meta itemprop="image" content="http://www.posteamos.com/img/logofooter.jpg" />
+<meta itemprop="image" content="http://www.posteamos.com/img/logofooter.jpg" /> -->
 
-<script languaje="javascript" type="text/javascript">
+<script type="text/javascript">
 /* Modernizr 2.5.3 (Custom Build) | MIT & BSD
  * Build: http://www.modernizr.com/download/#-fontface-backgroundsize-borderradius-boxshadow-flexbox-multiplebgs-opacity-textshadow-cssanimations-csscolumns-generatedcontent-cssgradients-cssreflections-csstransforms-csstransforms3d-csstransitions-geolocation-shiv-cssclasses-teststyles-testprop-testallprops-prefixes-domprefixes-load
  */
@@ -60,7 +59,7 @@ echo $scripts_for_layout;
 	<?php echo $html->link($html->image("logo_posteamos.png", array('alt'=>"Posteamos.com", 'id'=>"logo")),"/", array('escape'=>false))?>
 
 	<?php
-		$search = $form->create('News', array('id'=>"topSearch", 'type'=>"post", 'controller'=>"news", 'action'=>"search"));
+		$search = $form->create('News', array('id'=>"topSearch", 'type'=>"post", 'url'=>array('controller'=>"news", 'action'=>"search")));
 		$search .= $form->input('pattern', array('label'=>"",'size'=>25,'maxlength'=>150,'class'=>"search"));
 		$search .= $form->submit('Buscar >', array('class'=>"submit"));
 		$search .= $form->end();
@@ -92,37 +91,31 @@ function shake(element){
 }
 document.observe("dom:loaded", function (event) {SDEffect($("searchPopup"));});
 </script>
-<br clear="all"/>
+
 	<div id="snetworks">
-	<span>
-		<!-- Place this tag where you want the +1 button to render. -->
-		<div class="g-plusone" data-size="medium" data-href="http://www.posteamos.com/"></div>
-		
-		<!-- Place this tag after the last +1 button tag. -->
-		<script type="text/javascript">
-		  window.___gcfg = {lang: 'es-419'};
-		
-		  (function() {
-		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		    po.src = 'https://apis.google.com/js/plusone.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		  })();
-		</script>
-	</span>
-
-	<span>
-		<div class="fb-like" data-href="http://www.posteamos.com" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false" data-font="segoe ui"></div>
-	</span>
-	<span>
-		<a href="https://twitter.com/posteamos" class="twitter-follow-button" data-show-count="false" data-lang="es" data-show-screen-name="false">Seguir a @posteamos</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-	</span>
+		<div>
+			<!-- Place this tag where you want the +1 button to render. -->
+			<div class="g-plusone" data-size="medium" data-href="http://www.posteamos.com/"></div>
+			
+			<!-- Place this tag after the last +1 button tag. -->
+			<script type="text/javascript">
+			  window.___gcfg = {lang: 'es-419'};
+			
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/plusone.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+		</div>
 	
-	
-	
-
-	
-	
+		<div>
+			<div class="fb-like" data-href="http://www.posteamos.com" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false" data-font="segoe ui"></div>
+		</div>
+		<div>
+			<a href="https://twitter.com/posteamos" class="twitter-follow-button" data-show-count="false" data-lang="es" data-show-screen-name="false">Seguir a @posteamos</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
 	</div>
 <div id="container">
 	<?php //echo $this->Session->flash(); ?>
@@ -132,7 +125,7 @@ document.observe("dom:loaded", function (event) {SDEffect($("searchPopup"));});
 
 	<?php echo $content_for_layout; ?>
 
-    <br clear="all"/>
+    <div id="divider"></div>
 </div>
 
 <?php echo $this->element("footer",array('cache'=>'1 day'));?>

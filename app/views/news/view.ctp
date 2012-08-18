@@ -2,7 +2,6 @@
 	echo $this->Html->script('prototype',array('inline'=>false));
 	echo $this->Html->script('scriptaculous',array('inline'=>false));
 	echo $this->Html->script('common',array('inline'=>false, 'once'=>true));
-
 	//$js->buffer($facebookInit);
 	//$js->writeBuffer(array('inline'=>true, 'safe'=>true));
 
@@ -108,24 +107,34 @@ if (isset($preview) && $preview == true) {
 }
 ?>
 <div id="content">
-	<?php echo $this->element("news".DS."category_selector",array('selected'=>array_key_exists(0, $news['Category'])?$news['Category'][0]['id']:$news['Category']['id'],'newsId'=>$news['News']['id']))?>
-	<h4 class="section aqua">
+	<?php //echo $this->element("news".DS."category_selector",array('selected'=>array_key_exists(0, $news['Category'])?$news['Category'][0]['id']:$news['Category']['id'],'newsId'=>$news['News']['id']))?>
+	<h4 class="section grey">
 		<?php
 			//echo $html->link($category,"#nogo",array('onclick'=>"$('catSelector').fadeIn();",'escape'=>false));
-			$this->Js->get('#catSelector');
-			$effect = $this->Js->effect('fadeIn');
-			$effect = str_replace("\"", "'", $effect);
-			echo $html->link($category,"#nogo",array('onclick'=>$effect,'escape'=>false));
+			//$this->Js->get('#catSelector');
+			//$effect = $this->Js->effect('fadeIn');
+			//$effect = str_replace("\"", "'", $effect);
+			//echo $html->link($category,"#nogo",array('onclick'=>$effect,'escape'=>false));
+			echo $category
 		?>
 	</h4>
 
 	<h1 class="title colLeftSize"><?php echo $news['News']['title']; ?></h1>
 	<br/>
-	<hr class="black20" noshade="noshade" size="1" />
+	<hr class="black20" />
 	<div id="news">
 		<div id="NewscolLeft">
 			<div class="newsData">
-				<span class="date"> Por <?php echo empty($usr)?"RSS":$usr?> | <?php echo $date ?> | <?php echo $hora ?> Hs</span>
+				<?php 
+					if (empty($news['User']['posteamos_alias']) && empty($news['User']['alias'])) {
+						$usr = 'RSS';
+					}elseif (!empty($news['User']['posteamos_alias'])){
+						$usr = $news['User']['posteamos_alias'];
+					}else{
+						$user = empty($news['User']['alias']);
+					}
+				?>
+				<span class="date" itemscope itemtype="http://schema.org/Person"> Por <span itemprop="name"><?php echo $usr?></span> | <span><?php echo $date ?></span> | <span><?php echo $hora ?></span> Hs</span>
 			</div>
 			<div class="copete">
 				<?php echo $news['News']['summary']?>
@@ -143,15 +152,13 @@ if (isset($preview) && $preview == true) {
 					};
 				}());
 			</script>
-			<?php echo nl2br(html_entity_decode($news['News']['body']))?>
-			<br />
+			<?php echo (html_entity_decode($news['News']['body']))?>
 			<?php
 				if (array_key_exists('Feed', $news) && array_key_exists('Source', $news['Feed'])) {
 					echo $html->link("ver nota completa en <b>{$news['Feed']['Source']['name']}</b>...",$news['News']['link'], array('id'=>"n".$news['News']['id'], 'escape'=>false, 'class'=>"green right", 'style'=>"font-size: 12px;", 'target'=>"_blank"));
 				}
 
 				?>
-			<br clear="all"/>
 			<div class="NewsBar">
 				<div id="ToolBar">
 					<?php
@@ -171,17 +178,6 @@ if (isset($preview) && $preview == true) {
 						echo $html->link($img,"mailto:info@posteamos.com?subject=Error%20en%20la%20página",array('escape'=>false));
 					?>
 				</div>
-				<?php
-				if (!isset($preview) || $preview == false) {
-				?>
-					<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'110fd1f9-35e1-4aa4-999d-45677dfd296d'});</script>
-				<?php }?>
-					<div id="SocialBar">
-					<span class="st_twitter_vcount" displayText="Tweet"></span><span class="st_facebook_vcount" displayText="Share"></span><span class="st_email_vcount" displayText="Email"></span><span class="st_sharethis_vcount" displayText="Share"></span>
-					<span>
-
-				</span>
-				</div>
 			</div>
 			<div id="comments">
 				<?php
@@ -194,7 +190,6 @@ if (isset($preview) && $preview == true) {
 						echo $this->Html->div('right',$buttons,array('style'=>"margin-right: 30px; margin-bottom: 15px; width: 309px; font-size: 15px"));
 					}
 				?>
-
 			</div>
 		</div>
 	</div>
@@ -202,7 +197,7 @@ if (isset($preview) && $preview == true) {
  	<div id="NewscolRight">
  	<?php
  	if (!isset($preview) || $preview == false) {
- 		echo $facebook->recommendations(array('width'=>"264px"));
+ 		//echo $facebook->recommendations(array('width'=>"264px"));
  	}
  	if (!empty($news['News']['tags'])) {
  		$tweetData = array(
@@ -218,8 +213,63 @@ if (isset($preview) && $preview == true) {
  	}
 
  	?>
+ 	
+ 	<?php
+		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
+		?>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 1 */
+		google_ad_slot = "2925543696";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 2a */
+		google_ad_slot = "3802193888";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6965617047977932";
+		/* Anuncio columnas y pendientes 3 */
+		google_ad_slot = "1111764142";
+		google_ad_width = 300;
+		google_ad_height = 250;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<?php }?>
+ 	
+ 	
  	</div>
-	<br clear="all"/>
+ 	<div class="clearFloat"></div>
+ 	<?php
+		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
+	?>
+	<script type="text/javascript"><!--
+	google_ad_client = "ca-pub-6965617047977932";
+	/* Footer-Bloque Anuncios */
+	google_ad_slot = "6067688955";
+	google_ad_width = 728;
+	google_ad_height = 15;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+	<?php }?>
 </div>
 <?php
 	echo $js->writeBuffer(array('inline'=>true, 'safe'=>true));

@@ -1,4 +1,4 @@
-<div class="tNews">
+<div class="tNews news collapsed" id="<?php echo $news['id']?>">
 <article>
 	<div class="icon">
 		<?php
@@ -18,6 +18,7 @@
 			?>
 		</h4>
 		<h3><?php echo $html->link($text->truncate(__($news['title'], true),60, array('ending'=>'...', 'exact'=>false, 'html'=>true)),$news['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"new Ajax.Request('/visits/incrementaContador/{$news['id']}'); return true;"));?></h3>
+		<?php echo $this->Form->hidden('title',array('id'=>"title".$news['id'], 'value'=>$news['title']));?>
 		</header>
 		<!-- <div class="photo">
 			<?php
@@ -31,10 +32,11 @@
 				echo $text->truncate(__(Sanitize::clean(html_entity_decode($news['summary'],ENT_COMPAT,'UTF-8'),array('remove_html'=>true,'carriage'=>true,'odd_spaces'=>true)), true),110, array('ending'=>'...', 'exact'=>true, 'html'=>true));
 			?>
 		</p>
+		<?php echo $this->Form->hidden('title',array('id'=>"summary".$news['id'], 'value'=>$news['summary']));?>
 	</div>
 	<br clear="all"/>
 	<div class="mainComments">
-		<span class="disabled gray right bottom">comentarios deshabilitados temporalmente...</span>
+
 	</div>
 
 	<br clear="both"/>

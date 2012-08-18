@@ -12,8 +12,10 @@
 </div>
 <div id="rows">
 	<?php 
+	debug($data);
 	foreach ($data as $row) {
-		$image = !empty($row['Feed']['Source']['User'])?$row['Feed']['Source']['User']['avatar']:"empty.jpg";
+		debug($row);
+		$image = !empty($row[0])?$row[0]['avatar']:"empty.jpg";
 		$image = $this->Html->image($image);
 		$section = $this->Html->tag('h4', $row['Category']['name'], array('class'=> "section grey"));
 		$title = $this->Html->tag('h3', $row['News']['title']);

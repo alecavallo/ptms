@@ -96,6 +96,14 @@
 		array('controller'=>"News", 'action'=>'write'),
 		array('col'=>"postea")
 	);
+	Router::connect('/columna/:alias/noticia/:id-:titulo',
+		array('controller'=>"News", 'action'=>'view'),
+		array(
+			'pass'	=>	array('id','titulo'),
+			'id'	=>	"[0-9]+",
+			'titulo'	=>	"[a-zA-z0-9\-\_]+"
+		)
+	);
 	Router::connect('/columna/:alias',
 		array('controller'=>"Users", 'action'=>'view'),
 		array(

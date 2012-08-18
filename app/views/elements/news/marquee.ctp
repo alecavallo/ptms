@@ -37,7 +37,7 @@ function getNews(){
 	      });
 	      page++;
 	    },
-	    onFailure: function(){ alert('Volver marquesina al principio'); }
+	    onFailure: function(){ alert('No se han podido cargar las noticias, por favor intente nuevamente mas tarde'); }
 	  });
 }
 

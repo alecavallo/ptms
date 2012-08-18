@@ -6,6 +6,12 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 //echo $this->Html->script('common',array('inline'=>false));
 ?>
 <?php echo $this->element('news'.DS.'popup'/*, array('cache'=>'30 minutes')*/)?>
+<script type="text/javascript">
+<!--
+var commentsId = new Array();
+var commentsUrl = new Array();
+//-->
+</script>
 <div id="content">
 		<?php echo $this->element('news'.DS.'marquee', array('cache'=>'30 minutes'))?>
     	<div id="colLeft">
@@ -121,6 +127,41 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
         	?>
         </section>
         </div>
+        
+        <script type="text/javascript">
+        	jQuery("div.news").hover(
+                function(){
+                	window.dflt = jQuery(this).html();
+                	//alert(window.dflt);
+                	var id = jQuery(this).attr('id');
+                    /*var link = document.createElement('span');
+                    link.innerHTML="ampliar &gt;&gt;";*/
+                    
+                    jQuery('div#'+id+" h3 a").html(jQuery('div#'+id+" #title"+id).val());
+                    /*link.onclick = function(param1,param2){
+                        var id = jQuery(this).closest('div.news').attr('id');
+						//alert(jQuery(this).closest('div.news').attr('id'));
+						//jQuery('div#'+id+" h3 a").html(jQuery('div#'+id+" #title"+id).val());
+						jQuery(this).closest('div.news').addClass('expanded');
+						jQuery(this).closest('div.news').removeClass('collapsed');
+						jQuery('div.news').unbind('hover');
+                    	jQuery('div#'+id+" h3 a").html(jQuery('div#'+id+" #title"+id).val());
+                    	jQuery('div#'+id+" p.summary").html(jQuery('div#'+id+" #summary"+id).val());
+                    	//jQuery('div#'+id+" div.mainComments").html('');
+                    	jQuery('div#'+id+" div.mainComments").load("/news/getComment/"+id);
+                    	
+                    };*/
+                    //link.setAttribute('onclick',alert('hola'););
+                    
+					//jQuery(this).find("div.mainComments").append(link);
+        		},
+        		function(){
+            		//alert(window.dflt);
+					jQuery(this).html(dflt);
+        		}
+           	);
+        </script>
+        
         <div id="adsContainer">
         	<?php 
         	if (!empty($banner)) {
@@ -128,7 +169,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
         	}
         	?>
         </div>
-        <div id="otherNewsContainer" class="otherNewsContainer">
+        
         <section>
 			<?php
 				$parameters = array(
@@ -151,4 +192,5 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
         </div>
             <br clear="all"/>
             <br clear="all"/>
+        <div id="otherNewsContainer" class="otherNewsContainer">
     </div>

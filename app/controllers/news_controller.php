@@ -10,7 +10,7 @@ class NewsController extends AppController {
 	var $name = 'News';
 	var $uses = array('News','LastPost', 'User', 'Vote','Parameter', 'ExcludedWord', 'YoutubeFavorite');
 	var $components= array(/*'Security',*/'Phptwitter.Twitter','RequestHandler','Session','Auth', 'Twitter.Twitter');
-	var $helpers = array('Text', 'Js' => array('Prototype'), 'Form', 'Paginator');
+	var $helpers = array('Text', 'Js' => array('Prototype'), 'Form', 'Paginator', 'Session');
 	var $paginate = array('limit' => 1);
 	
 	/*se setea el tema para mobil*/
@@ -88,6 +88,7 @@ SCR;
 								if (!array_key_exists('name', $facebook) || empty($facebook['name'])) {
 									$facebook = FB::api("/{$value['Ad']['link']}/"); //reintento de obtener	 los datos identificatorios de la cuenta
 								}
+								$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
 								$aux = array(
 									'name' => $facebook['name'],
 									'nickname' => $facebook['username'],
@@ -148,6 +149,7 @@ SCR;
 						case 2: //facebook
 							
 							$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
+							$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
 							$aux = array(
 								'name' => $facebook['name'],
 								'nickname' => $facebook['username'],
@@ -210,6 +212,7 @@ SCR;
 						case 2: //facebook
 							
 							$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
+							$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
 							$aux = array(
 								'name' => $facebook['name'],
 								'nickname' => $facebook['username'],
@@ -953,9 +956,9 @@ function getPopularVideos($category="") {
 		if ($categoryId == 0) {
 			$conditions=array();
 		}
-		$this->paginate = array(
+		/*$this->paginate = array(
 			'limit'	=>	$count,
-			'conditions'	=>	array('News.rating <= 30','News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)'),	
+			'conditions'	=>	array('News.rating <= 30','News.created >= DATE_SUB(CURDATE(), INTERVAL 120 HOUR)'),	
 			'order'	=>	"News.created desc, rand()",		
 			'contain'	=>	array(
 				'Feed'	=>	array(
@@ -968,8 +971,9 @@ function getPopularVideos($category="") {
 					'conditions'	=> $conditions,
 				)
 			)
-		);
-		$data = $this->paginate('News');
+		);*/
+		$data = $this->News->getUsersNews(120);
+		//debug($data);
 		$this->layout = "ajax";
 		if (!$this->RequestHandler->isAjax()) {
 			$this->autoRender = false;
@@ -1041,7 +1045,29 @@ function search(){
 }
 
 
+	function vote($id,$multiplier=1){
+		$this->autoRender=false;
+		$this->layout='ajax';
+		// esta funcion se ejecuta solo si se llama por post
+		// y el token es válido
 
+		if ($this->RequestHandler->isAjax()) {
+			// Aumenta el contador de la noticia...
+			$usrVotes = $this->Session->read('votes');
+			$usrVotes = !empty($usrVotes)?$usrVotes:array();
+			if (!in_array($id, $usrVotes)) {
+				$this->News->recursive=-1;
+				$result = $this->News->updateAll(array('votes'=>'votes+'.$multiplier),array('News.id' => $id));
+				if($result != false){
+					$usrVotes[]=$id;
+					$this->Session->write('votes',$usrVotes);
+				}
+			}else {
+				return json_encode(false);
+			}
+		}
+		return json_encode(true);
+   }
 
 	/*DEPRECATED*/
 
@@ -1454,7 +1480,7 @@ function search(){
 			 	$newsId =$this->News->id;
 			 	$media['Media'] = $news['Media'];
 			 	$media['Media']['news_id'] =  $newsId;
-			 	debug($media);
+			 	//debug($media);
 			 	$this->News->Media->create($media);
 			 	if(!$this->News->Media->save()){
 			 		debug($this->News->Media->invalidFields());
@@ -1540,38 +1566,6 @@ function search(){
 		$this->redirect(array('action' => 'index'));
 	}
 
-	function vote($news_id){
-		if (!$this->RequestHandler->isAjax()) {
-			$this->cakeError('error404');
-		}
-		$this->layout='ajax';
-		$usr = $this->Auth->user();
-		$this->Vote->recursive=-1;
-		$usr_votes = $this->Vote->find('count',array('conditions'=>array('user_id'=>$usr['User']['id'],'object_id'=>$news_id,'type'=>VOTE_NEWS)));
-
-		$this->News->restrict = -1;
-		$votes = $this->News->findById($news_id);
-		$votes = $votes['News']['votes'];
-		if ($usr_votes > 0) {
-			$this->set('votes',$votes);
-			$this->set('saved',true);
-			$this->render('vote');
-			return ;
-		}
-		$this->News->id = $news_id;
-		$saved = $this->News->saveField('votes',$votes+1);
-		if ($saved) {
-			$saved = $this->Vote->save(array('user_id'=>$usr['User']['id'], 'object_id'=>$news_id, 'type'=>VOTE_NEWS));
-			if (!$saved) {
-				$this->News->restrict = -1;
-				$this->News->id = $news_id;
-				$this->News->saveField('votes','votes-1');
-			}else {
-				$this->set('votes',$votes+1);
-			}
-		}
-		$this->set('saved',$saved);
-	}
 
 	/*************************************************************************/
 
