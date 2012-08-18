@@ -52,8 +52,10 @@ SCR;
 		}else{ //sino trato de recuperarla de cache
 			$ads = Cache::read ( "ads", 'vLong' );
 		}
+		
 		$this->loadModel('Ad');
-		if (empty($ads)){
+		if (empty($ads)/* || true*/){
+			
 			$ads = array();
 			$ads[1]['data'] = $this->Ad->get(1);
 			$ads[1]['displayed'] = array();
@@ -65,7 +67,6 @@ SCR;
 					switch ($value['Ad']['socialnetwork']) {
 						case 1: //twitter
 							$tweet = $this->Twitter->showUser($value['Ad']['link']);
-							debug($tweet);
 							if(!empty($tweet)){
 								$aux = array(
 									'name'=>$tweet['name'],
@@ -89,6 +90,7 @@ SCR;
 									$facebook = FB::api("/{$value['Ad']['link']}/"); //reintento de obtener	 los datos identificatorios de la cuenta
 								}
 								$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
+								debug($facebook);
 								$aux = array(
 									'name' => $facebook['name'],
 									'nickname' => $facebook['username'],
@@ -246,7 +248,7 @@ SCR;
 			
 			array_multisort($ads[4]['displayed'], SORT_ASC, $ads[4]['data']);
 			
-			$ads[5]['data'] = $this->Ad->get(5);
+			//$ads[5]['data'] = $this->Ad->get(5);
 			
 			$this->Session->write('ads', $ads);
 			Cache::write ( "ads", $ads, 'vLong' );
