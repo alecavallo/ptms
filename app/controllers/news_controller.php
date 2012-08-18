@@ -972,7 +972,7 @@ function getPopularVideos($category="") {
 				)
 			)
 		);*/
-		$data = $this->News->getUsersNews(120);
+		$data = $this->News->getUsersNews(12);
 		//debug($data);
 		$this->layout = "ajax";
 		if (!$this->RequestHandler->isAjax()) {

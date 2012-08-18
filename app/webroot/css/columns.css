@@ -188,6 +188,12 @@ div#ads{
 }
 div#newsList div.newsRows{
 	margin-bottom: 30px;
+	clear:left;
+}
+div.heading{
+	clear: right;
+	float: left;
+	width: 548px;
 }
 div#newsList div.newsRows img{
 	width: 50px;

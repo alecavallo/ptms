@@ -333,6 +333,25 @@ QRY;
 	
 	return $result;
 	}
+	
+	function usersNew($id, $page=0, $limit=10){
+		$sql = <<<QRY
+select News.id, News.title, News.summary, News.created, News.link, Category.id, Category.name, coalesce(User.id,Ruser.id) as User_id, coalesce(User.first_name,Ruser.first_name) as first_name, coalesce(User.last_name,Ruser.last_name) as last_name, coalesce(User.alias,User.posteamos_alias,Ruser.alias,Ruser.posteamos_alias) as alias, coalesce(User.avatar,Ruser.avatar) as avatar
+from news News
+left join feeds Feed on Feed.id=News.feed_id
+left join sources Source on Source.id=Feed.source_id
+inner join categories Category on Category.id=News.category_id
+left join users User on User.id = News.user_id
+left join users Ruser on Ruser.sources_id = Source.id
+where
+User.id = {$id} or Ruser.id = {$id}
+order by User.registered desc, News.created desc, rand()
+limit {$page},{$limit};
+QRY;
+	$result = $this->query($sql);
+	
+	return $result;
+	}
 
 }
 ?>

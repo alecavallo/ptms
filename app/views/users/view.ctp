@@ -51,9 +51,15 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			$image = !empty($user['User']['avatar'])?$user['User']['avatar']:"empty.jpg";
 			$image = $this->Html->image($image);
 			$section = $this->Html->tag('h4', $row['Category']['name'], array('class'=> "section grey"));
-			$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), $row['News']['link'], array('target'=>'blank', 'escape'=>false));
+			if(!empty($row['News']['link'])){
+				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), $row['News']['link'], array('target'=>'blank', 'escape'=>false));
+			}else{
+				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), "/columna/{$row[0]['alias']}/noticia/{$row['News']['id']}-".Inflector::slug($row['News']['title']).".html", array('target'=>'blank', 'escape'=>false));
+			}
+			$heading = $this->Html->div('heading',$section.$title);
+			
 			$summary = $this->Html->para('summary', $this->Text->truncate($row['News']['summary'], 250, array('ending'=>"...", 'html'=>true, 'exact'=>false)));
-			echo $this->Html->div('newsRows', $image.$section.$title.$summary);
+			echo $this->Html->div('newsRows', $image.$heading.$summary);
 		}
 		?>
 	</div>
@@ -61,12 +67,12 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		<?php 
 			echo $this->Html->image($user['User']['avatar']);
 		?>
-		<h3><?php echo "{$user['User']['first_name']} {$user['User']['last_name']} -- {$user['User']['last_name']}"?></h3>
+		<h3><?php echo "{$user['User']['first_name']} {$user['User']['last_name']} -- {$user['User']['alias']}"?></h3>
 		<p class="description">
 			<?php echo $user['User']['description']?>
 		</p>
 		<p id="webPage">
-			<?php echo $this->Html->link($user['Source']['url'],$user['Source']['url'],array('target'=>"blank"))?>
+			<?php //echo $this->Html->link($user['Source']['url'],$user['Source']['url'],array('target'=>"blank"))?>
 		</p>
 		<br/>
 		<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>

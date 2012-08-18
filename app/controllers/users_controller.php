@@ -186,8 +186,9 @@ class UsersController extends AppController {
 				'Source'	=>	array()
 			)
 		));
+		
 		$id = $user['User']['id'];
-		$news = $this->User->News->find('all',array(
+		/*$news = $this->User->News->find('all',array(
 			'fields'	=>	array('News.id', 'News.title', 'News.summary', 'News.created', 'News.visits', 'News.votes', 'News.link'),
 			'conditions'	=>	array('News.user_id'=>$id),
 			'limit'	=>	7,
@@ -197,9 +198,12 @@ class UsersController extends AppController {
 				),
 				'Feed'	=>	array(),
 			)
-		));
+		));*/
+		//debug($news);
+		$news = $this->User->News->usersNew($id);
+
 		
-		/*debug($news);*/
+		//debug($news);
 		$this->set('user', $user);
 		$this->set('news', $news);
 	}
