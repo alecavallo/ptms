@@ -6,7 +6,7 @@ if (empty($data)) {
 $selected = isset($selected)?$selected:'Todas';
 ?>
 <div id="pendings">
-	<h1 class="greyTitle" style="margin-bottom: 20px;">Noticias pendientes de ser publicadas</h1>
+	<h1 class="greyTitle" style="margin-bottom: 20px;" title="Con tu voto podés hacer que estas noticias lleguen a portada!">Noticias pendientes de ser publicadas</h1>
 	<img src="/img/degradee.png" alt="" class="degradee">
 	<div id="categoryIndicator" onclick="showHide($('categoryPicker'))"><?php echo $selected;?>▼</div>
 	<div id="categoryPicker" style="display: none;">
