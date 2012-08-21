@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+#idc-container-parent {
+	background-color: #fafafa;
+}
+#idc-container-parent div#idc-container {
+	height: auto;
+	min-height: 500px;
+	max-height: 768px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #fafafa;
+}
+#idc-container-parent #idc-container h3{
+	font-size: 15px;
+}

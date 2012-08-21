@@ -2,6 +2,7 @@
 	echo $this->Html->script('prototype',array('inline'=>false));
 	echo $this->Html->script('scriptaculous',array('inline'=>false));
 	echo $this->Html->script('common',array('inline'=>false, 'once'=>true));
+	echo $this->Html->css('idb-posteamos');
 	//$js->buffer($facebookInit);
 	//$js->writeBuffer(array('inline'=>true, 'safe'=>true));
 
@@ -180,18 +181,8 @@ if (isset($preview) && $preview == true) {
 				</div>
 			</div>
 			<div id="comments">
-				<?php
-					if (!isset($preview) || $preview == false) {
-						echo $facebook->comments(array('numpost'=>7));
-					}else {
-						$buttons = $this->Html->link(__('Anterior',true),"/postea.html", array('class'=>"prevBtn"));
-						$buttons .= $this->Html->link(__('Publicar',true),array('controller'=>"news", 'action'=>"add", "publicar"), array('class'=>"nextBtn"));
-						$buttons .= $this->Html->tag('br',null,array('clear'=>"both"));
-						echo $this->Html->div('right',$buttons,array('style'=>"margin-right: 30px; margin-bottom: 15px; width: 309px; font-size: 15px"));
-					}
-				?>
+				
 			</div>
-		</div>
 	</div>
 
  	<div id="NewscolRight">
@@ -254,7 +245,14 @@ if (isset($preview) && $preview == true) {
  	
  	
  	</div>
- 	<div class="clearFloat"></div>
+ 	<div class="clearFloat">
+ 	<script>
+				var idcomments_acct = '19f7342c71062346f906e674904d040b';
+				var idcomments_post_id;
+				var idcomments_post_url;
+				</script>
+				<script type="text/javascript" src="http://www.intensedebate.com/js/genericLinkWrapperV2.js"></script>
+ 	</div>
  	<?php
 		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
 	?>
