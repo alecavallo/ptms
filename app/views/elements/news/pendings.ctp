@@ -30,7 +30,7 @@ $selected = isset($selected)?$selected:'Todas';
 			if(!empty($row['News']['link'])){
 				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), $row['News']['link'], array('target'=>'blank', 'escape'=>false));
 			}else{
-				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), "/columna/{$row[0]['alias']}/noticia/{$row['News']['id']}-".Inflector::slug($row['News']['title']).".html", array('target'=>'blank', 'escape'=>false));
+				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), "/columna/{$row[0]['alias']}/noticia/{$row['News']['id']}-".Inflector::slug($row['News']['title'],"-").".html", array('target'=>'blank', 'escape'=>false));
 			}
 			$summary = $this->Html->para('summary', $this->Text->truncate($row['News']['summary'], 250, array('ending'=>"...", 'html'=>true, 'exact'=>false)));
 			$up = $this->Html->image('OK.png', array("class"=>"vote")); //$this->Ajax->link(, "/visits/incrementaContador/{$row['News']['id']}/2", array('escape'=>false));

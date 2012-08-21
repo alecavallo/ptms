@@ -41,6 +41,7 @@ var commentsUrl = new Array();
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
 				if (!empty($news)) {
+					
 					foreach ($news as $row) {
 						if (array_key_exists('News', $row)) {
 							$aux = $row['News'];
@@ -54,6 +55,7 @@ var commentsUrl = new Array();
 							if ($row['Ad']['socialnetwork']==0) {
 								echo $this->element("widgets".DS."news_ads", array('ad'=>$row));
 							}else {
+								//debug($row);
 								if ($row['Ad']['socialnetwork']==1) {
 									$aux = $row['Ad'];
 									$aux['image'] = $row['twitter']['image'];

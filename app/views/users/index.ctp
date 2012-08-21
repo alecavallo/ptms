@@ -16,7 +16,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		<h1 class="greyTitle" style="margin-bottom: 20px;">Columnas</h1>
 		<img src="/img/degradee.png" alt="" class="degradee"/>
 		<div id="filters">
-			<label for="filterbox">Buscar: </label><input id="filterbox" type="text"/><span id="reset">&nbsp;X&nbsp;</span>
+			<label for="filterbox" class="greyTitle">Buscar: </label><input id="filterbox" type="text"/><span id="reset" class="greyTitle">&nbsp;X&nbsp;</span>
 		</div>
 		<div id="users">
 		

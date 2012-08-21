@@ -54,7 +54,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			if(!empty($row['News']['link'])){
 				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), $row['News']['link'], array('target'=>'blank', 'escape'=>false));
 			}else{
-				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), "/columna/{$row[0]['alias']}/noticia/{$row['News']['id']}-".Inflector::slug($row['News']['title']).".html", array('target'=>'blank', 'escape'=>false));
+				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), "/columna/{$row[0]['alias']}/noticia/{$row['News']['id']}-".Inflector::slug($row['News']['title'],"-").".html", array('target'=>'blank', 'escape'=>false));
 			}
 			$heading = $this->Html->div('heading',$section.$title);
 			
