@@ -194,5 +194,5 @@ var commentsUrl = new Array();
         </div>
             <br clear="all"/>
             <br clear="all"/>
-        <div id="otherNewsContainer" class="otherNewsContainer">
-    </div>
+        <!-- <div id="otherNewsContainer" class="otherNewsContainer">
+    </div> -->

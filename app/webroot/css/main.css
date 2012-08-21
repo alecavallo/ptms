@@ -122,10 +122,10 @@ clear: all;
 /*FOOTER*/
 
 #footer {
-	width: 100%; height: 120px; margin: 0 auto
+	width: 100%; min-width: 768; height: 120px; margin: 0 auto
 }
 #footer_1 {
-	width: 990px; height: 19px;  float:left
+	width: 100%; min-width: 768; height: 19px;  float:left
 }
 #footer_2 {
 	width: 100%; height: 76px;  float:left; background:url(../img/logofooter.jpg) no-repeat #333333; background-position: 0 25px
@@ -139,15 +139,20 @@ clear: all;
 }
 #footer_menu{
 	behavior: url(css/PIE.htc);
-	width: 964px; height: 37px; background: blue; position:absolute; margin: 0 0 0 200px; 
+	width: 85%;
+	height: 37px; background: blue; position:relative; 
+	margin-left: auto;
+	margin-right: auto;
 	-moz-border-radius:10px 10px 10px 10px; 
 	-webkit-border-radius: 10px 10px 10px 10px;
 	border-radius: 10px 10px 10px 10px; 
-	background: url(../img/backmenu.jpg) repeat
+	background: url(../img/backmenu.jpg) repeat;
+	max-width: 990px;
+	min-width: 768px;
 }
 .menufo{ /*font-family:Arial, Helvetica, sans-serif;*/ color:#FFFFFF; font-size: 13px;}
 .menufo a{ color:#FFFFFF; text-decoration:none}
-.menufo ul { padding:0px; margin: 9px 0 0 0; text-align: center;}
+.menufo ul { padding:0px; margin: 9px 0 0 0; text-align: center; line-height: 37px;}
 .menufo ul li{ display:inline; list-style: none; margin: 0 20px 0 10px }
 .copy{ /*font-family:Arial, Helvetica, sans-serif;*/ color:#FFFFFF; font-size: 11px; text-align:right}
 .copy a{ color:#FFFFFF; text-decoration:none}
@@ -1102,7 +1107,7 @@ img.pplNewsImage{
 	position: relative;
 	padding: 5px 5%;
 	min-height: 242px;
-	width: inherit;
+	width: 100%;
 }
 div#adsContainer{
 	clear:both;
