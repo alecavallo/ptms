@@ -353,5 +353,54 @@ QRY;
 	return $result;
 	}
 
+	function getHomeNews($feedCount=1, $categoryCount=2){
+		$sql = <<<QRY
+select Source.id, Source.icon, Source.name, News.id,News.title,News.summary,News.link,News.rating,News.created,News.rating,News.votes,News.visits,Category.id,Category.name,User.first_name,User.last_name,User.alias,User.posteamos_alias,User.avatar
+from 
+	(select news.*,
+	@num := if(@group = feed_id, @num + 1, 1) as row_number,
+	@group := feed_id as dummy,
+	@num2 := if(@group2 = user_id, @num2 + 1, 1) as usr_number,
+	@group2 := user_id as dummy2
+	from news
+	where news.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) and rating > 1
+	order by news.feed_id, news.user_id, news.rating desc, news.votes desc, news.visits desc) as News
+left join feeds Feed on News.feed_id=Feed.id
+left join sources Source on Source.id=Feed.source_id
+left join categories Category on News.category_id=Category.id
+left join users User on User.id=News.user_id
+where (News.row_number <={$feedCount} and dummy is not null and Feed.content_type=1) or (News.usr_number <={$feedCount} and dummy2 is not null)
+order by News.rating desc, News.votes desc, News.visits desc, News.created desc, Feed.rating desc;
+QRY;
+
+		$raw = $this->query($sql);
+		 
+		$result = array();
+		$shownSources = array();
+		$shownCategories = array();
+		foreach ($raw as $value) {
+			if (!in_array($value['Source']['id'], $shownSources)) {
+				$cateCount = array_count_values($shownCategories);
+				if(array_key_exists($value['Category']['id'], $cateCount)){
+					if ($cateCount[$value['Category']['id']]<$categoryCount) {
+						$shownCategories[] = $value['Category']['id'];
+					}else {
+						continue;
+					}
+				}else {
+					$shownCategories[] = $value['Category']['id'];
+				}
+				$shownSources[]=$value['Source']['id'];
+				
+				
+				$news['News']=$value['News'];
+				$news['Feed']['Source']=$value['Source'];
+				$news['Category']=$value['Category'];
+				$news['User']=$value['User'];
+				$result[] = $news;
+			}
+		}
+		return $result;
+	}
 }
 ?>

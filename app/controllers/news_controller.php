@@ -352,197 +352,18 @@ SCR;
 
 
 				$newsPapers = Cache::read ( "newsPapers", 'long' );
-
 				if (empty($newsPapers)){
-					$excludedSources = array('-1', '0'); //almacena las fuentes ya mostradas;
-					$newsPapers = array();
-					$i=0;
-					$newsPol = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=3",
-							'contain'	=>	array(
-								'Feed'	=>	array(
-									'conditions'	=>	array('Feed.content_type'=>1),
-									'Source'	=>	array(
-										'conditions'	=>	array("Source.country_id"=>1)
-									)
-								),
-								'Category'	=>	array(),
-								'User'		=>	array(),
-								'Media'		=>	array()
-							),
-							'limit'	=>	2,
-							'order'	=>	"News.rating desc, News.visits desc, rand()",
-							'group'	=>	"News.feed_id"
-						)
-					);
-					foreach ($newsPol as $row) {
-						if (!in_array($row['Feed']['source_id'], $excludedSources)) {
-							$excludedSources[]=$row['Feed']['source_id'];
-						}
-					}
-					//debug($blogsPol);
-					$newsEcono = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=4",
-							'contain'	=>	array(
-								'Feed'	=>	array(
-									'conditions'	=>	array('Feed.content_type'=>1, 'Feed.source_id not'=>$excludedSources),
-									'Source'	=>	array(
-										'conditions'	=>	array("Source.country_id"=>1)
-									)
-								),
-								'Category'	=>	array(),
-								'User'		=>	array(),
-								'Media'		=>	array()
-							),
-							'limit'	=>	2,
-							'order'	=>	"News.rating desc, News.visits desc, rand()",
-							'group'	=>	"News.feed_id"
-						)
-					);
-					
-					foreach ($newsEcono as $row) {
-						if (!in_array($row['Feed']['source_id'], $excludedSources)) {
-							$excludedSources[]=$row['Feed']['source_id'];
-						}
-					}
-					$newsCult = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=7",
-							'contain'	=>	array(
-								'Feed'	=>	array(
-									'conditions'	=>	array('Feed.content_type'=>1, 'Feed.source_id not'=>$excludedSources),
-									'Source'	=>	array(
-										'conditions'	=>	array("Source.country_id"=>1)
-									)
-								),
-								'Category'	=>	array(),
-								'User'		=>	array(),
-								'Media'		=>	array()
-							),
-							'limit'	=>	2,
-							'order'	=>	"News.rating desc, News.visits desc, rand()",
-							'group'	=>	"News.feed_id"
-						)
-					);
-					foreach ($newsCult as $row) {
-						if (!in_array($row['Feed']['source_id'], $excludedSources)) {
-							$excludedSources[]=$row['Feed']['source_id'];
-						}
-					}
-					$newsDepo = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=8",
-							'contain'	=>	array(
-								'Feed'	=>	array(
-									'conditions'	=>	array('Feed.content_type'=>1, 'Feed.source_id not'=>$excludedSources),
-									'Source'	=>	array(
-										'conditions'	=>	array("Source.country_id"=>1)
-									)
-								),
-								'Category'	=>	array(),
-								'User'		=>	array(),
-								'Media'		=>	array()
-							),
-							'limit'	=>	2,
-							'order'	=>	"News.rating desc, News.visits desc, rand()",
-							'group'	=>	"News.feed_id"
-						)
-					);
-					foreach ($newsDepo as $row) {
-						if (!in_array($row['Feed']['source_id'], $excludedSources)) {
-							$excludedSources[]=$row['Feed']['source_id'];
-						}
-					}
-					$newsTecno = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=11",
-							'contain'	=>	array(
-								'Feed'	=>	array(
-									'conditions'	=>	array('Feed.content_type'=>1, 'Feed.source_id not'=>$excludedSources),
-									'Source'	=>	array(
-										'conditions'	=>	array("Source.country_id"=>1)
-									)
-								),
-								'Category'	=>	array(),
-								'User'		=>	array(),
-								'Media'		=>	array()
-							),
-							'limit'	=>	2,
-							'order'	=>	"News.rating desc, News.visits desc, rand()",
-							'group'	=>	"News.feed_id"
-						)
-					);
-					foreach ($newsTecno as $row) {
-						if (!in_array($row['Feed']['source_id'], $excludedSources)) {
-							$excludedSources[]=$row['Feed']['source_id'];
-						}
-					}
-					$newsSoc = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=16",
-							'contain'	=>	array(
-								'Feed'	=>	array(
-									'conditions'	=>	array('Feed.content_type'=>1, 'Feed.source_id not'=>$excludedSources),
-									'Source'	=>	array(
-										'conditions'	=>	array("Source.country_id"=>1)
-									)
-								),
-								'Category'	=>	array(),
-								'User'		=>	array(),
-								'Media'		=>	array()
-							),
-							'limit'	=>	2,
-							'order'	=>	"News.rating desc, News.visits desc, rand()",
-							'group'	=>	"News.feed_id"
-						)
-					);
-					/*foreach ($newsSoc as $row) {
-						if (!in_array($row['Feed']['source_id'], $excludedSources)) {
-							$excludedSources[]=$row['Feed']['source_id'];
-						}
-					}*/
-					
-					$i=0;
-					while ($i < 8){
-						$j = rand(0, 5);
-						$aux = null;
-						switch ($j) {
-							case 0:
-								$aux = array_shift($newsPol);
-							break;
-							case 1:
-								$aux = array_shift($newsEcono);
-							break;
-							case 2:
-								$aux = array_shift($newsCult);
-							break;
-							case 3:
-								$aux = array_shift($newsDepo);
-							break;
-							case 4:
-								$aux = array_shift($newsTecno);
-							break;
-							case 5:
-								$aux = array_shift($newsSoc);
-							break;
-
-							default:
-								$aux = null;
-							break;
-						}
-
-						if (!empty($aux)) {
-							$newsPapers[]=$aux;
-							$i ++;
-						}
-						if (empty($newsCult) && empty($newsDepo) && empty($newsEcono) && empty($newsPol) && empty($newsSoc) && empty($newsTecno)) {
-							break;
-						}
-					}
-					Cache::write ( "newsPapers", $newsPapers, 'long' );
+				$newsPapers = $this->News->getHomeNews();
+				$newsPapers = array_slice($newsPapers, 0, 8);
+				shuffle($newsPapers);
+				Cache::write ( "newsPapers", $newsPapers, 'long' );
 				}
-				
+				//debug($newsPapers);
 				//obtengo id de las noticias en portada
-				$shown=array();
-				foreach ($newsPapers as $row) {
+				//$shown=array();
+				/*foreach ($newsPapers as $row) {
 					$shown[]=$row['News']['id'];
-				}
+				}*/
 				
 				//agrego publicidad en posición aleatoria
 				if(!empty($newsAds)){
@@ -551,6 +372,8 @@ SCR;
 				}
 				//debug(count($newsPapers));
 				$this->set('news',$newsPapers);
+				//debug($newsPapers);
+				
 
 
 				$blogs = Cache::read ( "blogs", 'long' );
@@ -1373,6 +1196,8 @@ function search(){
 				$this->set('errors', $errors);
 				$this->Session->setFlash(__('Debe elegir una categoría', true));
 			}
+		}else {
+			//$this->Session->flash('');
 		}
 	}
 
