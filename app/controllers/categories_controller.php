@@ -313,7 +313,7 @@ class CategoriesController extends AppController {
 					$newsPapers = array();
 					$i=0;
 					$news = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)) AND News.category_id={$id}",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 16 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 16 HOUR)) AND News.category_id={$id}",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>1),
@@ -326,7 +326,7 @@ class CategoriesController extends AppController {
 								'Media'		=>	array()
 							),
 							//'limit'	=>	300,
-							'order'	=>	"News.rating desc, News.visits desc, News.created desc, rand()"
+							'order'	=>	"News.rating desc, News.created desc, News.visits desc, rand()"
 						)
 					);
 					//debug($news);
