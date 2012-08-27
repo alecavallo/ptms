@@ -90,7 +90,7 @@ SCR;
 									$facebook = FB::api("/{$value['Ad']['link']}/"); //reintento de obtener	 los datos identificatorios de la cuenta
 								}
 								$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
-								debug($facebook);
+								//debug($facebook);
 								$aux = array(
 									'name' => $facebook['name'],
 									'nickname' => $facebook['username'],
