@@ -237,5 +237,27 @@ class User extends AppModel {
 
 		return $aux;
 	}
+
+
+	function usersWithNews($limit=NULL, $page=0){
+		if (!empty($limit)) {
+			$limit = "limit {$page},{$limit}";
+		}else {
+			$limit = "";
+		}
+		$limit = mysql_real_escape_string($limit);
+		$sql = <<<SQL
+select first_name, last_name, avatar, alias, posteamos_alias, description
+from users User
+inner join news News on News.user_id=User.id
+group by News.user_id
+having count(News.id) > 0
+order by User.rating desc
+{$limit};
+SQL;
+		
+		return $this->query($sql);
+
+	}
 }
 ?>

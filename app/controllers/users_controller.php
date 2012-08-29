@@ -40,8 +40,10 @@ class UsersController extends AppController {
     	$this->autoRender=false;
     	$this->layout = 'ajax';
     	header('Content-type: application/json');
+    	header('Charset: utf-8');
     	$this->User->recursive = -1;
-    	$usrs = $this->User->find('all', array('fields'=>array('first_name', 'last_name', 'avatar', 'alias', 'description'),'order'=>"User.rating desc", 'limit'=>$limit));
+    	$usrs = $this->User->usersWithNews();
+    		//debug($usrs);
     	echo json_encode($usrs);
     }
 	function login(){
