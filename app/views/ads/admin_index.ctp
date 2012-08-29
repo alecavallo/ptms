@@ -52,13 +52,14 @@
 					;
 				break;
 			}
+			$image = !empty($ad['Ad']['url'])?$html->image($ad['Ad']['url'],array('alt'=>"no se ve"))/*.$html->image("/img/small_293/476048.gif",array('style'=>"width: 100px;"))*/:"";
 			$content[] = array(
 				$ad['Ad']['id'],
 				$ad['Ad']['name'],
 				$ad['Ad']['link'],
 				$aux,
 				$posicion,
-				$html->image($ad['Ad']['url'],array('alt'=>"no se ve")).$html->image("img/small_293/476048.gif",array('style'=>"width: 100px;")),
+				$image,
 				$html->link('Editar', "edit/{$ad['Ad']['id']}")." ".$html->link('Borrar', "delete/{$ad['Ad']['id']}")
 			);
 		}

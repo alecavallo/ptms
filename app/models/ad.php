@@ -65,6 +65,7 @@ class Ad extends AppModel {
 		}
 		$conditions = array(
 			'priority'	=>	$priority,
+			'enabled'	=>	1
 		);
 		if (!empty($excluded)) {
 			$conditions['id not']=$excluded;
@@ -99,7 +100,7 @@ class Ad extends AppModel {
 		foreach ($ads as $key => $value) {
 			$aux = $value;
 
-			if (!empty($aux['Ad']['url'])) {
+			if (!empty($aux['Ad']['url']) && $aux['Ad']['socialnetwork']!=3) {
 				$aux['Ad']['url']= str_replace("\\", "/", $aux['Ad']['url']);
 				$folders = explode("/", $aux['Ad']['url']);
 				

@@ -54,7 +54,7 @@ SCR;
 		}
 		
 		$this->loadModel('Ad');
-		if (empty($ads)/* || true*/){
+		if (empty($ads) || true){
 			
 			$ads = array();
 			$ads[1]['data'] = $this->Ad->get(1);
@@ -90,7 +90,7 @@ SCR;
 									$facebook = FB::api("/{$value['Ad']['link']}/"); //reintento de obtener	 los datos identificatorios de la cuenta
 								}
 								$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
-								debug($facebook);
+								//debug($facebook);
 								$aux = array(
 									'name' => $facebook['name'],
 									'nickname' => $facebook['username'],
