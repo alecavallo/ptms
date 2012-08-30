@@ -299,16 +299,80 @@ class UsersController extends AppController {
 	}
 
 	function edit($id = null) {
+		$loggedUser = $this->Auth->user();
+		if ($loggedUser['User']['id'] != $id) {
+			$this->cakeError('404');
+		} 
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
+		if (!empty($this->data['User']['avatar']['tmp_name'])) {
+					$target = 60;
+					$folderName = WWW_ROOT."img".DS."avatars";
+					$filename = time().$this->data['User']['avatar']['name'];
+					$filename = explode(".", $filename);
+					$filename = $filename[0].".jpg";
+					$tmpFile = $this->data['User']['avatar']['tmp_name'];
+					$img = getimagesize($tmpFile);//obtengo datos de imagen
+					//debug($img);
+					$width = $img[0];
+					$height = $img[1];
+					if ($width > $height) {
+						$percentage = ($target / $width);
+					} else {
+						$percentage = ($target / $height);
+					}
+					//obtengo nuevos valores ancho y alto de la imagen
+					$width = round($width * $percentage);
+					$height = round($height * $percentage);
+					switch ($img['mime']) {//cargo en memoria imagen origen y destino
+						case 'image/png':
+							$dst = imagecreatetruecolor($width, $height);
+							$orig = imagecreatefrompng($tmpFile);
+						break;
+						case 'image/jpeg':
+							$dst = imagecreatetruecolor($width, $height);
+							$orig = imagecreatefromjpeg($tmpFile);
+						break;
+						case 'image/gif':
+							$dst = imagecreatetruecolor($width, $height);
+							$orig = imagecreatefromgif($tmpFile);
+						break;
+						
+						default:
+							$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+							debug("No se pudo modificar el tamaño de la imágen");
+							unlink($this->data['User']['avatar']['tmp_name']);
+							return;
+						break;
+					}
+					if(!imagecopyresampled($dst, $orig, 0, 0, 0, 0, $width, $height, $img[0], $img[1])){
+						//$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+						debug("No se pudo modificar el tamaño de la imágen");
+					}else {
+						//debug($folderName.DS.$filename);
+						if(imagejpeg($dst,$folderName.DS.$filename)){
+							//$this->Session->setFlash("La imágen se ha guardado correctamente");
+						}else {
+							//$this->Session->setFlash("No se pudo modificar el tamaño de la imágen");
+							debug("No se pudo modificar el tamaño de la imágen");
+						}
+					}
+					/*$avatarUrl = str_ireplace(WWW_ROOT, '', $folderName.DS.$filename);
+					$avatarUrl = str_ireplace("\\", "/", $avatarUrl);
+					$this->data['User']['avatar'] = $avatarUrl;*/
+				}else{
+					$this->data['User']['avatar'] = null;
+				}
+				debug($this->data['User']['avatar']);
 			if ($this->User->save($this->data)) {
 				$this->Session->setFlash(__('The user has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('El usuario no puede ser guardado. Intente nuevamente mas tarde', true));
+				debug($this->User->invalidFields());
 			}
 		}
 		if (empty($this->data)) {

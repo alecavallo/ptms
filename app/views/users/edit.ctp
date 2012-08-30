@@ -1,34 +1,44 @@
-<div class="users form">
-<?php echo $this->Form->create('User');?>
-	<fieldset>
- 		<legend><?php __('Edit User'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('first_name');
-		echo $this->Form->input('last_name');
-		echo $this->Form->input('alias');
-		echo $this->Form->input('last_signup');
-		echo $this->Form->input('rating');
-		echo $this->Form->input('city_id');
-		echo $this->Form->input('column_allowed');
-		echo $this->Form->input('sources_id');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('User.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $this->Form->value('User.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Users', true), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Cities', true), array('controller' => 'cities', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New City', true), array('controller' => 'cities', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Preferred Layouts', true), array('controller' => 'preferred_layouts', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Preferred Layout', true), array('controller' => 'preferred_layouts', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Comments', true), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Comment', true), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List News', true), array('controller' => 'news', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New News', true), array('controller' => 'news', 'action' => 'add')); ?> </li>
-	</ul>
+<?php 
+	echo $this->Html->script(array('tweeter/jquery','prototype', 'effects'),array('inline'=>false, 'once'=>true));
+	print $this->Html->scriptBlock('var jQuery = jQuery.noConflict();',array('inline' => false));
+?>
+<script type="text/javascript">
+jQuery.ajax({
+	  url: '/cities/getAll',
+	  async: false,
+	  success: function (data,textStatus){
+		  window.cityList = data;
+	  },
+	  failure: function(data, textStatus){
+		  window.cityList = new Array();
+		  console.log('Error conectandose al servidor. posteamos');
+	  },
+	  dataType: "json"
+});
+</script>
+<div id="content">
+<br/>
+	<?php echo $this->Session->flash(); ?>
+	<div class="users form">
+		<h1><?php __('Edicion de usuario')?></h1>
+		<hr noshade="noshade"/>
+		<?php echo $this->Form->create('User', array('enctype' => 'multipart/form-data'));?>
+			<?php
+				echo $this->Form->input('email',array('label'=>__('E-mail:',true),'div'=>false));
+				//echo $this->Form->input('password',array('label'=>__('Contraseña:',true),'div'=>false, 'value' => ''));
+				//echo $this->Form->input('password_confirm',array('label'=>__('Confirmación:',true),'id'=>"password_confirm",'type'=>"password",'div'=>false, 'value' => ''));
+				//echo $jqautocomplete->searchbox('User.city_id','window.cityList', false, array('startText'=>"Ciudad,Provincia,País",'minChars'=>2, 'key_delay'=>100, 'selectionLimit'=>1, 'limitText'=>"Para obtener una lista de ciudades debe introducir los datos de la siguiente manera: <b>ciduad,provincia,país</b>",'asHtmlID'=>"city",'selectedValuesProp'=>"id"), array('label'=>__('Ciudad:', true),'div'=>false));
+				echo $this->Form->input('alias',array('label'=>__('Twitter alias:',true),'div'=>false));
+				echo $this->Form->input('posteamos_alias',array('label'=>__('Nick:',true),'div'=>false));
+				echo $this->Form->input('first_name',array('label'=>__('Nombre:',true),'div'=>false));
+				echo $this->Form->input('last_name',array('label'=>__('Apellido:',true),'div'=>false));
+				echo $this->Form->input('avatar', array('label'=>__('Foto:',true),'div'=>false,'type'=>'file'));
+				echo $this->Form->input('description',array('label'=>__('Descripción de tu perfil:',true),'div'=>false, 'type'=>"textarea"));
+			?>
+			<br clear="all"/>
+			<hr noshade="noshade"/>
+		<?php echo $this->Form->end(__(' ', true));?>
+	</div>
+	<br clear="all"/>
+	<?php //echo $this->Js->writeBuffer();?>
 </div>

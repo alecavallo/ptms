@@ -3,6 +3,7 @@ class User extends AppModel {
 	var $name = 'User';
 	var $displayField = 'alias';
 	var $cacheQueries = true;
+	var $fileStatus = "";
 	var $validate = array(
 		'id' => array(
 			'numeric' => array(
@@ -93,7 +94,7 @@ class User extends AppModel {
 				'rule' => array('alphanumeric', true),
 				'message' => 'La contraseña solo puede contener alfanuméricos y no debe ser vacía',
 				'allowEmpty' => false,
-				'required' => true,
+				//'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -101,7 +102,7 @@ class User extends AppModel {
 				'rule' => array('alphanumeric', true),
 				'message' => 'La contraseña solo puede contener alfanuméricos y no debe ser vacía',
 				'allowEmpty' => false,
-				'required' => true,
+				//'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -109,7 +110,7 @@ class User extends AppModel {
 				'rule' => 'notemptypasswd',
 				'message' => 'La contraseña está vacía',
 				'allowEmpty' => false,
-				'required' => true,
+				//'required' => true,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
@@ -118,7 +119,7 @@ class User extends AppModel {
 			'rule' => array('identicalValues', 'password'),
 			'message' => 'La contraseñas no coinciden',
 			'allowEmpty' => false,
-			'required' => true,
+			//'required' => true,
 			//'last' => false, // Stop validation after this rule
 			//'on' => 'create', // Limit validation to 'create' or 'update' operations
 		),
@@ -203,6 +204,7 @@ class User extends AppModel {
 
 	function isUploadedImage($params){
 		$val = array_shift($params);
+		debug($val);
 		if($val['error'] == 4){
 			return true;
 		}
@@ -259,5 +261,21 @@ SQL;
 		return $this->query($sql);
 
 	}
+
+
+	function beforeSave(){
+		if (is_array($this->data['User']['avatar'])){
+			//$this->fileStatus = $this->data['User']['avatar'];
+			$folderName = WWW_ROOT."img".DS."avatars";
+			$filename = time().$this->data['User']['avatar']['name'];
+			$filename = explode(".", $filename);
+			$filename = $filename[0].".jpg";
+			$avatarUrl = str_ireplace(WWW_ROOT, '', $folderName.DS.$filename);
+			$avatarUrl = str_ireplace("\\", "/", $avatarUrl);
+			$this->data['User']['avatar'] = DS.$avatarUrl;
+		}
+		return true;
+	}
+
 }
 ?>
