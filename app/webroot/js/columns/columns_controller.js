@@ -17,11 +17,17 @@ jQuery(document).ready(function(){
 		url:'/users/getAll',
 		success: function(data){
 			window.users = data;
-			jQuery('div#users').html('');
+			//jQuery('div#users').html('');
+			var pane = jQuery('div#users');
+			var api = pane.data('jsp');
+			api.getContentPane().html('');
 			jQuery.each(data,function(index, value){
 				var row = _.template(template, value);
-				jQuery('div#users').append(row);
+				api.getContentPane().append(row);
 			});
+			//jQuery('div#users').jScrollPane();
+			
+			api.reinitialise();
 			jQuery('input#filterbox').attr('disabled', false);
 		}
 	});

@@ -777,28 +777,8 @@ function getPopularVideos($category="") {
 }
 
 	function listNews($categoryId=0, $count=7){
-		$conditions = array('Category.id'=>$categoryId);
-		if ($categoryId == 0) {
-			$conditions=array();
-		}
-		/*$this->paginate = array(
-			'limit'	=>	$count,
-			'conditions'	=>	array('News.rating <= 30','News.created >= DATE_SUB(CURDATE(), INTERVAL 120 HOUR)'),	
-			'order'	=>	"News.created desc, rand()",		
-			'contain'	=>	array(
-				'Feed'	=>	array(
-					'Source'	=>	array(
-						'User'	=>	array()
-					),
-					'conditions'	=>	array('Feed.content_type'=>2)
-				),
-				'Category'	=>	array(
-					'conditions'	=> $conditions,
-				)
-			)
-		);*/
-		$data = $this->News->getUsersNews(12);
-		//debug($data);
+
+		$data = $this->News->getUsersNews(12, $categoryId, $count);
 		$this->layout = "ajax";
 		if (!$this->RequestHandler->isAjax()) {
 			$this->autoRender = false;

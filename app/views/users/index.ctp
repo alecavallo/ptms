@@ -1,6 +1,9 @@
 <?php 
 echo $this->Html->css('columns', 'stylesheet', array('inline' => false ));
+echo $this->Html->css('jscrollpane/jquery.jscrollpane', 'stylesheet', array('inline' => false ));
+echo $this->Html->css('jscrollpane/jquery.jscrollpane.lozenge', 'stylesheet', array('inline' => false ));
 echo $this->Html->script(array('tweeter/jquery', 'underscore', 'prototype', 'Marquee', 'columns/columns_controller'),array('inline'=>false, 'once'=>true));
+echo $this->Html->script(array('jscrollpane/jquery.mousewheel.min','jscrollpane/jquery.jscrollpane.min'),array('inline'=>false, 'once'=>true));
 echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inline'=>false, 'once'=>true));
 ?>
 
@@ -25,6 +28,11 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		<?php echo $this->element('templates'.DS.'usrlist_template')?>
 		
 	</div>
+	<script type="text/javascript">
+		jQuery(function(){
+				jQuery('div#users').jScrollPane();
+		});
+	</script>
 	<div id="pending">
 		<?php echo $this->element('news'.DS.'pendings', array('categories'=>$categories))?>
 	</div>

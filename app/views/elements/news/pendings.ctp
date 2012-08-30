@@ -1,6 +1,6 @@
 <?php 
 if (empty($data)) {
-	$data = $this->requestAction(array('controller'=>'news', 'action'=>"listNews"));
+	$data = $this->requestAction('/news/listNews/0/70');
 }
 
 $selected = isset($selected)?$selected:'Todas';
@@ -11,10 +11,10 @@ $selected = isset($selected)?$selected:'Todas';
 	<div id="categoryIndicator" onclick="showHide($('categoryPicker'))"><?php echo $selected;?>▼</div>
 	<div id="categoryPicker" style="display: none;">
 	<?php 
-		echo $this->Ajax->link('Todas',array('controller'=>"news",'action'=>"listNews", 0),array('update'=>"pending"));
+		echo $this->Ajax->link('Todas','/news/listNews/0/70',array('update'=>"pending"));
 		foreach ($categories as $row) {
 			echo $this->Html->para('filter', 
-				$this->Ajax->link($row['Category']['name'],array('controller'=>"news",'action'=>"listNews", $row['Category']['id']),array('update'=>"pending"))
+				$this->Ajax->link($row['Category']['name'],"/news/listNews/{$row['Category']['id']}/70",array('update'=>"pending"))
 			);
 		}
 	?>
@@ -82,4 +82,13 @@ $selected = isset($selected)?$selected:'Todas';
 
 			
 	});
+</script>
+<script type="text/javascript">
+		jQuery(function(){
+				jQuery('div#rows').jScrollPane();
+				setTimeout(function(){
+					jQuery('div#rows').data('jsp').reinitialise();
+				},7000);
+				
+		});
 </script>
