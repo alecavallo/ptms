@@ -38,6 +38,7 @@ jQuery.ajax({
 			<br clear="all"/>
 			<hr noshade="noshade"/>
 		<?php echo $this->Form->end(__(' ', true));?>
+		<?php echo $this->Html->link('Cambiar contraseña', "/users/pwdchange/{$userid}")?>
 	</div>
 	<br clear="all"/>
 	<?php //echo $this->Js->writeBuffer();?>
