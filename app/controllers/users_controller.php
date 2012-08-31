@@ -274,7 +274,7 @@ class UsersController extends AppController {
 					}
 					$avatarUrl = str_ireplace(WWW_ROOT, '', $folderName.DS.$filename);
 					$avatarUrl = str_ireplace("\\", "/", $avatarUrl);
-					$this->data['User']['avatar'] = $avatarUrl;
+					$this->data['User']['avatar'] = "/".$avatarUrl;
 				}else{
 					$this->data['User']['avatar'] = "";
 				}
@@ -303,6 +303,7 @@ class UsersController extends AppController {
 		if ($loggedUser['User']['id'] != $id) {
 			$this->cakeError('404');
 		} 
+		$this->set('userid',$id);
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect(array('action' => 'index'));
@@ -380,6 +381,47 @@ class UsersController extends AppController {
 		}
 		$cities = $this->User->City->find('list');
 		$this->set(compact('cities'));
+	}
+	
+	function pwdchange($id) {
+		$loggedUser = $this->Auth->user();
+		if ($loggedUser['User']['id'] != $id) {
+			$this->cakeError('404');
+		}
+		$this->set('usrid', $id);
+		if (!empty($this->data)) {
+			/*encripto los datos*/
+			$this->data['User']['old_password'] = $this->Auth->password($this->data['User']['old_password']);
+			$this->data['User']['password'] = $this->Auth->password($this->data['User']['password']);
+			$this->data['User']['password_confirm'] = $this->Auth->password($this->data['User']['password_confirm']);
+			
+			if ($this->data['User']['password']) {
+				;
+			}
+			
+			$this->User->recursive = -1;
+			$cnt = $this->User->find('count',array(
+				'conditions'	=>	array('id'=>$id, 'password'=>$this->data['User']['old_password'])	
+			));
+			if($cnt == 1){
+				unset($this->data['User']['old_password']);
+				$this->User->set($this->data);
+				if ($this->User->validates()) {
+					$this->User->id=$id;
+					if($this->User->saveField('password',$this->data['User']['password'])){
+						$this->Session->setFlash('La contraseña ha sido cambiada exitosamente');
+						$this->redirect("/users/edit/{$id}");
+					}else {
+						$this->Session->setFlash('Hubo un error al intentar cambiar la contraseña. Intentelo nuevamente mas tarde');
+					}
+				}else {
+					debug($this->User->invalidFields());
+					$this->Session->setFlash('Los datos no son válidos. Revise los mensajes de error');
+				}
+			}else {
+				$this->Session->setFlash('La contraseña anterior no es correcta');
+			}
+		}
 	}
 
 	function delete($id = null) {
