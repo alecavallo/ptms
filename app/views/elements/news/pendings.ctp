@@ -42,7 +42,7 @@ $selected = isset($selected)?$selected:'Todas';
 				$vote = $this->Html->div('vote_buttons',"");
 			}
 			$date = strtotime($row['News']['created']);
-			date('d/m/y', $date);
+
 			$usrData = $this->Html->div('usrData', "Por ".$row[0]['first_name']." ".$row[0]['last_name']." - ".date('d/m/y', $date));
 			$clear = $this->Html->div('clearFloat',"");
 			$metadata = $this->Html->div('metadata',$usrData.$vote.$clear);
