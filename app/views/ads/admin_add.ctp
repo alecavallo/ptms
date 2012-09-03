@@ -27,7 +27,8 @@ echo $this->Html->script(array('http://ajax.googleapis.com/ajax/libs/prototype/1
 		$options = array(
 			0 => 'Imágen',
 			1 => 'Twitter',
-			2 => 'Facebook'
+			2 => 'Facebook',
+			3 => 'Texto'
 		);
 		echo $this->Form->input('Ad.socialnetwork', array('options'=>$options, 'default'=>0, 'label'=>"Tipo Publicidad", 'empty'=>false, 'title'=>"Especifique si la publicidad proviene de una red social"));
 		//echo $this->Form->input('Ad.twitter', array('type'=>"checkbox", 'label'=>"Publicidad twitter", 'div'=>array('id'=>"twitter")));
@@ -41,6 +42,11 @@ echo $this->Html->script(array('http://ajax.googleapis.com/ajax/libs/prototype/1
 			4	=>	'Banner Central'
 		);
 		echo $this->Form->select('Ad.priority', $options, null, array('empty'=>"Seleccione Posición", 'label'=>"Posición", 'title'=>"Seleccione la posición en la que aparecerá la publicidad"));
+		echo $this->Html->tag('br');
+		echo $this->Html->tag('br');
+		echo $this->Form->input('Ad.url',array('label'=>"URL imagen",'div'=>array('class'=>'textAds')));
+		echo $this->Form->input('Ad.text',array('label'=>"Texto",'type'=>"textarea",'div'=>array('class'=>'textAds')));
+		
         echo $this->Form->submit('Agregar');
         echo $this->Html->tag('br');
 		echo $this->Html->tag('br');
@@ -91,22 +97,71 @@ $this->Js->get('#AdPriority');
 $this->Js->event('change', "var elem = event.element(); if(elem.value == 4){ $('prvImg').setStyle('height:144px; width:1080px;'); } else { $('prvImg').setStyle('height: 124px;width:380px;'); }");
 ?>
 <script type="text/javascript">
+//$$('.textAds').each(Element.hide);
+var selected = $('AdSocialnetwork').value;
+		//console.log(selected);
+		switch(selected){
+		case '0':
+			$('button').show();
+			$('preview').show();
+			$('link').update('Link');
+			$$('.textAds').each(Element.hide);
+			break;
+		case '1':
+			$('button').hide();
+			$('preview').hide();
+			$('link').update('Twitter ID');
+			$$('.textAds').each(Element.hide);
+			break;
+
+		case '2':
+			$('button').hide();
+			$('preview').hide();
+			$('link').update('Facebook ID');
+			$$('.textAds').each(Element.hide);
+			break;
+
+		case '3':
+			$('button').hide();
+			$('preview').hide();
+			$('link').update('Link');
+			$$('.textAds').each(Element.show);
+			break;
+		}
+
 $('AdSocialnetwork').observe('change',
 	function(event){
 		var selected = $('AdSocialnetwork').value;
-		if(selected > 0){
-			$('button').hide();
-			$('preview').hide();
-			if(selected == 1){
-				$('link').update('Twitter ID');
-			}else{
-				$('link').update('Facebook ID');
-			}
-		}else{
+		//console.log(selected);
+		switch(selected){
+		case '0':
 			$('button').show();
 			$('preview').show();
-			$('link').update('Link')
+			$('link').update('Link');
+			$$('.textAds').each(Element.hide);
+			break;
+		case '1':
+			$('button').hide();
+			$('preview').hide();
+			$('link').update('Twitter ID');
+			$$('.textAds').each(Element.hide);
+			break;
+
+		case '2':
+			$('button').hide();
+			$('preview').hide();
+			$('link').update('Facebook ID');
+			$$('.textAds').each(Element.hide);
+			break;
+
+		case '3':
+			$('button').hide();
+			$('preview').hide();
+			$('link').update('Link');
+			$$('.textAds').each(Element.show);
+			break;
 		}
+
 	}
 );
 </script>

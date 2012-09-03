@@ -47,9 +47,11 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 	</div>
 	<div id="newsList">
 		<?php 
+		$votes = $session->read('votes');
+		$votes = !empty($votes)?$votes:array();
 		foreach ($news as $row) {
 			$image = !empty($user['User']['avatar'])?$user['User']['avatar']:"empty.jpg";
-			$image = $this->Html->image($image);
+			$image = $this->Html->image($image, array('class'=>'avatar'));
 			$section = $this->Html->tag('h4', $row['Category']['name'], array('class'=> "section grey"));
 			if(!empty($row['News']['link'])){
 				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), $row['News']['link'], array('target'=>'blank', 'escape'=>false));
@@ -59,7 +61,22 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			$heading = $this->Html->div('heading',$section.$title);
 			
 			$summary = $this->Html->para('summary', $this->Text->truncate($row['News']['summary'], 250, array('ending'=>"...", 'html'=>true, 'exact'=>false)));
-			echo $this->Html->div('newsRows', $image.$heading.$summary);
+			
+			$date = strtotime($row['News']['created']);
+
+			$usrData = $this->Html->div('usrData', "Por ".$user['User']['first_name']." ".$user['User']['last_name']." - ".date('d/m/y', $date));
+			$up = $this->Html->image('OK.png', array("class"=>"vote")); 
+			$down = $this->Html->image('NO.png', array("class"=>"votedown"));
+			
+			if (!in_array($row['News']['id'], $votes)) {
+				$vote = $this->Html->div('vote_buttons',$up.$down);
+			}else {
+				$vote = $this->Html->div('vote_buttons',"");
+			}
+			$clear = $this->Html->div('clearFloat',"");
+			$metadata = $this->Html->div('metadata',$usrData.$vote.$clear);
+			
+			echo $this->Html->div('newsRows', $image.$heading.$summary.$metadata);
 		}
 		?>
 	</div>

@@ -1,6 +1,6 @@
 <?php 
 if (empty($data)) {
-	$data = $this->requestAction(array('controller'=>'news', 'action'=>"listNews"));
+	$data = $this->requestAction('/news/listNews/0/70');
 }
 
 $selected = isset($selected)?$selected:'Todas';
@@ -11,10 +11,10 @@ $selected = isset($selected)?$selected:'Todas';
 	<div id="categoryIndicator" onclick="showHide($('categoryPicker'))"><?php echo $selected;?>▼</div>
 	<div id="categoryPicker" style="display: none;">
 	<?php 
-		echo $this->Ajax->link('Todas',array('controller'=>"news",'action'=>"listNews", 0),array('update'=>"pending"));
+		echo $this->Ajax->link('Todas','/news/listNews/0/70',array('update'=>"pending"));
 		foreach ($categories as $row) {
 			echo $this->Html->para('filter', 
-				$this->Ajax->link($row['Category']['name'],array('controller'=>"news",'action'=>"listNews", $row['Category']['id']),array('update'=>"pending"))
+				$this->Ajax->link($row['Category']['name'],"/news/listNews/{$row['Category']['id']}/70",array('update'=>"pending"))
 			);
 		}
 	?>
@@ -33,16 +33,22 @@ $selected = isset($selected)?$selected:'Todas';
 				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), "/columna/{$row[0]['alias']}/noticia/{$row['News']['id']}-".Inflector::slug($row['News']['title'],"-").".html", array('target'=>'blank', 'escape'=>false));
 			}
 			$summary = $this->Html->para('summary', $this->Text->truncate($row['News']['summary'], 250, array('ending'=>"...", 'html'=>true, 'exact'=>false)));
-			$up = $this->Html->image('OK.png', array("class"=>"vote")); //$this->Ajax->link(, "/visits/incrementaContador/{$row['News']['id']}/2", array('escape'=>false));
-			$down = $this->Html->image('NO.png', array("class"=>"votedown")); //$this->Ajax->link(, "/visits/incrementaContador/{$row['News']['id']}/-1", array('escape'=>false));
+			$up = $this->Html->image('OK.png', array("class"=>"vote")); 
+			$down = $this->Html->image('NO.png', array("class"=>"votedown")); 
 			
 			if (!in_array($row['News']['id'], $votes)) {
 				$vote = $this->Html->div('vote_buttons',$up.$down);
 			}else {
 				$vote = $this->Html->div('vote_buttons',"");
 			}
+			$date = strtotime($row['News']['created']);
+
+			$usrData = $this->Html->div('usrData', "<span itemscope itemtype=\"http://data-vocabulary.org/Person\"> Por <span itemprop=\"name\">".$row[0]['first_name']." ".$row[0]['last_name']."</span></span> - ".date('d/m/y', $date), array('escape'=>false));
+			$clear = $this->Html->div('clearFloat',"");
+			$metadata = $this->Html->div('metadata',$usrData.$vote.$clear);
 			
-			echo $this->Html->div('newsRows', $image.$section.$title.$summary.$vote, array('id'=>$row['News']['id']));
+			
+			echo $this->Html->div('newsRows', $image.$section.$title.$summary.$metadata, array('id'=>$row['News']['id']));
 		}
 		?>
 	</div>
@@ -82,4 +88,13 @@ $selected = isset($selected)?$selected:'Todas';
 
 			
 	});
+</script>
+<script type="text/javascript">
+		jQuery(function(){
+				jQuery('div#rows').jScrollPane();
+				setTimeout(function(){
+					jQuery('div#rows').data('jsp').reinitialise();
+				},7000);
+				
+		});
 </script>

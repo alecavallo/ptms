@@ -56,23 +56,39 @@ var commentsUrl = new Array();
 								echo $this->element("widgets".DS."news_ads", array('ad'=>$row));
 							}else {
 								//debug($row);
-								if ($row['Ad']['socialnetwork']==1) {
-									$aux = $row['Ad'];
-									$aux['image'] = $row['twitter']['image'];
-									$aux['name'] = $row['twitter']['name'];
-									$aux['nickname'] = $row['twitter']['nickname'];
-									$aux['text'] = $row['twitter']['text'];
-									$aux['snType'] = $row['Ad']['socialnetwork'];
-									$aux['link'] = "https://twitter.com/#!/{$row['twitter']['nickname']}";
-								}else {
-									$aux = $row['Ad'];
-									$aux['image'] = $row['facebook']['image'];
-									$aux['name'] = $row['facebook']['name'];
-									$aux['nickname'] = $row['facebook']['nickname'];
-									$aux['text'] = $row['facebook']['text'];
-									$aux['snType'] = $row['Ad']['socialnetwork'];
-									$aux['link'] = !empty($row['facebook']['pubLink'])?$row['facebook']['pubLink']:"http://www.facebook.com/{$aux['nickname']}";
+								switch ($row['Ad']['socialnetwork']) {
+									case 1:
+										$aux = $row['Ad'];
+										$aux['image'] = $row['twitter']['image'];
+										$aux['name'] = $row['twitter']['name'];
+										$aux['nickname'] = $row['twitter']['nickname'];
+										$aux['text'] = $row['twitter']['text'];
+										$aux['snType'] = $row['Ad']['socialnetwork'];
+										$aux['link'] = "https://twitter.com/#!/{$row['twitter']['nickname']}";
+									break;
+									
+									case 3:
+										//debug($row['Ad']);
+										$aux = $row['Ad'];
+										$aux['image'] = $row['Ad']['url'];  
+										$aux['name'] = $row['Ad']['name'];
+										$aux['nickname'] = "";
+										$aux['text'] = $row['Ad']['text'];
+										$aux['snType'] = $row['Ad']['socialnetwork'];
+										$aux['link'] = $row['Ad']['link'];
+									break;
+									
+									case 2:
+										$aux = $row['Ad'];
+										$aux['image'] = $row['facebook']['image'];
+										$aux['name'] = $row['facebook']['name'];
+										$aux['nickname'] = $row['facebook']['nickname'];
+										$aux['text'] = $row['facebook']['text'];
+										$aux['snType'] = $row['Ad']['socialnetwork'];
+										$aux['link'] = !empty($row['facebook']['pubLink'])?$row['facebook']['pubLink']:"http://www.facebook.com/{$aux['nickname']}";;
+									break;
 								}
+								
 								echo $this->element("widgets".DS."twtr_ads", array('ad'=>$aux));
 							}
 							
