@@ -19,20 +19,21 @@
 		}
 	?>
 	<div class="usrRow">
+		<article itemscope itemtype="http://data-vocabulary.org/Person">
 		<div class="uAvatar"><?php echo $this->Html->image(!empty($user['User']['avatar'])?$user['User']['avatar']:"empty.jpg",array('alt'=>$user['User']['alias']))?></div>
-		<!-- <div class="section grey"><span class="name"><?php echo "{$user['User']['first_name']} {$user['User']['last_name']}"; ?></span>&nbsp;-&nbsp;<span class="nick"><?php echo $user['User']['alias']?></span></div> -->
 		<div class="section grey">
 			<?php 
-				$name = $this->Html->tag('span', "{$user['User']['first_name']} {$user['User']['last_name']}", array('class'=>"name"));
-				$nick = $this->Html->tag('span', $user['User']['alias'], array('class'=>"nick"));
+				$name = $this->Html->tag('span', "{$user['User']['first_name']} {$user['User']['last_name']}", array('class'=>"name", 'itemprop'=>"name"));
+				$nick = $this->Html->tag('span', $user['User']['alias'], array('class'=>"nick", 'itemprop'=>"nickname"));
 				if(!empty($user['User']['alias'])){//si el nick no es vacío, mostrar guion
 					echo $this->Html->link($name." - ".$nick, "/columna/".$user['User']['alias'].".html", array('escape'=>false));
 				}else {
-					echo $this->Html->link($name, "/columna/".$user['User']['alias'].".html", array('escape'=>false));
+					echo $this->Html->link($name, "/columna/".$user['User']['alias'].".html", array('escape'=>false, 'itemprop'=>"nickname"));
 				}
 			?>
 		</div>
 		<div class="desc"><?php echo $user['User']['description'];?>&nbsp;</div>
+		</article>
 	</div>
 	<?php endforeach; ?>
 	<div>

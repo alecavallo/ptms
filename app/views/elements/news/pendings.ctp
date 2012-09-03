@@ -33,8 +33,8 @@ $selected = isset($selected)?$selected:'Todas';
 				$title = $this->Html->link($this->Html->tag('h3', $row['News']['title']), "/columna/{$row[0]['alias']}/noticia/{$row['News']['id']}-".Inflector::slug($row['News']['title'],"-").".html", array('target'=>'blank', 'escape'=>false));
 			}
 			$summary = $this->Html->para('summary', $this->Text->truncate($row['News']['summary'], 250, array('ending'=>"...", 'html'=>true, 'exact'=>false)));
-			$up = $this->Html->image('OK.png', array("class"=>"vote")); //$this->Ajax->link(, "/visits/incrementaContador/{$row['News']['id']}/2", array('escape'=>false));
-			$down = $this->Html->image('NO.png', array("class"=>"votedown")); //$this->Ajax->link(, "/visits/incrementaContador/{$row['News']['id']}/-1", array('escape'=>false));
+			$up = $this->Html->image('OK.png', array("class"=>"vote")); 
+			$down = $this->Html->image('NO.png', array("class"=>"votedown")); 
 			
 			if (!in_array($row['News']['id'], $votes)) {
 				$vote = $this->Html->div('vote_buttons',$up.$down);
@@ -43,7 +43,7 @@ $selected = isset($selected)?$selected:'Todas';
 			}
 			$date = strtotime($row['News']['created']);
 
-			$usrData = $this->Html->div('usrData', "Por ".$row[0]['first_name']." ".$row[0]['last_name']." - ".date('d/m/y', $date));
+			$usrData = $this->Html->div('usrData', "<span itemscope itemtype=\"http://data-vocabulary.org/Person\"> Por <span itemprop=\"name\">".$row[0]['first_name']." ".$row[0]['last_name']."</span></span> - ".date('d/m/y', $date), array('escape'=>false));
 			$clear = $this->Html->div('clearFloat',"");
 			$metadata = $this->Html->div('metadata',$usrData.$vote.$clear);
 			
