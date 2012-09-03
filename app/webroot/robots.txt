@@ -5,4 +5,7 @@ Disallow: /visits/incrementaContador
 Disallow: /ads/click
 Disallow: /news/getPopularVideos
 Disallow: /medias/index
+Disallow: /1
+Disallow: /-1
+Disallow: /cities/getAll
 Sitemap: http://www.posteamos.com/sitemap.xml
