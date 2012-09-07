@@ -290,7 +290,11 @@ class AdsController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Ad->save($this->data)) {
+			$this->Ad->read($id);
+			$this->Ad->set($this->data);
+			$this->Ad->id=$id;
+
+			if ($this->Ad->save()) {
 				$this->Session->setFlash(__('La publicidad se ha guardado correctamente', true));
 				$this->redirect(array('action' => 'index'));
 			} else {

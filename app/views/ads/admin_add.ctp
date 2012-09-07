@@ -44,7 +44,8 @@ echo $this->Html->script(array('http://ajax.googleapis.com/ajax/libs/prototype/1
 		echo $this->Form->select('Ad.priority', $options, null, array('empty'=>"Seleccione Posición", 'label'=>"Posición", 'title'=>"Seleccione la posición en la que aparecerá la publicidad"));
 		echo $this->Html->tag('br');
 		echo $this->Html->tag('br');
-		echo $this->Form->input('Ad.url',array('label'=>"URL imagen",'div'=>array('class'=>'textAds')));
+		echo $this->Form->input('Ad.url',array('label'=>"Avatar",'div'=>array('class'=>'textAds')));
+		echo $this->Form->input('Ad.url_img',array('label'=>"Imagen",'div'=>array('class'=>'textAds')));
 		echo $this->Form->input('Ad.text',array('label'=>"Texto",'type'=>"textarea",'div'=>array('class'=>'textAds')));
 		
         echo $this->Form->submit('Agregar');

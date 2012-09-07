@@ -1392,6 +1392,11 @@ div.tNews .tContent, div.twitterNews .tContent{
 	margin-right: 10px;
 	float:left;
 }
+.tNews div.photo img{
+	max-width: 50px;
+	max-height: 50px;
+}
+
 div.tNews div.summary{
 	display: block;
 	float: left;
