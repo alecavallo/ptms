@@ -14,7 +14,7 @@
 		<h3><?php echo $html->link($ad['name'],$ad['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"new Ajax.Request('/ads/click/{$ad['id']}'); return true;"));?></h3>
 		<div class="photo">
 			<?php 
-				if (array_key_exists('photo', $ad)) {
+				if (array_key_exists('photo', $ad) && !empty($ad['photo'])) {
 					echo $html->image($ad['photo'], array('alt'=>$ad['name']));
 				}
 			?>

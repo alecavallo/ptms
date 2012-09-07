@@ -98,6 +98,35 @@ $this->Js->get('#AdPriority');
 $this->Js->event('change', "var elem = event.element(); if(elem.value == 4){ $('prvImg').setStyle('height:144px; width:1080px;'); } else { $('prvImg').setStyle('height: 124px;width:380px;'); }");
 ?>
 <script type="text/javascript">
+	$('AdText').observe('keypress',function(e){
+		if($('AdText').value.length >= 148){
+			if(e.keyCode != Event.KEY_BACKSPACE || e.keyCode != Event.KEY_TAB || e.keyCode != Event.KEY_ESC || e.keyCode != Event.KEY_LEFT ||
+				e.keyCode != Event.KEY_UP || e.keyCode != Event.KEY_RIGHT || e.keyCode != Event.KEY_DOWN || e.keyCode != Event.KEY_DELETE || 
+				e.keyCode != Event.KEY_HOME || e.keyCode != Event.KEY_END || e.keyCode != Event.KEY_PAGEUP || e.keyCode != Event.KEY_PAGEDOWN ||
+				e.keyCode != Event.KEY_INSERT){
+				
+					alert('No se pueden introducir mas de 148 caracteres!');
+					Event.stop(e);
+					return false;
+			}else{
+				return true;
+			}
+			
+		}
+	});
+	$('AdText').observe('blur',function(e){
+		if($('AdText').value.length >= 148){
+					alert('No se pueden introducir mas de 148 caracteres!');
+					Event.stop(e);
+					$('AdText').focus();
+					return false;
+		}else{
+			return true;
+		}
+			
+	});
+</script>
+<script type="text/javascript">
 //$$('.textAds').each(Element.hide);
 var selected = $('AdSocialnetwork').value;
 		//console.log(selected);
