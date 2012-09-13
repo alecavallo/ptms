@@ -408,5 +408,49 @@ QRY;
 		}
 		return $result;
 	}
+	
+	function getRelated($newsId, $categoryId, $datetime, $title, $fulltext, $minRelevance=6, $contentType=0){
+		if (!is_int($newsId) || !is_int($categoryId) || !is_numeric($minRelevance)) {
+			//return false;
+		}
+		$title = mysql_real_escape_string($title);
+		$fulltext = mysql_real_escape_string($fulltext);
+		if ($contentType==0){
+		$sql = <<<QRY
+select Source.name, Source.icon, news.created, match(news.title) against("{$title}") as relevancia_titulo, match(news.title, news.summary) against("{$fulltext}") as relevancia_total, news.id, news.title, news.summary
+from news
+inner join feeds on feeds.id = news.feed_id
+inner join sources Source on Source.id = feeds.source_id
+where
+news.created >= '{$datetime}' and news.category_id={$categoryId} and match(news.title, news.summary) against("{$fulltext}") > {$minRelevance} and News.id <> {$newsId}
+order by news.created desc, relevancia_total desc, relevancia_titulo desc
+limit 7;
+QRY;
+		}else {
+		$contentType = is_int($contentType)?$contentType:1;
+		$sql = <<<QRY
+select Source.name, Source.icon, news.created, match(news.title) against("{$title}") as relevancia_titulo, match(news.title, news.summary) against("{$fulltext}") as relevancia_total, news.id, news.title, news.summary
+from news
+inner join feeds on feeds.id = news.feed_id
+inner join sources Source on Source.id = feeds.source_id
+where
+news.created >= '{$datetime}' and news.category_id={$categoryId} and match(news.title, news.summary) against("{$fulltext}") > {$minRelevance} and News.id <> {$newsId}
+and feeds.content_type={$contentType}
+order by news.created desc, relevancia_total desc, relevancia_titulo desc
+limit 7;
+QRY;
+		}
+		$related = $this->query($sql);
+		if (!empty($related)) {
+			foreach ($related as $key=>$value) {
+				$related[$key]['relevancia_titulo']=$related[$key][0]['relevancia_titulo'];
+				$related[$key]['relevancia_total']=$related[$key][0]['relevancia_total'];
+				unset($related[$key][0]);
+			}
+			
+			
+		}
+		return $related;
+	}
 }
 ?>

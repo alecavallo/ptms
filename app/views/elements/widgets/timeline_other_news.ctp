@@ -17,7 +17,7 @@
 				echo $usr."<span style='font-weight: 400'>{$news['Category']['name']}</span>";
 			?>
 		</h4>
-		<h3><?php echo $html->link($text->truncate(__($news['title'], true),60, array('ending'=>'...', 'exact'=>false, 'html'=>true)),$news['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"new Ajax.Request('/visits/incrementaContador/{$news['id']}'); return true;"));?></h3>
+		<h3><?php echo $html->link($text->truncate(__($news['title'], true),60, array('ending'=>'...', 'exact'=>false, 'html'=>true)),$news['link'], array('escape'=>false, 'target'=>"_self", 'onclick'=>"new Ajax.Request('/visits/incrementaContador/{$news['id']}'); return true;"));?></h3>
 		<?php echo $this->Form->hidden('title',array('id'=>"title".$news['id'], 'value'=>$news['title']));?>
 		</header>
 		<!-- <div class="photo">

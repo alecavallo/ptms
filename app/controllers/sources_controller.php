@@ -188,5 +188,8 @@ class SourcesController extends AppController {
 
 	}
 
+	function view($name) {
+		;
+	}
 }
 ?>

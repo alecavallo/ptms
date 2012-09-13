@@ -29,7 +29,7 @@ $audioPagOptions = array(
 	<div id="fotos" class="content" style="overflow:hidden">
 		<div class="imgListContainer" id="imgListContainer">
 			<?php
-				echo $html->image(!empty($images)?$images[0]['Media']['url']:"empty.jpg",array('alt'=>$news['News']['title'], 'class'=>"fittedImg", 'style'=>"text-decoration:none; border-width:0px; position:relative; top: -45px;"));
+				echo $html->image(!empty($images)?$images[0]['Media']['url']:"empty.jpg",array('alt'=>$news['News']['title'], 'class'=>"fittedImg", 'style'=>"text-decoration:none; border-width:0px; position:relative;max-height: 247px;max-width: 318px;"));
 			?>
 		</div>
 	</div>

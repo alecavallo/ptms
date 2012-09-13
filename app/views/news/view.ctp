@@ -1,8 +1,9 @@
 <?php
-	echo $this->Html->script('prototype',array('inline'=>false));
+	echo $this->Html->script(array('prototype','Marquee'),array('inline'=>false));
+	echo $this->Html->script(array('tweeter/jquery'),array('inline'=>false, 'once'=>true));
 	echo $this->Html->script('scriptaculous',array('inline'=>false));
 	echo $this->Html->script('common',array('inline'=>false, 'once'=>true));
-	echo $this->Html->css('idb-posteamos');
+	echo $this->Html->css(array('idb-posteamos', 'relatedNews'));
 	//$js->buffer($facebookInit);
 	//$js->writeBuffer(array('inline'=>true, 'safe'=>true));
 
@@ -80,7 +81,7 @@
           break;
        }
     $ano = date("Y",$fecha); // optenemos el año en formato 4 digitos
-    $hora = date("H:i:s", $fecha);
+    //$hora = date("H:i:s", $fecha);
     $fecha = $diasemana.", ".$dia." de ".$mes." de ".$ano;
 
     $date = $fecha;
@@ -107,6 +108,8 @@ if (isset($preview) && $preview == true) {
 <?php
 }
 ?>
+<input type="hidden" id="newsId" value="<?php echo $news['News']['id'];?>" />
+<input type="hidden" id="categoryId" value="<?php echo $news['Category']['id'];?>" />
 <div id="content">
 	<?php //echo $this->element("news".DS."category_selector",array('selected'=>array_key_exists(0, $news['Category'])?$news['Category'][0]['id']:$news['Category']['id'],'newsId'=>$news['News']['id']))?>
 	<h4 class="section grey">
@@ -128,19 +131,25 @@ if (isset($preview) && $preview == true) {
 			<div class="newsData">
 				<?php 
 					if (empty($news['User']['posteamos_alias']) && empty($news['User']['alias'])) {
-						$usr = 'RSS';
+						$usr = $news['Feed']['Source']['name'];
 					}elseif (!empty($news['User']['posteamos_alias'])){
 						$usr = $news['User']['posteamos_alias'];
 					}else{
 						$user = empty($news['User']['alias']);
 					}
 				?>
-				<span class="date" itemscope itemtype="http://schema.org/Person"> Por <span itemprop="name"><?php echo $usr?></span> | <span><?php echo $date ?></span> | <span><?php echo $hora ?></span> Hs</span>
+				<span class="date" itemscope itemtype="http://schema.org/Person"> Por <span itemprop="name"><?php echo $usr?></span> | <span><?php echo $date ?>
 			</div>
 			<div class="copete">
 				<?php echo $news['News']['summary']?>
 			</div>
-			<?php $multimedia=null; echo $this->element("widgets".DS."multimedia", array('multimedia'=>$multimedia, 'newsId'=>$news['News']['id']));?>
+			<?php 
+			$multimedia=null; 
+			if (!empty($images) && !empty($images[0]['Media']['url'])) {
+				echo $this->element("widgets".DS."multimedia", array('multimedia'=>$multimedia, 'newsId'=>$news['News']['id']));
+			}
+			
+			?>
 			<script type="text/javascript">
 				(function() {
 					var img = $$('img.fittedImg');
@@ -153,10 +162,12 @@ if (isset($preview) && $preview == true) {
 					};
 				}());
 			</script>
+			<p id="body">
 			<?php echo (html_entity_decode($news['News']['body']))?>
+			</p>
 			<?php
 				if (array_key_exists('Feed', $news) && array_key_exists('Source', $news['Feed'])) {
-					echo $html->link("ver nota completa en <b>{$news['Feed']['Source']['name']}</b>...",$news['News']['link'], array('id'=>"n".$news['News']['id'], 'escape'=>false, 'class'=>"green right", 'style'=>"font-size: 12px;", 'target'=>"_blank"));
+					echo $html->link("ver nota completa en <b>{$news['Feed']['Source']['name']}</b>...",$news['News']['link'], array('id'=>"n".$news['News']['id'], 'escape'=>false, 'class'=>"green right", 'style'=>"font-size: 12px;", 'target'=>"_blank", 'rel'=>"nofollow"));
 				}
 
 				?>
@@ -181,7 +192,25 @@ if (isset($preview) && $preview == true) {
 				</div>
 			</div>
 			<div id="comments">
-				
+				<?php 
+					if (!empty($related)) {
+						echo "<h2 id=\"other-news-title\">Así lo dicen otras fuentes:</h2>";
+						foreach ($related as $row) {
+							$par = array(
+								'image'=> "/img/".$row['Source']['icon'],
+								'title'	=> $row['news']['title'],
+								'summary'	=> $row['news']['summary'],
+								'link'	=>	strtolower("/medios/".Inflector::slug($row['Source']['name'],"-")."/noticia/".$row['news']['id']."-".Inflector::slug($row['news']['title'],"-").".html"),
+								'titleRating'	=> $row['relevancia_titulo'],
+								'generalRating'	=> $row['relevancia_total'],
+							);
+							echo $this->element('news'.DS."related_news", array('params'=> $par));
+						}
+					}
+					
+				?>
+				<div id="other-news">
+				</div>
 			</div>
 	</div>
 
@@ -253,6 +282,10 @@ if (isset($preview) && $preview == true) {
 				</script>
 				<script type="text/javascript" src="http://www.intensedebate.com/js/genericLinkWrapperV2.js"></script>
  	</div>
+ 	<script type="text/javascript">
+ 		setTimeout("jQuery('div.clearFloat > a')[0].click();", 3700);
+ 	</script>
+ 	<div class="clearFloat"></div>
  	<?php
 		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
 	?>

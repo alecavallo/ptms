@@ -1913,3 +1913,10 @@ div#colRight div.adContainer{
 	/*background-color: rgb(250,250,250);*/
 	background-color: white;
 }
+div#imgListContainer{
+	height: 247px;
+	width:318px;
+	position: relative;
+	vertical-align: middle;
+	display: table-cell;
+}

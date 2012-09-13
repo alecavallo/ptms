@@ -43,6 +43,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 							$aux['Source'] = $row['Feed']['Source'];
 							$aux['Feed'] = $row['Feed'];
 							$aux['Category'] = $row['Category'];
+							$aux['link'] = strtolower("/medios/".Inflector::slug($row['Feed']['Source']['name'],"-")."/noticia/{$row['News']['id']}-".Inflector::slug($row['News']['title'],"-").".html");
 							echo $this->element("widgets".DS."timeline_other_news", array('news'=>$aux));
 						}elseif (array_key_exists('Ad', $row)){
 							if ($row['Ad']['socialnetwork']==0) {

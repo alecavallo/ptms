@@ -111,3 +111,19 @@
 			'alias'	=>	"[a-zA-z0-9]+"
 		)
 	);
+	Router::connect('/medios/:alias/noticia/:id-:titulo',
+		array('controller'=>"News", 'action'=>'view'),
+		array(
+			'pass'	=>	array('id','titulo'),
+			'id'	=>	"[0-9]+",
+			'titulo'	=>	"[a-zA-z0-9\-\_|á|é|í|ó|ú|ñ]+",
+			//'alias'	=>	"[a-zA-z0-9\-\_]+"
+		)
+	);
+	Router::connect('/medios/:alias',
+		array('controller'=>"Sources", 'action'=>'view'),
+		array(
+			'pass'	=>	array('alias'),
+			'alias'	=>	"[a-zA-z0-9]+"
+		)
+	);

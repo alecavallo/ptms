@@ -873,6 +873,27 @@ function search(){
 		}
 		return json_encode(true);
    }
+   
+   function getRelated($newsId){
+   		$this->autoRender=false;
+		$this->layout='ajax';
+   		//return json_encode($this->params);
+		if ($this->RequestHandler->isAjax()) {
+			header('Content-type: application/json');
+			$minRelevance = 25;
+			$datetime = date("Y-m-d H:i:s", strtotime("-2 day"));
+			$related = $this->News->getRelated($newsId, $this->params['form']['category'], $datetime, $this->params['form']['title'], $this->params['form']['fulltext'], $minRelevance);
+			if(empty($related)){
+				return json_encode($this->params['form']);
+			}
+			return json_encode($related);
+			
+		}elseif(!empty($this->params['requested']) && $this->params['requested']==1){
+			$this->autoRender=false;
+			return $related;
+		}
+		
+   }
 
 	/*DEPRECATED*/
 
@@ -964,7 +985,7 @@ function search(){
 		}
 	}
 
-	function view($id = null) {
+	function view($id = null, $title="") {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid news', true));
 			$this->redirect(array('action' => 'index'));
@@ -1015,10 +1036,12 @@ function search(){
 			}else{
 				$this->params['paging'] = $pag['paginatorData'];
 			}
+			
+			/*se setean los datos para las noticias relacionadas*/
+			$datetime = date("Y-m-d", strtotime("-2 day"));
+			$related = $this->News->getRelated($noticia['News']['id'], $noticia['Category']['id'], $datetime, $noticia['News']['title'], $noticia['News']['title']." ".$noticia['News']['summary']." ".$noticia['News']['body'], 25,1);
+			$this->set('related',$related);
 
-
-			//debug($pag['paginatorData']);
-			//debug($this->params['paging']);
 			$this->set("title_for_layout",$noticia['News']['title']);
 			$this->set('category', $categoria);
 			$this->set('usr', $usuario);
@@ -1029,7 +1052,7 @@ function search(){
 		}
 	}
 
-	function getRelated($id, $count = 4) {
+	function getRelatedd($id, $count = 4) {
 
 		$idRelatedNew = $this->News->field('related_news_id', 'News.id = '.$id,'id');
 		$noticias =	$this->News->RelatedNews->find('all', array('conditions' => array('RelatedNews.id'=> $idRelatedNew),
