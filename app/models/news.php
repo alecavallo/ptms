@@ -434,7 +434,7 @@ from news
 inner join feeds on feeds.id = news.feed_id
 inner join sources Source on Source.id = feeds.source_id
 where
-news.created >= '{$datetime}' and news.category_id={$categoryId} and match(news.title, news.summary) against("{$fulltext}") > {$minRelevance} and News.id <> {$newsId}
+news.created >= '{$datetime}' and news.category_id={$categoryId} and match(news.title, news.summary) against("{$fulltext}") > {$minRelevance} and news.id <> {$newsId}
 and feeds.content_type={$contentType}
 order by news.created desc, relevancia_total desc, relevancia_titulo desc
 limit 7;
