@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+div#comments h2#other-news-title{
+	margin-bottom: 10px;
+	display: none;
+}
+div#comments div.relNews{
+	margin-bottom: 25px;
+}
+div#comments div.relNews div.photo{
+	max-height:45px;
+	max-width:45px;
+	float:left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+div#comments div.relNews div.photo img{
+	max-height:45px;
+	max-width:45px;
+}
