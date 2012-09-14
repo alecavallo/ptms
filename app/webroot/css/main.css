@@ -1920,3 +1920,31 @@ div#imgListContainer{
 	vertical-align: middle;
 	display: table-cell;
 }
+
+/**Loggedin user**/
+div#user{
+	padding: 3px 10px 3px 1px;
+	margin-top: 5px;
+	margin-left: 15px;
+	float: left;
+	height: 22px;
+	/*background-color: red;*/
+	overflow-y: hidden;
+}
+div#user:HOVER{
+	background-color: #EEEEEE;
+}
+div#user span#u-avatar{
+	height: 22px;
+}
+div#user span#u-avatar img{
+	max-height: 22px;
+	max-width: 32px;
+	margin-right: 3px;
+}
+div#user span#u-data{
+	position: relative;
+	top: -6px;
+	font-weight: bold;
+	font-size: 10px;
+}

@@ -72,6 +72,10 @@ class AppController extends Controller {
 		//debug($cliLocation);
 	}
 
+	function beforeRender(){
+		$user = $this->Auth->user();
+		$this->set('user',$user);
+	}
 
 	function isAuthorized() {
 		return $this->Auth->user('id');

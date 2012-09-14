@@ -91,7 +91,9 @@ function shake(element){
 }
 document.observe("dom:loaded", function (event) {SDEffect($("searchPopup"));});
 </script>
-
+	<div id="user">
+		<?php echo $this->element('users/loggedin', array('user'=>$user))?>
+	</div>
 	<div id="snetworks">
 		<div>
 			<!-- Place this tag where you want the +1 button to render. -->
