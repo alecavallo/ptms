@@ -5,7 +5,9 @@ div#menu{
 }
 #menu ul{
 padding:0px;
-margin-left: 58px;
+width: 1024px;
+margin-left: auto;
+margin-right: auto;
 }
 #menu li a{
 display:block;

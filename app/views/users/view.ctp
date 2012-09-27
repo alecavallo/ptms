@@ -1,6 +1,9 @@
 <?php 
 echo $this->Html->css('columns', 'stylesheet', array('inline' => false ));
-echo $this->Html->script(array('prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
+echo $this->Html->css('jscrollpane/jquery.jscrollpane', 'stylesheet', array('inline' => false ));
+echo $this->Html->css('jscrollpane/jquery.jscrollpane.lozenge', 'stylesheet', array('inline' => false ));
+echo $this->Html->script(array('tweeter/jquery', 'underscore', 'prototype', 'Marquee', 'columns/columns_controller'),array('inline'=>false, 'once'=>true));
+echo $this->Html->script(array('jscrollpane/jquery.mousewheel.min','jscrollpane/jquery.jscrollpane.min'),array('inline'=>false, 'once'=>true));
 echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inline'=>false, 'once'=>true));
 ?>
 <div id="content">
@@ -45,6 +48,11 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 		<?php }?>
 	
 	</div>
+	<script type="text/javascript">
+		jQuery(function(){
+				jQuery('div#newsList').jScrollPane();
+		});
+	</script>
 	<div id="newsList">
 		<?php 
 		$votes = $session->read('votes');
@@ -76,10 +84,11 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 			$clear = $this->Html->div('clearFloat',"");
 			$metadata = $this->Html->div('metadata',$usrData.$vote.$clear);
 			
-			echo $this->Html->div('newsRows', $image.$heading.$summary.$metadata);
+			echo $this->Html->div('newsRows', $heading.$image.$summary.$metadata);
 		}
 		?>
 	</div>
+	
 	<div id="usrDesc">
 		<?php 
 			echo $this->Html->image($user['User']['avatar']);

@@ -124,7 +124,7 @@ function Twitter(){
 	};
 	
 	var renderHomeFeed = function(data){
-		var tweetsPerColumn=12;
+		var tweetsPerColumn=13;
 		sinceId = data[1];
 		var tweets = data[0];
 		//var container = jQuery('#tweets');

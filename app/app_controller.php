@@ -74,7 +74,7 @@ class AppController extends Controller {
 
 	function beforeRender(){
 		$user = $this->Auth->user();
-		$this->set('user',$user);
+		$this->set('loggedUser',$user);
 	}
 
 	function isAuthorized() {

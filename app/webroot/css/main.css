@@ -288,9 +288,8 @@ background-color:#F7FFEE;
 	z-index: 3;
 }
 
-
 #container {
-	width:97%;
+	width:1024px;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top: 10px;
@@ -364,7 +363,7 @@ hr.black20{
 	position:relative;
 	float:left;
 	clear:left;
-	width:63%;
+	width:800px;
 	margin-right: 2%;
 }
 #NewscolLeft ul{
@@ -374,7 +373,7 @@ hr.black20{
 margin-top: 15px;
 position:relative;
 float:right;
-width:30%;
+width:180px;
 /*background-color:#FF0000;*/
 min-height: 200px;
 }
@@ -406,7 +405,7 @@ overflow: hidden;
 	/*border-color: blue;
 	border-style: solid;
 	border-width: 1px;*/
-	height: 810px;
+	height: 1022px;
 	margin-bottom: 10px;
 	clear: right;
 }
@@ -1107,7 +1106,6 @@ img.pplNewsImage{
 	position: relative;
 	padding: 5px 5%;
 	min-height: 242px;
-	width: 100%;
 }
 div#adsContainer{
 	clear:both;
@@ -1322,8 +1320,7 @@ div#audios{
 	float:left;
 }
 div.tNews{
-	min-height: 96px;
-	max-height: 96px;
+	height: 115px;
 	/*max-height: 125px;*/
 	overflow: hidden;
 	clear: both;
@@ -1347,7 +1344,7 @@ div.news.collapsed:hover {
     min-height: 110px;
 	margin-top: 19px;
 	left: 0px;
-	margin-bottom: -15px;
+	margin-bottom: -1px;
 }
 .news.expanded{
 	padding: 5px;
@@ -1915,10 +1912,10 @@ div#colRight div.adContainer{
 }
 div#imgListContainer{
 	height: 247px;
-	width:318px;
+	width:99%;
 	position: relative;
 	vertical-align: middle;
-	display: table-cell;
+	/*display: table-cell;*/
 }
 
 /**Loggedin user**/

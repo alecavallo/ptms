@@ -12,7 +12,7 @@ var tWidget = new TWTR.Widget({
 	  interval: 30000,
 	  title: "Temas del momento",
 	  subject: '',
-	  width: 334,
+	  width: 261,
 	  height: 218,
 	  theme: {
 	    shell: {

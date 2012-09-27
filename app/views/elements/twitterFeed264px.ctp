@@ -12,8 +12,8 @@ var widget = new TWTR.Widget({
   interval: 6000,
   title: '{$title}',
   subject: '{$subtitle}',
-  width: 264,
-  height: 350,
+  width: 261,
+  height: 450,
   theme: {
     shell: {
       background: '#8ac33f',

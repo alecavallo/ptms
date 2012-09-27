@@ -87,7 +87,7 @@ $float = empty($float)?'left':$float;
 			Este div va a mostrar los parametros de configuracion de cada widget.
 
 		</div>
-		<div id="busy-indicator" style="display:none; position: relative; top: -366px; z-index: 100; background-color: white; height: 195px; opacity:0.7; padding-top: 105px; padding-left: 45%;">
+		<div id="busy-indicator" style="display:none; position: relative; top: -327px; z-index: 100; background-color: white; height: 189px; opacity:0.7; padding-top: 105px; padding-left: 45%;">
 				<?php echo $this->Html->image('loading.gif', array('id' => 'busy-indicator', 'style'=>"display: block; float: left; position: relative; margin-top:15px")); ?>
 		</div>
 	</div>
