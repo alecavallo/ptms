@@ -239,32 +239,10 @@ if (isset($preview) && $preview == true) {
 		?>
 		<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-6965617047977932";
-		/* Anuncio columnas y pendientes 1 */
-		google_ad_slot = "2925543696";
-		google_ad_width = 300;
-		google_ad_height = 250;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-6965617047977932";
-		/* Anuncio columnas y pendientes 2a */
-		google_ad_slot = "3802193888";
-		google_ad_width = 300;
-		google_ad_height = 250;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-6965617047977932";
-		/* Anuncio columnas y pendientes 3 */
-		google_ad_slot = "1111764142";
-		google_ad_width = 300;
-		google_ad_height = 250;
+		/* Banner Largo Vertical */
+		google_ad_slot = "0183084197";
+		google_ad_width = 160;
+		google_ad_height = 600;
 		//-->
 		</script>
 		<script type="text/javascript"
