@@ -4,7 +4,7 @@
 <head>
 <?php echo $this->Html->charset('utf-8'); ?>
 <title>
-<?php __("Posteamos.com :: {$title_for_layout}")?>
+<?php __("{$title_for_layout}")?>
 </title>
 
 <!-- <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
@@ -25,11 +25,14 @@ echo $scripts_for_layout;
 
 ?>
 <?php 
+	if(empty($nofollow) || $nofollow=false){
+		echo '<meta name="robots" content="index, follow"/>';
+	}
 	if(empty($meta) || !array_key_exists('description', $meta)){
 		//echo $this->Html->meta('description', "Un sitio de noticias interactivo y participativo");
 		echo '<meta name="description" content="Posteamos.com, un sitio de noticias interactivo y participativo donde encontraras noticias publicadas a traves de medios, blogs y twitter" />';
 	}else {
-		echo $this->Html->meta('description', $meta['description']);
+		echo $this->Html->meta('description', $text->truncate($meta['description'], 160, array(ending=>"", 'exact'=>true, 'html'=>true)));
 	}
 ?>
 <?php 

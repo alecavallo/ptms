@@ -1043,6 +1043,8 @@ function search(){
 			$this->set('related',$related);
 
 			$this->set("title_for_layout",$noticia['News']['title']);
+			$aux['description'] = $noticia['News']['summary'];
+			$this->set("meta",$aux);
 			$this->set('category', $categoria);
 			$this->set('usr', $usuario);
 			$this->set('nVisits', $visitas);
