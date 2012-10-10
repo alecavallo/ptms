@@ -61,7 +61,7 @@ class media extends AppModel {
 			$category_condition="";
 		}else {
 			$category_id = Sanitize::clean($category_id);
-			$category_condition = "and news.category_id={$category_id}";
+			$category_condition = "and News.category_id={$category_id}";
 		}
 		if ($count!=0) {
 			
