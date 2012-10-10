@@ -27,7 +27,6 @@ class YoutubeFavorite extends AppModel {
 			if (array_key_exists('category',$conditions) && !empty($conditions['category'])) {
 				Configure::write('debug',2);
 				
-				//$results = $HttpSocket->get($url,"q={$conditions['country']}&v=2&category={$conditions['category']}&orderby=relevance&time=this_week");
 				$yParams = array(
 					'q'	=>	$conditions['country'],
 					'v'	=>	2,
@@ -155,6 +154,81 @@ class YoutubeFavorite extends AppModel {
 				die($status['status']['reason-phrase']);
 			}
 		}
+
+	}
+	
+	function getVideos($conditions = array()) {
+
+		if (array_key_exists('category',$conditions) && !empty($conditions['category'])) {
+			$conditions = array_merge(array('country'=>"argentina",'time'=>"this_week",'type'=>"category"), $conditions);
+			$url = "http://gdata.youtube.com/feeds/api/videos";
+		}else {
+			$defaults = array('country'=>"AR", 'type'=>'most_popular', 'time'=>'today', 'category'=>"");
+			$conditions = array_merge($conditions, $defaults);
+			$url="http://gdata.youtube.com/feeds/api/standardfeeds/{$conditions['country']}/{$conditions['type']}";
+		}
+		
+		$categorySlug = md5($conditions['country'].$conditions['type'].$conditions['time'].str_ireplace(" & ", "%7C",$conditions['category']));
+
+		if (($aux = Cache::read ( "youtube_list_{$categorySlug}", 'long' )) === false ) {
+			
+			App::import('Core', 'HttpSocket');
+			$HttpSocket = new HttpSocket();
+			if (array_key_exists('category',$conditions) && !empty($conditions['category'])) {
+				Configure::write('debug',2);
+				
+				$yParams = array(
+					'q'	=>	$conditions['country'],
+					'v'	=>	2,
+					'category'	=>	str_ireplace(" & ", "%7C", $conditions['category']),
+					'orderby'	=>	"relevance",
+					'time'		=>	"this_week"
+				);
+				$results = $HttpSocket->get($url, $yParams);
+				//debug($yParams);
+				//debug($results);
+			}else{
+				$results = $HttpSocket->get($url, "time={$conditions['time']}");
+				//debug($HttpSocket);
+			}
+			$status = $HttpSocket->response;
+			if($status['status']['code']==200){
+				App::import('Core', 'Xml');
+				$xml = new Xml($results);
+
+				$xmlArr = $xml->toArray();
+				//debug($xmlArr);
+				$updated = $xmlArr['Feed']['updated'];
+				$items = $xmlArr['Feed']['Entry'];
+				$aux = array();
+
+				foreach ($items as $row) {
+					if (!array_key_exists('Content', $row['Group'])) {
+						continue;
+					}
+					$url = null;
+					if (array_key_exists(0, $row['Group']['Content'])) {
+						$url=$row['Group']['Content'][0]['url'];
+					}elseif (array_key_exists('url', $row['Group']['Content'])){
+						$url=$row['Group']['Content']['url'];
+					}else {
+						continue;
+					}
+					if (!is_array($row['title'])) {
+						$title = $row['title'];
+					}else{
+						$title = $row['title']['value'];
+					}
+					$aux[] = array('title'=>$title, 'url'=>$url);
+					
+				}
+			}else {
+				die($status['status']['reason-phrase']);
+			}
+			Cache::write ("youtube_list_{$categorySlug}", $aux, 'long');
+		}
+
+		return $aux;
 
 	}
 

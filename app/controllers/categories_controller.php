@@ -5,7 +5,7 @@ class CategoriesController extends AppController {
 	var $helpers = array('Js'=>array('Prototype'), 'Text', 'Cache', 'Paginator');
 
 	var $components= array('Phptwitter.Twitter');
-	var $uses = array('News','Category', 'Parameter');
+	var $uses = array('News','Category', 'Parameter', 'YoutubeFavorite');
 	
 	/*se setea el tema para mobil*/
 	var $view = 'Theme';
@@ -47,7 +47,8 @@ class CategoriesController extends AppController {
 	}
 
 	function view($id = null, $count = 20) {
-		$this->set("title_for_layout","Categorías");
+		/*$category = $this->find('first',array('conditions'=>array('id'=>$id)));
+		$this->set("title_for_layout",$category['Category']['name']);*/
 		$usr=$this->Auth->user();
 
 		//$this->disableCache(); /*TODO desactivar??*/
@@ -419,6 +420,7 @@ class CategoriesController extends AppController {
 				switch ($id) {
 					case 3:
 						$this->set("title_for_layout","Política");
+						//$category = "Política";
 						$meta = array(
 							'keywords'	=>	"politica argentina,politica,pj,ucr,kirchnerismo,cfk,oposicion,blogs,twitter,diarios",
 							'description'	=> "twitters, blogs y diarios sobre política argentina"
@@ -427,6 +429,7 @@ class CategoriesController extends AppController {
 					break;
 					case 4:
 						$this->set("title_for_layout","Economía & Empresas");
+						//$category = "Economía & Empresas";
 						$meta = array(
 							'keywords'	=>	"economia argentina,economia,empresas,dolar,bolsa,blogs,twitter,diarios",
 							'description'	=> "twitters, blogs y diarios sobre economía argentina"
@@ -435,6 +438,7 @@ class CategoriesController extends AppController {
 					break;
 					case 7:
 						$this->set("title_for_layout","Cultura & Espectáculos");
+						//$category = "Cultura & Espectáculos";
 						$meta = array(
 							'keywords'	=>	"cultura argentina,cultura,espectaculos,farandula,famosos,libros,agenda cultural,blogs,twitter,diarios",
 							'description'	=> "twitters, blogs y diarios sobre espacios culturales y noticias del espectáculo de argentina"
@@ -443,6 +447,7 @@ class CategoriesController extends AppController {
 					break;
 					case 8:
 						$this->set("title_for_layout","Deportes");
+						//$category = "Deportes";
 						$meta = array(
 							'keywords'	=>	"deportes argentina,deportes,futbol,basquet,tenis,primera,afa,olimìadas,mundial,blogs,twitter,diarios",
 							'description'	=> "twitters, blogs y diarios sobre deportes en argentina"
@@ -451,6 +456,7 @@ class CategoriesController extends AppController {
 					break;
 					case 11:
 						$this->set("title_for_layout","Tecno & Ciencia");
+						$category['Category']['name'] = "Tecnología & Ciencia";
 						$meta = array(
 							'keywords'	=>	"tecnologia,ciencia,iphone,apple,windows,android,diseño,blogs,twitter,diarios",
 							'description'	=> "twitters, blogs y diarios sobre tecnología y ciencia"
@@ -459,6 +465,7 @@ class CategoriesController extends AppController {
 					break;
 					case 16:
 						$this->set("title_for_layout","Sociedad");
+						//$category = "Sociedad";
 						$meta = array(
 							'keywords'	=>	"argentina,sociedad,sociales,policiales,blogs,twitter,diarios",
 							'description'	=> "twitters, blogs y diarios sobre noticias sociales en argentina"
@@ -470,12 +477,54 @@ class CategoriesController extends AppController {
 						;
 					break;
 				}
-
-				//$tweets = $this->requestAction("twtr/getList/0/".($category['Category']['name']));
+				
+				/*obtengo las primeras imágenes de la semana*/
+				$imgs = $this->News->Media->imgListing($id);
+				$img_array=array();
+				for ($i = 0; $i <= count($imgs); $i=$i+3) {
+					$aux=array();
+					if (array_key_exists($i, $imgs)) {
+						$aux[0]=$imgs[$i];
+						$url = "/medios/".Inflector::slug($imgs[$i]['Source']['name'],"-")."/noticia/{$imgs[$i]['News']['id']}-".Inflector::slug($imgs[$i]['News']['title'],"-").".html";
+						$aux[0]['News']['url'] = $url;
+					}
+					if (array_key_exists($i+1, $imgs)) {
+						$aux[1]=$imgs[$i+1];
+						$url = "/medios/".Inflector::slug($imgs[$i+1]['Source']['name'],"-")."/noticia/{$imgs[$i+1]['News']['id']}-".Inflector::slug($imgs[$i+1]['News']['title'],"-").".html";
+						$aux[1]['News']['url'] = $url;
+					}
+					if (array_key_exists($i+2, $imgs)) {
+						$aux[2]=$imgs[$i+2];
+						$url = "/medios/".Inflector::slug($imgs[$i+2]['Source']['name'],"-")."/noticia/{$imgs[$i+2]['News']['id']}-".Inflector::slug($imgs[$i+2]['News']['title'],"-").".html";
+						$aux[2]['News']['url'] = $url;
+					}
+					if(!empty($aux)){
+						$img_array[]=$aux;
+					}
+				}
+				
+				$this->set('images',$img_array);
+				
+				$vids = $this->YoutubeFavorite->getVideos(array('category'=>$category['Category']['name']));
+				$vids_array=array();
+				for ($i = 0; $i <= count($vids); $i=$i+3) {
+					$aux=array();
+					if (array_key_exists($i, $vids)) {
+						$aux[0]=$vids[$i];
+					}
+					if (array_key_exists($i+1, $vids)) {
+						$aux[1]=$vids[$i+1];
+					}
+					if (array_key_exists($i+2, $vids)) {
+						$aux[2]=$vids[$i+2];
+					}
+					if(!empty($aux)){
+						$vids_array[]=$aux;
+					}
+				}
+				$this->set('videos', $vids_array);
 
 				$this->set('category', $category);
-				//$this->set('twitters', $tweets[0]);
-				//$this->set('lastTweet', $tweets[1]);
 
 				$this->render('index');
 	}

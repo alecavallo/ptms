@@ -32,7 +32,7 @@ echo $scripts_for_layout;
 		//echo $this->Html->meta('description', "Un sitio de noticias interactivo y participativo");
 		echo '<meta name="description" content="Posteamos.com, un sitio de noticias interactivo y participativo donde encontraras noticias publicadas a traves de medios, blogs y twitter" />';
 	}else {
-		echo $this->Html->meta('description', $text->truncate($meta['description'], 160, array(ending=>"", 'exact'=>true, 'html'=>true)));
+		echo $this->Html->meta('description', $text->truncate($meta['description'], 160, array('ending'=>"", 'exact'=>true, 'html'=>true)));
 	}
 ?>
 <?php 
@@ -68,9 +68,6 @@ echo $scripts_for_layout;
 		$search .= $form->end();
 		echo $this->Html->div('searchbox', $search, array('id'=>"searchContainer"));
 	?>
-	<div id="searchPopup" onmouseover="shake(this);" sytle="display:none;">
-		<div id="popupContent">Probá los resultados de búsqueda y compará los distintos criterios editoriales sobre un tema!</div>
-	</div>
 	<?php echo $this->element('menu/generalMenu', array('city'=>$city/*, 'cache'=>'10 minutes'*/))?>
 
 </div>
@@ -82,23 +79,12 @@ echo $scripts_for_layout;
 	$hide .= "setTimeout(hide, 9000);";
 	$js->buffer($show.$hide);*/
 ?>
-<script>
-function SDEffect(element){
-	window.element = element;
-	setTimeout("element.show()",3000);
-	new Effect.SlideDown(element, {duration:4,delay:0});
-	new Effect.SlideUp(element, {duration:5,delay:17});
-}
-function shake(element){
-	new Effect.Shake(element);
-}
-document.observe("dom:loaded", function (event) {SDEffect($("searchPopup"));});
-</script>
+
 	<div id="user">
 		<?php echo $this->element('users/loggedin', array('loggedUser'=>$loggedUser))?>
 	</div>
 	<div id="snetworks">
-		<div>
+		 <div>
 			<!-- Place this tag where you want the +1 button to render. -->
 			<div class="g-plusone" data-size="medium" data-href="http://www.posteamos.com/"></div>
 			
@@ -112,7 +98,7 @@ document.observe("dom:loaded", function (event) {SDEffect($("searchPopup"));});
 			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 			  })();
 			</script>
-		</div>
+		</div> 
 	
 		<div>
 			<div class="fb-like" data-href="http://www.posteamos.com" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false" data-font="segoe ui"></div>

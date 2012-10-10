@@ -58,6 +58,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 	<?php
 		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
 	?>
+	<div id="footer-ad">
 	<script type="text/javascript"><!--
 	google_ad_client = "ca-pub-6965617047977932";
 	/* Footer-Bloque Anuncios */
@@ -69,6 +70,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 	<script type="text/javascript"
 	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	</script>
+	</div>
 	<?php }?>
 	
 </div>

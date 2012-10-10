@@ -580,6 +580,54 @@ SCR;
 				$this->set('blogs',$blogs);
 				//debug($blogs);
 				$tweets = $this->requestAction(array('controller'=>"twtr",'action'=>"getTimeline"));
+				
+				/*obtengo las primeras imágenes de la semana*/
+				$imgs = $this->News->Media->imgListing(0);
+				$img_array=array();
+				for ($i = 0; $i <= count($imgs); $i=$i+3) {
+					$aux=array();
+					if (array_key_exists($i, $imgs)) {
+						$aux[0]=$imgs[$i];
+						$url = "/medios/".Inflector::slug($imgs[$i]['Source']['name'],"-")."/noticia/{$imgs[$i]['News']['id']}-".Inflector::slug($imgs[$i]['News']['title'],"-").".html";
+						$aux[0]['News']['url'] = $url;
+					}
+					if (array_key_exists($i+1, $imgs)) {
+						$aux[1]=$imgs[$i+1];
+						$url = "/medios/".Inflector::slug($imgs[$i+1]['Source']['name'],"-")."/noticia/{$imgs[$i+1]['News']['id']}-".Inflector::slug($imgs[$i+1]['News']['title'],"-").".html";
+						$aux[1]['News']['url'] = $url;
+					}
+					if (array_key_exists($i+2, $imgs)) {
+						$aux[2]=$imgs[$i+2];
+						$url = "/medios/".Inflector::slug($imgs[$i+2]['Source']['name'],"-")."/noticia/{$imgs[$i+2]['News']['id']}-".Inflector::slug($imgs[$i+2]['News']['title'],"-").".html";
+						$aux[2]['News']['url'] = $url;
+					}
+					if(!empty($aux)){
+						$img_array[]=$aux;
+					}
+				}
+				
+				$this->set('images',$img_array);
+				
+				$vids = $this->YoutubeFavorite->getVideos();
+				$vids_array=array();
+				for ($i = 0; $i <= count($vids); $i=$i+3) {
+					$aux=array();
+					if (array_key_exists($i, $vids)) {
+						$aux[0]=$vids[$i];
+					}
+					if (array_key_exists($i+1, $vids)) {
+						$aux[1]=$vids[$i+1];
+					}
+					if (array_key_exists($i+2, $vids)) {
+						$aux[2]=$vids[$i+2];
+					}
+					if(!empty($aux)){
+						$vids_array[]=$aux;
+					}
+				}
+				$this->set('videos', $vids_array);
+				
+				
 				$this->set('twitters', $tweets[0]);
 				$this->set('lastTweet', $tweets[1]);
 				$this->render('index');

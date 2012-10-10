@@ -208,19 +208,9 @@ var commentsUrl = new Array();
         
         <section>
 			<?php
-				$parameters = array(
-					'wId'	=>	"images",
-					'wTitle'	=>	"Posts en imágenes",
-					'float'	=>	"left"
-				);
-        		echo $this->element("widgets".DS. "hlongimgwidget", array('par'=>$parameters,'cache'=>'1 hour'));
-        		$param2 = array(
-					'wId'		=>	"videos",
-					'wTitle'	=>	"Videos populares de youtube",
-        			'float'		=>	"right",
-        			'category'	=>	""
-				);
-        		echo $this->element("widgets".DS. "hlongvidwidget", array('par'=>$param2,'cache'=>'12 hours'));
+				echo $this->element("widgets".DS. "img_rotator", array(/*'cache'=>'1 hour'*/));
+				
+				echo $this->element("widgets".DS. "video_rotator", array(/*'cache'=>'1 hour'*/));
         	?>
 
                 <br clear="all"/>

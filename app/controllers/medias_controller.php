@@ -87,6 +87,28 @@ class MediasController extends AppController {
 		}
 
 	}
+	
+	function getImages($id=0){
+		$this->autoRender=false;
+		$imgs = $this->Media->imgListing($id);
+		$img_array=array();
+		for ($i = 0; $i <= count($imgs); $i=$i+3) {
+			$aux=array();
+			if (array_key_exists($i, $imgs)) {
+				$aux[0]=$imgs[$i];
+			}
+			if (array_key_exists($i+1, $imgs)) {
+				$aux[1]=$imgs[$i+1];
+			}
+			if (array_key_exists($i+2, $imgs)) {
+				$aux[2]=$imgs[$i+2];
+			}
+			
+			$img_array[]=$aux;
+		}
+		return $aux;
+	}
+	
 	function getPagVideos($id){
 		$this->autoRender = false;
 		$this->Media->contain('News');
