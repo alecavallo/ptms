@@ -59,59 +59,60 @@ class Ad extends AppModel {
 			};
 		}
 	}
-	function get($priority, $category=0, $excluded=array()){
-		if(is_int($priority) && $priority!=4){//todas las columnas excepto el banner central
-			$priority=array($priority, 5);
-		}
-		$conditions = array(
-			'priority'	=>	$priority,
-			'enabled'	=>	1
-		);
-		if (!empty($excluded)) {
-			$conditions['id not']=$excluded;
-		}
-
-		if ($category==0) {
-			$ads = $this->find('all',
-				array(
-					'conditions'	=>	$conditions,
-					'contain'		=>	array()
-				)
-			);
+	function get($priority, $category=0, $excluded = array(), $limit = 2){
+		//creo filtro por categoría si el parametro fue especificado
+		if ($category != 0 && is_int($category)) {
+			$category = " AND Ad.category = {$category}";
 		}else {
-			$ads = $this->Category->find('first', array(
-					'conditions'	=>	array('Category.id'	=>	$category),
-					'contain'	=>	array(
-						'Ad'	=>	array(
-							'conditions'=>$conditions
-						)
-					)
-				)
-			);
-			$ads = $ads['Ad'];
-			$aux = array();
-			foreach ($ads as $key=>$value) {
-				$aux[$key]=array('Ad'=>$value);
-			}
-			$ads = $aux;
-			unset($aux);
+			$category = "";
+		}
+		
+		//creo filtro de publicidades ya mostradas si el parametro fue especificado
+		if (!empty($excluded) && is_array($excluded)) {
+			$excluded = implode(",", $excluded);
+			$excluded = " AND id not in ({$excluded})";
+		}else {
+			$excluded = "";
+		}
+		if ($priority != 4) {
+			$select = <<<TRN
+SELECT `Ad`.`id`, `Ad`.`name`, `Ad`.`url`, `Ad`.`link`, `Ad`.`text`, `Ad`.`url_img`, `Ad`.`socialnetwork`
+FROM ads Ad
+WHERE Ad.enabled = 1 AND (Ad.priority=5 OR Ad.priority={$priority}){$category}{$excluded}
+ORDER BY Ad.shows asc
+LIMIT {$limit}
+FOR UPDATE;
+TRN;
+		}else {
+			$select = <<<TRN
+SELECT Ad.id, Ad.name, Ad.url, Ad.link, Ad.text, Ad.url_img, Ad.socialnetwork 
+FROM ads Ad
+WHERE Ad.enabled = 1 AND Ad.priority=4{$category}{$excluded}
+ORDER BY Ad.shows asc
+LIMIT {$limit}
+FOR UPDATE;
+TRN;
 		}
 
-		foreach ($ads as $key => $value) {
-			$aux = $value;
-
-			if (!empty($aux['Ad']['url']) && $aux['Ad']['socialnetwork']!=3) {
-				$aux['Ad']['url']= str_replace("\\", "/", $aux['Ad']['url']);
-				$folders = explode("/", $aux['Ad']['url']);
-				
-				if (strtolower($folders[0]) != "img" && strtolower($folders[1]) != "img") {
-					$aux['Ad']['url'] = "/".'img'."/".$aux['Ad']['url'];
-				}
-			}
-			
-			$ads[$key] = $aux;
+$this->query('START TRANSACTION;');
+$ads = $this->query($select);
+$ids = array();
+	foreach ($ads as $row) {
+		$ids[]= $row['Ad']['id'];
+	}
+	$ids = "(".implode(",", $ids).")";
+	$update = <<<TRN
+UPDATE ads SET shows = shows+1 WHERE ads.id in {$ids}
+TRN;
+		
+		if (empty($ads) || $ads != FALSE) {
+			$this->query($update);
+			$this->query('COMMIT;');
+		}else {
+			$this->query('ROLLBACK;');
+			$ads = array();
 		}
-
+		
 		return $ads;
 	}
 }

@@ -47,302 +47,28 @@ SCR;
 		$usr=$this->Auth->user();
 
 		//$this->disableCache(); //TODO desactivar??
-		if($this->Session->check('ads')){//si existe la variable de sesión la uso
-			$ads = $this->Session->read('ads');
-		}else{ //sino trato de recuperarla de cache
-			$ads = Cache::read ( "ads", 'vLong' );
+		
+		
+		$this->loadModel('Ad');	
+		$ads = array();
+		$ads[1]['data'] = $this->Ad->get(1);
+		$displayed = array();
+		foreach ($ads[1]['data'] as $row) {
+			$displayed[] = $row['Ad']['id'];
 		}
 		
-		$this->loadModel('Ad');
-		if (empty($ads) || true){
-			
-			$ads = array();
-			$ads[1]['data'] = $this->Ad->get(1);
-			$ads[1]['displayed'] = array();
-			
-			App::import('Lib', 'Facebook.FB');
-			foreach ($ads[1]['data'] as $key => $value) {
-				if($value['Ad']['socialnetwork']!=0){
-					$aux=array();
-					switch ($value['Ad']['socialnetwork']) {
-						case 1: //twitter
-							$tweet = $this->Twitter->showUser($value['Ad']['link']);
-							if(!empty($tweet)){
-								$aux = array(
-									'name'=>$tweet['name'],
-									'nickname'=>$tweet['screen_name'],
-									'image'=>$tweet['profile_image_url'],
-									'text'=>$tweet['status']['text']
-								);
-								$ads[1]['data'][$key]['twitter']= $aux;
-								if (empty($value['Ad']['snid'])){
-									$this->Ad->read(null,$value['Ad']['id']);
-									$this->Ad->set('snid', $tweet['id_str']);
-									$this->Ad->save();
-								}
-							}
-								
-						break;
-						
-						case 2: //facebook
-								$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
-								if (!array_key_exists('name', $facebook) || empty($facebook['name'])) {
-									$facebook = FB::api("/{$value['Ad']['link']}/"); //reintento de obtener	 los datos identificatorios de la cuenta
-								}
-								$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
-								//debug($facebook);
-								$aux = array(
-									'name' => $facebook['name'],
-									'nickname' => $facebook['username'],
-									'image'	=>	$facebook['picture'],
-									'link'	=>	$facebook['link'],
-									'id'	=>	$facebook['id']
-								);
-								
-								$facebook = FB::api("/{$value['Ad']['link']}/feed");
-								foreach ($facebook['data'] as $value) {
-									if ($value['type']!='question' && $value['from']['id']==$aux['id'] && array_key_exists('message', $value) && !empty($value['message'])) {
-										if (!array_key_exists('message', $value) || empty($value['message'])) {
-											continue;
-										}
-										$aux['text']=str_ireplace("\n", " ", $value['message']); 
-										$aux['pubLink']=array_key_exists('actions', $value)?$value['actions'][0]['link']:$aux['link'];
-										break;
-									}
-								}
-							$ads[1]['data'][$key]['facebook']= $aux;
-							
-						break;
-					}
-					
-					
-				}
-				$ads[1]['displayed'][$key] = rand(0, 2);
-			}
-			//debug($ads[1]['displayed']);
-			$excludeAds = array();
-			/*foreach ($ads[1]['data'] as $ad){
-				$excludeAds[]=$ad['Ad']['id'];
-			}*/
-			array_multisort($ads[1]['displayed'], SORT_ASC, $ads[1]['data']);
-			
-			$ads[2]['data'] = $this->Ad->get(2,0,$excludeAds);
-			$ads[2]['displayed'] = array();
-			foreach ($ads[2]['data'] as $key => $value) {
-				if($value['Ad']['socialnetwork']!=0){
-				$aux=array();
-					switch ($value['Ad']['socialnetwork']) {
-						case 1: //twitter
-							$tweet = $this->Twitter->showUser($value['Ad']['link']);
-							$aux = array(
-								'name'=>$tweet['name'],
-								'nickname'=>$tweet['screen_name'],
-								'image'=>$tweet['profile_image_url'],
-								'text'=>$tweet['status']['text']
-							);
-							$ads[2]['data'][$key]['twitter']= $aux;
-							if (empty($value['Ad']['snid'])){
-								$this->Ad->read(null,$value['Ad']['id']);
-								$this->Ad->set('snid', $tweet['id_str']);
-								$this->Ad->save();
-							}
-						break;
-						
-						case 2: //facebook
-							
-							$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
-							$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
-							$aux = array(
-								'name' => $facebook['name'],
-								'nickname' => $facebook['username'],
-								'image'	=>	$facebook['picture'],
-								'link'	=>	$facebook['link'],
-								'id'	=>	$facebook['id']
-							);
-							if (empty($value['Ad']['snid'])){//si no existe guardo el id de la publicidad
-								$this->Ad->create();
-								$this->Ad->read(null,$value['Ad']['id']);
-								$this->Ad->set('snid', $facebook['id']);
-								$this->Ad->save();
-							}
-							
-							$facebook = FB::api("/{$value['Ad']['link']}/feed");
-							foreach ($facebook['data'] as $value) {
-								if ($value['type']!='question' && $value['from']['id']==$aux['id'] && array_key_exists('message', $value) && !empty($value['message'])) {
-									$aux['text']=str_ireplace("\n", " ", $value['message']);
-									$aux['pubLink']=array_key_exists('actions', $value)?$value['actions'][0]['link']:$aux['link'];
-									break;
-								};
-							}
-							$ads[2]['data'][$key]['facebook']= $aux;
-							
-						break;
-					}
-				}
-				$ads[2]['displayed'][$key] = rand(0, 2);
-			}
-			/*$excludeAds = array();
-			foreach ($ads[2]['data'] as $ad){
-				$excludeAds[]=$ad['Ad']['id'];
-			}*/
-			array_multisort($ads[2]['displayed'], SORT_ASC, $ads[2]['data']);
-			
-			//$ads[3]['data'] = $this->Ad->get(3,0,$excludeAds);
-			$ads[3]['data'] = array();
-			$ads[3]['displayed'] = array();
-			foreach ($ads[3]['data'] as $key => $value) {
-				if($value['Ad']['socialnetwork']!=0){
-				$aux=array();
-					switch ($value['Ad']['socialnetwork']) {
-						case 1: //twitter
-							$tweet = $this->Twitter->showUser($value['Ad']['link']);
-							$aux = array(
-								'name'=>$tweet['name'],
-								'nickname'=>$tweet['screen_name'],
-								'image'=>$tweet['profile_image_url'],
-								'text'=>$tweet['status']['text']
-							);
-							$ads[3]['data'][$key]['twitter']= $aux;
-							if (empty($value['Ad']['snid'])){
-								$this->Ad->create();
-								$this->Ad->read(null,$value['Ad']['id']);
-								$this->Ad->set('snid', $tweet['id_str']);
-								$this->Ad->save();
-							}
-						break;
-						
-						case 2: //facebook
-							
-							$facebook = FB::api("/{$value['Ad']['link']}/"); //obtengo los datos identificatorios de la cuenta
-							$facebook['picture'] = "http://graph.facebook.com/{$facebook['username']}/picture/";
-							$aux = array(
-								'name' => $facebook['name'],
-								'nickname' => $facebook['username'],
-								'image'	=>	$facebook['picture'],
-								'link'	=>	$facebook['link'],
-								'id'	=>	$facebook['id']
-							);
-							
-							$facebook = FB::api("/{$value['Ad']['link']}/feed");
-							foreach ($facebook['data'] as $value) {
-								if ($value['type']!='question' && $value['from']['id']==$aux['id'] && array_key_exists('message', $value) && !empty($value['message'])) {
-									$aux['text']=str_ireplace("\n", " ", $value['message']);
-									$aux['pubLink']=array_key_exists('actions', $value)?$value['actions'][0]['link']:$aux['link'];
-									break;
-								}
-							}
-							$ads[3]['data'][$key]['facebook']= $aux;
-							
-						break;
-					}
-				}
-				$ads[3]['displayed'][$key] = rand(0, 2);
-			}
-			array_multisort($ads[3]['displayed'], SORT_ASC, $ads[3]['data']);
-			
-			$ads[4]['data'] = $this->Ad->get(4);
-			$ads[4]['displayed'] = array();
-			foreach ($ads[4]['data'] as $key => $value) {
-				$ads[4]['displayed'][$key] = rand(0, 2);
-			}
-			
-			array_multisort($ads[4]['displayed'], SORT_ASC, $ads[4]['data']);
-			
-			//$ads[5]['data'] = $this->Ad->get(5);
-			
-			$this->Session->write('ads', $ads);
-			Cache::write ( "ads", $ads, 'vLong' );
-		}else {
-			//$ads = $this->Session->read('ads');
+		$ads[2]['data'] = $this->Ad->get(2,0,$displayed);
+		foreach ($ads[2]['data'] as $row) {
+			$displayed[] = $row['Ad']['id'];
 		}
 		
-
-		//obtengo las publicidades
-		$maxAds = 2;
-		$adsToShow = array();
-		//publicidades en medios
-		$excludedAds = array();
-		if(!empty($ads[1]['data'])){
-			$maxAds = count($ads[1]['data'])>=$maxAds?$maxAds:count($ads[1]['data']);
-			for ($i = 0; $i < $maxAds; $i++) {
-				$adsToShow[1][] = $ads[1]['data'][$i];
-				$excludedAds[]=$ads[1]['data'][$i]['Ad']['id'];
-				//incremento el contador de cantidad de visualizaciones
-				$ads[1]['displayed'][$i]++;
-			}
-			if(!empty($excludedAds)){
-				$this->Ad->updateAll(array('Ad.shows'=>"Ad.shows+1"), array('Ad.id'=>$excludedAds));
-			}
-		}else {
-			$adsToShow[1] = array();
-		}
-		//ordeno nuevamente el array de publicidades
-		array_multisort($ads[1]['displayed'], SORT_ASC, $ads[1]['data']);
+		$ads[3]['data'] = array();
 		
-		//publicidades en blogs
-		if(!empty($ads[2]['data'])){
-			$maxAds = 2;
-			$maxAds = count($ads[2]['data'])>=$maxAds?$maxAds:count($ads[2]['data']);
-			$i=0;
-			$adsToUpdate=array();
-			foreach ($ads[2]['data'] as $key => $ad) {
-				if($i >= $maxAds){
-					break;
-				}
-				if(!in_array($ad['Ad']['id'], $excludedAds)){
-					$adsToUpdate[]=$ad['Ad']['id'];
-					$adsToShow[2][] = $ad;
-					$ads[2]['displayed'][$key]++;
-					$i++;
-				}	
-			}
-			if(!empty($adsToUpdate)){
-				$this->Ad->updateAll(array('Ad.shows'=>"Ad.shows+1"), array('Ad.id'=>$adsToUpdate));
-			}
-			
-		}else {
-			$adsToShow[2] = array();
-		}
-		//ordeno nuevamente el array de publicidades
-		array_multisort($ads[2]['displayed'], SORT_ASC, $ads[2]['data']);
+		$ads[4]['data'] = $this->Ad->get(4,0,$displayed, 1);
+		$ads[4]['displayed'] = array();
 		
-		//publicidades en twitter
-		if(!empty($ads[3]['data'])){
-			$maxAds = count($ads[3]['data'])>=$maxAds?$maxAds:count($ads[3]['data']);
-			for ($i = 0; $i < $maxAds; $i++) {
-				$adsToShow[3][] = $ads[3]['data'][$i];
-				//incremento el contador de cantidad de visualizaciones
-				$ads[3]['displayed'][$i]++;
-			}
-		}else {
-			$adsToShow[3] = array();
-		}
-		//ordeno nuevamente el array de publicidades
-		array_multisort($ads[3]['displayed'], SORT_ASC, $ads[3]['data']);
-		
-		//publicidades en banner grande
-		if(!empty($ads[4]['data'])){
-			$maxAds= 1;
-			$maxAds = count($ads[4]['data'])>=$maxAds?$maxAds:count($ads[4]['data']);
-			for ($i = 0; $i < $maxAds; $i++) {
-				$adsToShow[4][] = $ads[4]['data'][$i];
-				//incremento el contador de cantidad de visualizaciones
-				$ads[4]['displayed'][$i]++;
-			}
-		}else {
-			$adsToShow[4] = array();
-		}
-		//ordeno nuevamente el array de publicidades
-		array_multisort($ads[4]['displayed'], SORT_ASC, $ads[4]['data']);
-		
-		$this->Session->write('ads', $ads);
-
-		//obtengo las publicidades a mostrar por columna
-		//$newsAds = array_slice($ads['data'], 0, $adsPerColumn+1);
-		//$blogsAds = array_slice($ads['data'], $adsPerColumn+1, $adsPerColumn);
-		
-		$newsAds= $adsToShow[1];
-		$blogsAds=$adsToShow[2];
+		$newsAds= $ads[1]['data'];
+		$blogsAds=$ads[2]['data'];
 		$banner = $ads[4]['data'];
 		$this->set('banner', $banner);
 
@@ -359,11 +85,6 @@ SCR;
 				Cache::write ( "newsPapers", $newsPapers, 'long' );
 				}
 				//debug($newsPapers);
-				//obtengo id de las noticias en portada
-				//$shown=array();
-				/*foreach ($newsPapers as $row) {
-					$shown[]=$row['News']['id'];
-				}*/
 				
 				//agrego publicidad en posición aleatoria
 				if(!empty($newsAds)){
@@ -608,7 +329,8 @@ SCR;
 				
 				$this->set('images',$img_array);
 				
-				$vids = $this->YoutubeFavorite->getVideos();
+				
+				$vids = $this->YoutubeFavorite->getVideos(array('category'=>$category));
 				$vids_array=array();
 				for ($i = 0; $i <= count($vids); $i=$i+3) {
 					$aux=array();
