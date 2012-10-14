@@ -285,6 +285,7 @@ SCR;
 				
 				
 				//agrego los blogs mostrados en portada
+				$shown = array();
 				foreach ($blogs as $row) {
 					$shown[]=$row['News']['id'];
 				}
@@ -330,7 +331,7 @@ SCR;
 				$this->set('images',$img_array);
 				
 				
-				$vids = $this->YoutubeFavorite->getVideos(array('category'=>$category));
+				$vids = $this->YoutubeFavorite->getVideos();
 				$vids_array=array();
 				for ($i = 0; $i <= count($vids); $i=$i+3) {
 					$aux=array();
