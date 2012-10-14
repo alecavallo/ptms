@@ -171,26 +171,7 @@ if (isset($preview) && $preview == true) {
 				}
 
 				?>
-			<div class="NewsBar">
-				<div id="ToolBar">
-					<?php
-						$img = $html->image('print-02.png',array('class'=>'link'));
-						echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
-						echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
-						//$img = $html->image('photo-03.png',array('class'=>'link'));
-						//echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
-						//echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
-						//$img = $html->image('mail-04.png',array('class'=>'link'));
-						//echo $html->link($img,"#nogo",array('onclick'=>"window.print()",'escape'=>false));
-						//echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
-						//$img = $html->image('comment-05.png',array('class'=>'link'));
-						//echo $html->link($img,"#comments",array('escape'=>false));
-						//echo $html->image('pipe-07.png',array('alt'=>"agregar imágen",'class'=>'separator'));
-						$img = $html->image('report_error-06.png',array('class'=>'link'));
-						echo $html->link($img,"mailto:info@posteamos.com?subject=Error%20en%20la%20página",array('escape'=>false));
-					?>
-				</div>
-			</div>
+
 			<div id="comments">
 				<?php 
 					if (!empty($related)) {
