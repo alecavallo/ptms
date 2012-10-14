@@ -175,7 +175,7 @@ if (isset($preview) && $preview == true) {
 			<div id="comments">
 				<?php 
 					if (!empty($related)) {
-						echo "<h2 id=\"other-news-title\">Así lo dicen otras fuentes:</h2>";
+						echo "<h2 id=\"other-news-title\">Ésto dicen otras fuentes:</h2>";
 						foreach ($related as $row) {
 							$par = array(
 								'image'=> "/img/".$row['Source']['icon'],
@@ -193,6 +193,14 @@ if (isset($preview) && $preview == true) {
 				<div id="other-news">
 				</div>
 			</div>
+			<div class="clearFloat">
+		 	<script type="text/javascript">
+				var idcomments_acct = '19f7342c71062346f906e674904d040b';
+				var idcomments_post_id;
+				var idcomments_post_url;
+			</script>
+			<script type="text/javascript" src="http://www.intensedebate.com/js/genericLinkWrapperV2.js"></script>
+	 	</div>
 	</div>
 
  	<div id="NewscolRight">
@@ -233,14 +241,7 @@ if (isset($preview) && $preview == true) {
  	
  	
  	</div>
- 	<div class="clearFloat">
- 	<script>
-				var idcomments_acct = '19f7342c71062346f906e674904d040b';
-				var idcomments_post_id;
-				var idcomments_post_url;
-				</script>
-				<script type="text/javascript" src="http://www.intensedebate.com/js/genericLinkWrapperV2.js"></script>
- 	</div>
+
  	<script type="text/javascript">
  		setTimeout("jQuery('div.clearFloat > a')[0].click();", 3700);
  	</script>

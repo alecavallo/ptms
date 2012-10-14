@@ -1,7 +1,6 @@
 @CHARSET "UTF-8";
 div#comments h2#other-news-title{
 	margin-bottom: 10px;
-	display: none;
 }
 div#comments div.relNews{
 	margin-bottom: 25px;
