@@ -1109,6 +1109,7 @@ img.pplNewsImage{
 }
 div#adsContainer{
 	clear:both;
+	margin: 10px 0px 10px 0px;
 	border-top-style: dotted;
 	border-top-width: 1px;
 	border-top-color: #DEDEDE;
@@ -1917,7 +1918,11 @@ div#imgListContainer{
 	vertical-align: middle;
 	/*display: table-cell;*/
 }
-
+div#submenu-bar{
+	width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
+}
 /**Loggedin user**/
 div#user{
 	padding: 3px 10px 3px 1px;
@@ -1925,8 +1930,6 @@ div#user{
 	margin-left: 15px;
 	float: left;
 	height: 22px;
-	/*background-color: red;*/
-	overflow-y: hidden;
 }
 div#user:HOVER{
 	background-color: #EEEEEE;
@@ -1944,4 +1947,7 @@ div#user span#u-data{
 	top: -6px;
 	font-weight: bold;
 	font-size: 10px;
+}
+div#NewscolLeft div#comments{
+	clear: both;
 }
