@@ -8,7 +8,7 @@ if (isset($loggedUser) && !empty($loggedUser)) {
 		} 
 		?>
 	</span>
-	<span id="u-data"><?php echo $html->link($loggedUser['User']['first_name']." ".$loggedUser['User']['last_name'],array('controller'=>"users",'action'=>"edit", $loggedUser['User']['id']))?></span>
+	<span id="u-data"><?php echo $html->link($loggedUser['User']['first_name']." ".$loggedUser['User']['last_name']." "."<span style='color:rgb(100,100,100);font-weight: normal;'>(editar)</span>",array('controller'=>"users",'action'=>"edit", $loggedUser['User']['id']),array('escape'=>false))?></span>
 <?php 
 }
 ?>
