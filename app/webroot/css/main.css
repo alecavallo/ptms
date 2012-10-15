@@ -462,7 +462,7 @@ img.degradee{
 	float:right;
 	width:32%;
 	/*background-color:#FF0000;*/
-	min-height: 1200px;
+	min-height: 768px;
 	max-height: 1550px;
 	margin-bottom: 0px;
 }
@@ -1586,7 +1586,7 @@ p#toregister{
 div#news_content{
 	/*width: 1196px;*/
 	
-	clear: both;
+	/*clear: both;*/
 	background-color: #FFFFFF;
 	/*-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;

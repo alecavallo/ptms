@@ -839,6 +839,7 @@ function search(){
 
 	function write(){
 		$this->layout="default";
+		$this->set("title_for_layout","Escribe tu noticia");
 		if ($this->Session->check('newsAdd') && $this->referer() == "/news/add/step:2") {
 			$this->data = $this->Session->read('newsAdd');
 		}
@@ -952,7 +953,6 @@ function search(){
 						unset($this->data['News']['photo']);
 					}
 				}
-				debug($this->data);
 			
 			
 

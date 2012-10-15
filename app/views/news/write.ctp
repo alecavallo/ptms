@@ -5,6 +5,7 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 
 echo $this->Html->script('prototype',array('inline'=>false));
 ?>
+<div id="content">
 <?php echo $this->element('betanotice'/*, array('cache'=>'30 minutes')*/)?>
 <div class="steps">
 	<div id="scontainer">
@@ -36,7 +37,7 @@ echo $this->Html->script('prototype',array('inline'=>false));
 
 			echo $this->Form->input('summary',array('label'=>__('Copete:<br/>',true), 'class'=>"writeSc"));
 
-			echo "<br clear=\"all\"/>";
+			echo "<div style=\"clear:both;\"></div>";
 			echo $this->Form->label('body', "Artículo: ");
 			echo $this->Form->textarea('body');
 			if (!empty($errors['body'])) {
@@ -109,7 +110,7 @@ echo $this->Html->script('prototype',array('inline'=>false));
 			echo $this->Html->div('right',$buttons,array('style'=>"margin-right: 30px; width: 309px; font-size: 15px"));
 		?>
 	<?php echo $this->Form->end();?>
-	<br clear="all"/>
+	<div style="clear:both;"></div>
 	</div>
 	<div id="colRight">
 	
@@ -129,7 +130,7 @@ echo $this->Html->script('prototype',array('inline'=>false));
 		</script>
 		<?php }?>
 
-		<br clear="all"/>
+		<div style="clear:both;"></div>
 	</div>
 <script type="text/javascript">
 
@@ -191,5 +192,6 @@ echo $this->Html->script('prototype',array('inline'=>false));
 	<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/995381652/?value=0&amp;label=BFwtCLTz8wMQlKPR2gM&amp;guid=ON&amp;script=0"/>
 	</div>
 	</noscript>
-	<br clear="all"/>
+	<div style="clear:both;"></div>
+</div>
 </div>
