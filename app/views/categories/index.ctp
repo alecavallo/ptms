@@ -10,7 +10,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
     	<section>
 			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
-			<div id="tweets">
+			<div id="tweets" class="<?php if($category['Category']['id']==4){ echo "economia";}else{echo "";}?>">
 			<div id="loading">
 				<p>Conect&aacute;ndose con twitter...</p>
 				<img alt="cargando" src="/img/loading.gif"/>
