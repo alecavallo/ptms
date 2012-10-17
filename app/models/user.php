@@ -316,8 +316,8 @@ SQL;
 			$filename = explode(".", $filename);
 			$filename = $filename[0].".jpg";
 			$avatarUrl = str_ireplace(WWW_ROOT, '', $folderName.DS.$filename);
-			$avatarUrl = str_ireplace("\\", "/", $avatarUrl);
-			$this->data['User']['avatar'] = DS.$avatarUrl;
+			$avatarUrl = str_ireplace(DS, "/", $avatarUrl);
+			$this->data['User']['avatar'] = "/".$avatarUrl;
 		}
 		return true;
 	}
