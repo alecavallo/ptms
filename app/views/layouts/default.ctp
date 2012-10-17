@@ -175,9 +175,6 @@ var google_remarketing_only = true;
 		jQuery('div#flashMessage').delay(5000).fadeOut('slow');
 	});
 </script>
-</body>
-</html>
-"></script>
 <?php echo $this->Session->flash(); ?>
 </body>
 </html>
