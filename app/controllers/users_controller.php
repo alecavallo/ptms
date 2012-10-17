@@ -307,7 +307,7 @@ class UsersController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-		if (!empty($this->data['User']['avatar']['tmp_name'])) {
+			if (!empty($this->data['User']['avatar']['tmp_name'])) {
 					$target = 60;
 					$folderName = WWW_ROOT."img".DS."avatars";
 					$filename = time().$this->data['User']['avatar']['name'];
@@ -365,7 +365,7 @@ class UsersController extends AppController {
 				}else{
 					unset($this->data['User']['avatar']);
 				}
-				
+			$this->User->id = $id;	
 			if ($this->User->save($this->data)) {
 				$this->Session->setFlash(__('El usuario ha sido modificado correctamente', true));
 				$referer = $this->Session->read('referer');
