@@ -25,7 +25,6 @@ class YoutubeFavorite extends AppModel {
 			App::import('Core', 'HttpSocket');
 			$HttpSocket = new HttpSocket();
 			if (array_key_exists('category',$conditions) && !empty($conditions['category'])) {
-				Configure::write('debug',2);
 				
 				$yParams = array(
 					'q'	=>	$conditions['country'],
@@ -104,7 +103,6 @@ class YoutubeFavorite extends AppModel {
 			App::import('Core', 'HttpSocket');
 			$HttpSocket = new HttpSocket();
 			if (array_key_exists('category',$conditions) && !empty($conditions['category'])) {
-				Configure::write('debug',2);
 				
 				//$results = $HttpSocket->get($url,"q={$conditions['country']}&v=2&category={$conditions['category']}&orderby=relevance&time=this_week");
 				$yParams = array(
@@ -175,7 +173,6 @@ class YoutubeFavorite extends AppModel {
 			App::import('Core', 'HttpSocket');
 			$HttpSocket = new HttpSocket();
 			if (array_key_exists('category',$conditions) && !empty($conditions['category'])) {
-				Configure::write('debug',2);
 				
 				$yParams = array(
 					'q'	=>	$conditions['country'],
