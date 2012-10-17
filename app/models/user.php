@@ -262,9 +262,54 @@ SQL;
 
 	}
 
+	function afterFind($results, $primary){
+		//parent::afterFind($results,$primary);
+		if(count($results)>1){
+			return $results;
+		}
+		
+			/*si no tiene definido los resultados de google adwords, retornar como está*/
+			if (empty($results[0]['User']['gadw_code'])) {
+				return $results;
+			}
+			
+			$gadw_code = $results[0]['User']['gadw_code'];
+			$aux = array();
+			$google_ad_client = preg_match_all('/google_ad_client = "(.*)";/', $gadw_code, $aux, PREG_PATTERN_ORDER);
+			if ($google_ad_client > 0) {
+				$google_ad_client = $aux[1][0];
+			}
+			
+			$aux = array();
+			$google_ad_slot = preg_match_all('/google_ad_slot = "(.*)";/', $gadw_code, $aux, PREG_PATTERN_ORDER);
+			if ($google_ad_slot > 0) {
+				$google_ad_slot = $aux[1][0];
+			}
+			
+			$aux = array();
+			$google_ad_width = preg_match_all('/google_ad_width = (.*);/', $gadw_code, $aux, PREG_PATTERN_ORDER);
+			if ($google_ad_width > 0) {
+				$google_ad_width = $aux[1][0];
+			}
+			
+			$aux = array();
+			$google_ad_height = preg_match_all('/google_ad_height = (.*);/', $gadw_code, $aux, PREG_PATTERN_ORDER);
+			if ($google_ad_height > 0) {
+				$google_ad_height = $aux[1][0];
+			}
+			
+			/*elimino código javascript en crudo para prevenir una inclusion accidentar que puede facilitar XSS*/
+			//unset($results[0]['User']['gadw_code']);
+			
+			$results[0]['User']['google_ad_client'] = $google_ad_client;
+			$results[0]['User']['google_ad_slot'] = $google_ad_slot;
+			$results[0]['User']['google_ad_width'] = $google_ad_width;
+			$results[0]['User']['google_ad_height'] = $google_ad_height;
+			return $results;
+	}
 
 	function beforeSave(){
-		if (is_array($this->data['User']['avatar'])){
+		if (array_key_exists('avatar', $this->data['User']) && is_array($this->data['User']['avatar'])){
 			//$this->fileStatus = $this->data['User']['avatar'];
 			$folderName = WWW_ROOT."img".DS."avatars";
 			$filename = time().$this->data['User']['avatar']['name'];

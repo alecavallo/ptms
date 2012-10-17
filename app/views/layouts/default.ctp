@@ -111,7 +111,7 @@ echo $scripts_for_layout;
 	</div>
 	</div>
 <div id="container">
-	<?php //echo $this->Session->flash(); ?>
+	
 	<?php echo $this->Session->flash('email'); ?>
 
 
@@ -169,5 +169,15 @@ var google_remarketing_only = true;
 
 </script>
 <a href="http://www.posteamos.com/sitemap.xml" style="display: none"> </a>
+<script type="text/javascript">
+	jQuery.noConflict();
+	jQuery(document).ready(function(){
+		jQuery('div#flashMessage').delay(5000).fadeOut('slow');
+	});
+</script>
+</body>
+</html>
+"></script>
+<?php echo $this->Session->flash(); ?>
 </body>
 </html>

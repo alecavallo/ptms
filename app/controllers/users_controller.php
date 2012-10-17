@@ -7,6 +7,7 @@ class UsersController extends AppController {
 	//var $components = array('RequestHandler', 'Localize', 'Session', 'Facebook.Connect'=>array('createUser'=>false),'Auth'=>array('authorize'=>'controller','loginRedirect'=>array('controller' => 'news', 'action' => 'index')));
 	var $components = array('Email','RequestHandler');
 	var $view = 'Theme';
+	var $referer;
 
 	function getUsername($alias){
 		header('Content-type: application/json');
@@ -65,16 +66,13 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			//$this->data['User']['password'] = sha1($this->data['User']['password']);
 			$this->data['User']['password_confirm'] = $this->Auth->password($this->data['User']['password']);
-			$this->User->contain('City.State.Country');
+			//$this->User->contain('City.State.Country');
 			$usr = $this->User->find('first',array('conditions'=>array('email'=>$this->data['User']['email'],'password'=>$this->data['User']['password'])));
 			if (!empty($usr)) {
 				$redirect = $this->Session->read('Auth.redirect');
 				if (empty($redirect)) {
 					$redirect = $this->Auth->loginRedirect;
 				}
-
-				$this->Session->write('City.City',$usr['City']);
-				//$this->Cache->clearCache();
 				$this->redirect($redirect);
 			}
 		}else {
@@ -305,7 +303,7 @@ class UsersController extends AppController {
 		} 
 		$this->set('userid',$id);
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid user', true));
+			$this->Session->setFlash(__('Usuario no válido', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
@@ -365,19 +363,24 @@ class UsersController extends AppController {
 					$avatarUrl = str_ireplace("\\", "/", $avatarUrl);
 					$this->data['User']['avatar'] = $avatarUrl;*/
 				}else{
-					$this->data['User']['avatar'] = null;
+					unset($this->data['User']['avatar']);
 				}
-				debug($this->data['User']['avatar']);
+				
 			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('The user has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('El usuario ha sido modificado correctamente', true));
+				$referer = $this->Session->read('referer');
+				$this->Session->delete('referer');
+				$this->redirect($referer);
 			} else {
 				$this->Session->setFlash(__('El usuario no puede ser guardado. Intente nuevamente mas tarde', true));
 				debug($this->User->invalidFields());
 			}
 		}
 		if (empty($this->data)) {
+			$this->Session->write('referer',$this->referer());
+			//debug($this->referer);
 			$this->data = $this->User->read(null, $id);
+			//debug($this->data);
 		}
 		$cities = $this->User->City->find('list');
 		$this->set(compact('cities'));

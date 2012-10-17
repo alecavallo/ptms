@@ -63,13 +63,12 @@ class AppController extends Controller {
 		}
 
 
-		if (!$this->Session->check('City')) {
+		if (!$this->Session->check('City') && false) {
 			$cliLocation = $this->Location->findByIp($this->RequestHandler->getClientIP());
 			$this->Session->write('City', $cliLocation);
 		}
 		$this->set('facebook_user',$this->Connect->user());
 		$this->set('user', $this->Auth->user());
-		//debug($cliLocation);
 	}
 
 	function beforeRender(){

@@ -34,6 +34,7 @@ jQuery.ajax({
 				echo $this->Form->input('last_name',array('label'=>__('Apellido:',true),'div'=>false));
 				echo $this->Form->input('avatar', array('label'=>__('Foto:',true),'div'=>false,'type'=>'file'));
 				echo $this->Form->input('description',array('label'=>__('Descripción de tu perfil:',true),'div'=>false, 'type'=>"textarea"));
+				echo $this->Form->input('gadw_code',array('label'=>__('Código Adwords:',true),'div'=>false, 'type'=>"textarea"));
 			?>
 			<br clear="all"/>
 			<hr noshade="noshade"/>

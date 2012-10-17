@@ -10,20 +10,19 @@ echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inli
 	<div id="ads">
 	
 		<?php
-		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
-		?>
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-6965617047977932";
-		/* Banner Largo Vertical */
-		google_ad_slot = "0183084197";
-		google_ad_width = 160;
-		google_ad_height = 600;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-		<?php }?>
+		if(Router::url("/",true) != "http://posteamos.localhost.com/"){
+			if (empty($user['User']['google_ad_client'])) {
+				$gadw = array();
+			}else {
+				$gadw = array(
+					'google_ad_client' => $user['User']['google_ad_client'],
+					'google_ad_slot' => $user['User']['google_ad_slot'],
+					'google_ad_width' => $user['User']['google_ad_width'],
+					'google_ad_height' => $user['User']['google_ad_height']
+				);
+			}
+			echo $this->element('ads'.DS.'ga_template',array('gadw'=>$gadw));
+		}?>
 	
 	</div>
 	<script type="text/javascript">

@@ -225,19 +225,18 @@ if (isset($preview) && $preview == true) {
  	
  	<?php
 		if(Router::url("/",true) != "http://posteamos.localhost.com/"){//
-		?>
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-6965617047977932";
-		/* Banner Largo Vertical */
-		google_ad_slot = "0183084197";
-		google_ad_width = 160;
-		google_ad_height = 600;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-		<?php }?>
+			if (empty($news['User']['google_ad_client'])) {
+				$gadw = array();
+			}else {
+				$gadw = array(
+					'google_ad_client' => $news['User']['google_ad_client'],
+					'google_ad_slot' => $news['User']['google_ad_slot'],
+					'google_ad_width' => $news['User']['google_ad_width'],
+					'google_ad_height' => $news['User']['google_ad_height']
+				);
+			}
+			echo $this->element('ads'.DS.'ga_template',array('gadw'=>$gadw));
+		}?>
  	
  	
  	</div>
