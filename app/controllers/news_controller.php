@@ -88,8 +88,12 @@ SCR;
 				
 				//agrego publicidad en posición aleatoria
 				if(!empty($newsAds)){
-					array_splice($newsPapers, rand(1, 4), 0, array($newsAds[0]));
-					array_splice($newsPapers, rand(6, 8), 0, array($newsAds[1]));
+					$pos = rand(1, 4);
+					$items = array($newsAds[0], $newsPapers[$pos]);
+					array_splice($newsPapers, $pos, 0, $items);
+					$pos = rand(6, 8);
+					$items = array($newsAds[1], $newsPapers[$pos]);
+					array_splice($newsPapers, $pos, 0, $items);
 				}
 				//debug(count($newsPapers));
 				$this->set('news',$newsPapers);
@@ -238,11 +242,7 @@ SCR;
 							'group'	=>	"News.feed_id"
 						)
 					);
-					/*foreach ($blogsSoc as $row) {
-						if (!in_array($row['Feed']['source_id'], $excludedSources)) {
-							$excludedSources[]=$row['Feed']['source_id'];
-						}
-					}*/
+
 					$i=0;
 					while ($i < 9){
 						$j = rand(0, 5);
@@ -295,10 +295,14 @@ SCR;
 				
 				//agrego publicidad en posición aleatoria
 				if (!empty($blogsAds)) {
-					array_splice($blogs, rand(1, 3), 0, array($blogsAds[0]));
-					array_splice($blogs, rand(5, 8), 0, array($blogsAds[1]));
+					$pos = rand(1, 3);
+					$items = array($blogsAds[0], $blogs[$pos]);
+					array_splice($blogs, $pos, 0, $items);
+					$pos = rand(5, 8);
+					$items = array($blogsAds[1], $blogs[$pos]);
+					array_splice($blogs, $pos, 0, $items);
 				}
-				$blogs = array_slice($blogs, 0,10);
+				$blogs = array_slice($blogs, 0,12);
 				$this->set('blogs',$blogs);
 				//debug($blogs);
 				$tweets = $this->requestAction(array('controller'=>"twtr",'action'=>"getTimeline"));

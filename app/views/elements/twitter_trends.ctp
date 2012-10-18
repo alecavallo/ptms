@@ -1,10 +1,46 @@
 <div id="twtr_tr_container" style="float:left; width: 100%;">
 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+
 <script type="text/javascript">
 //IMPORTANTE PONER UN LÍMITE DE TAMAÑO A LA PANTALLA (MIN-WIDTH)
 var glbTCount = 0;
 var tI = -1;
 var glbTwitter;
+<?php 
+if($this->here == "/"){
+?>
+var tWidget = new TWTR.Widget({
+	  version: 2,
+	  type: 'search',
+	  search: "@posteamos",
+	  interval: 30000,
+	  title: "Temas del momento",
+	  subject: '',
+	  width: 261,
+	  height: 490,
+	  theme: {
+	    shell: {
+	      background: '#838281',
+	      color: '#ffffff'
+	    },
+	    tweets: {
+	      background: '#ffffff',
+	      color: '#444444',
+	      links: '#8ac33f'
+	    }
+	  },
+	  features: {
+	    scrollbar: false,
+	    loop: true,
+	    live: true,
+	    hashtags: true,
+	    timestamp: false,
+	    avatars: true,
+	    toptweets: true,
+	    behavior: 'default'
+	  }
+	});
+<?php }else{?>
 var tWidget = new TWTR.Widget({
 	  version: 2,
 	  type: 'search',
@@ -36,6 +72,7 @@ var tWidget = new TWTR.Widget({
 	    behavior: 'default'
 	  }
 	});
+<?php } ?>
 
 function parseTrends(twitterTrends){
 

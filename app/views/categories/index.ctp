@@ -5,10 +5,17 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 //echo $this->Html->script('common',array('inline'=>false));
 ?>
 <div id="content">
+		<h1 class="greyTitle">Últimas noticias de <?php echo $category['Category']['name']?></h1>
 		<?php echo $this->element('news'.DS.'marquee',array('categoryId'=>$category['Category']['id']))?>
+		<section>
+			<?php
+				echo $this->element("widgets".DS. "img_rotator", array(/*'cache'=>'1 hour'*/));
+			?>
+		</section>
+		<br/>
     	<div id="colLeft">
     	<section>
-			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
+			<h2 class="greyTitle" style="margin-bottom: 20px;">Twitters</h2>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
 			<div id="tweets" class="<?php if($category['Category']['id']==4){ echo "economia";}else{echo "";}?>">
 			<div id="loading">
@@ -42,7 +49,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
        </div>
         <div id="colCenter">
         <section>
-        	<h1 class="greyTitle">Medios</h1>
+        	<h2 class="greyTitle">Medios</h2>
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
 				if (!empty($news)) {
@@ -103,7 +110,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 
         <div id="colRight">
         <section>
-        	<h1 class="greyTitle">Blogs</h1>
+        	<h2 class="greyTitle">Blogs</h2>
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
         		//debug($blogs);
@@ -171,7 +178,6 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
         </div>
         <section>
         	<?php 
-        	echo $this->element("widgets".DS. "img_rotator");
         	echo $this->element("widgets".DS. "video_rotator");
         	?>
         </section>

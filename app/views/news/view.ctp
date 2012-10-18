@@ -4,13 +4,9 @@
 	echo $this->Html->script('scriptaculous',array('inline'=>false));
 	echo $this->Html->script('common',array('inline'=>false, 'once'=>true));
 	echo $this->Html->css(array('idb-posteamos', 'relatedNews'));
-	//$js->buffer($facebookInit);
-	//$js->writeBuffer(array('inline'=>true, 'safe'=>true));
 
 	$js->buffer("function sendRequest(){ {$this->Js->request('/visits/incrementaContador/'.$news['News']['id'])} }; setTimeout(sendRequest, 9000);");
-	//$js->buffer("setTimeout(sendRequest, 9000)");
-	//echo $this->Html->script('common',array('inline'=>false));
-	//debug($news);
+
 	$category = array_key_exists(0, $news['Category'])?$news['Category'][0]['name']:$news['Category']['name'];
 	$date = $news['News']['created']>$news['News']['modified']?$news['News']['created']:$news['News']['modified'];
 	$fecha= strtotime($date); // convierte la fecha de formato mm/dd/yyyy a marca de tiempo
@@ -174,20 +170,28 @@ if (isset($preview) && $preview == true) {
 
 			<div id="comments">
 				<?php 
-					if (!empty($related)) {
-						echo "<h2 id=\"other-news-title\">Ésto dicen otras fuentes:</h2>";
-						foreach ($related as $row) {
-							$par = array(
-								'image'=> "/img/".$row['Source']['icon'],
-								'title'	=> $row['news']['title'],
-								'summary'	=> $row['news']['summary'],
-								'link'	=>	strtolower("/medios/".Inflector::slug($row['Source']['name'],"-")."/noticia/".$row['news']['id']."-".Inflector::slug($row['news']['title'],"-").".html"),
-								'titleRating'	=> $row['relevancia_titulo'],
-								'generalRating'	=> $row['relevancia_total'],
-							);
-							echo $this->element('news'.DS."related_news", array('params'=> $par));
+					if (!isset($preview) || $preview == false) {
+						if (!empty($related)) {
+							echo "<h2 id=\"other-news-title\">Ésto dicen otras fuentes:</h2>";
+							foreach ($related as $row) {
+								$par = array(
+									'image'=> "/img/".$row['Source']['icon'],
+									'title'	=> $row['news']['title'],
+									'summary'	=> $row['news']['summary'],
+									'link'	=>	strtolower("/medios/".Inflector::slug($row['Source']['name'],"-")."/noticia/".$row['news']['id']."-".Inflector::slug($row['news']['title'],"-").".html"),
+									'titleRating'	=> $row['relevancia_titulo'],
+									'generalRating'	=> $row['relevancia_total'],
+								);
+								echo $this->element('news'.DS."related_news", array('params'=> $par));
+							}
 						}
+					}else {
+						$buttons = $this->Html->link(__('Anterior',true),"/postea.html", array('class'=>"prevBtn"));
+						$buttons .= $this->Html->link(__('Publicar',true),array('controller'=>"news", 'action'=>"add", "publicar"), array('class'=>"nextBtn"));
+						$buttons .= $this->Html->tag('br',null,array('clear'=>"both"));
+						echo $this->Html->div('right',$buttons,array('style'=>"margin-right: 30px; margin-bottom: 15px; width: 309px; font-size: 15px"));
 					}
+					
 					
 				?>
 				<div id="other-news">

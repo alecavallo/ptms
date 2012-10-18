@@ -13,10 +13,17 @@ var commentsUrl = new Array();
 //-->
 </script>
 <div id="content">
+		<h1 class="greyTitle">Últimas noticias</h1>
 		<?php echo $this->element('news'.DS.'marquee', array('cache'=>'30 minutes'))?>
+		<section>
+			<?php
+				echo $this->element("widgets".DS. "img_rotator", array(/*'cache'=>'1 hour'*/));
+			?>
+		</section>
+		<br/>
     	<div id="colLeft">
     	<section>
-			<h1 class="greyTitle" style="margin-bottom: 20px;">Twitters</h1>
+			<h2 class="greyTitle" style="margin-bottom: 20px;">Twitters</h2>
 			<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
 			<cake:nocache>
 			<div id="tweets">
@@ -37,7 +44,7 @@ var commentsUrl = new Array();
        </div>
         <div id="colCenter">
         <section>
-        	<h1 class="greyTitle">Medios</h1>
+        	<h2 class="greyTitle">Medios</h2>
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
 				if (!empty($news)) {
@@ -45,7 +52,7 @@ var commentsUrl = new Array();
 					foreach ($news as $row) {
 						if (array_key_exists('News', $row)) {
 							$aux = $row['News'];
-							$aux['Media'] = $row['Media'];
+							$aux['Media'] = null;
 							$aux['User'] = $row['User'];
 							$aux['Source'] = $row['Feed']['Source'];
 							$aux['Feed'] = $row['Feed'];
@@ -105,7 +112,7 @@ var commentsUrl = new Array();
 
         <div id="colRight">
         <section>
-        	<h1 class="greyTitle">Blogs</h1>
+        	<h2 class="greyTitle">Blogs</h2>
         	<?php echo $html->image('degradee.png', array('alt'=>"", 'class'=>"degradee"));?>
         	<?php
         		//debug($blogs);
@@ -208,7 +215,7 @@ var commentsUrl = new Array();
         
         <section>
 			<?php
-				echo $this->element("widgets".DS. "img_rotator", array(/*'cache'=>'1 hour'*/));
+				//echo $this->element("widgets".DS. "img_rotator", array(/*'cache'=>'1 hour'*/));
 				
 				echo $this->element("widgets".DS. "video_rotator", array(/*'cache'=>'1 hour'*/));
         	?>
