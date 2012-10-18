@@ -103,7 +103,7 @@ SCR;
 
 
 				$blogs = Cache::read ( "blogs", 'long' );
-				if (empty($blogs) || true){
+				if (empty($blogs)){
 					$excludedSources=array(-1,0); //almaceno las fuentes que ya mostre
 					$blogs = array();
 					$i=0;
