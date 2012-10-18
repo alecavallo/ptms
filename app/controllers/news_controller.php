@@ -103,12 +103,12 @@ SCR;
 
 
 				$blogs = Cache::read ( "blogs", 'long' );
-				if (empty($blogs)){
+				if (empty($blogs) || true){
 					$excludedSources=array(-1,0); //almaceno las fuentes que ya mostre
 					$blogs = array();
 					$i=0;
 					$blogsPol = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=3",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 4 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 4 DAY)) AND News.category_id=3",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>2, 'Feed.source_id not'=>$excludedSources),
@@ -134,7 +134,7 @@ SCR;
 					}
 					
 					$blogsEcono = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=4",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 4 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 4 DAY)) AND News.category_id=4",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>2, 'Feed.source_id not'=>$excludedSources),
@@ -157,7 +157,7 @@ SCR;
 						}
 					}
 					$blogsCult = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=7",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 4 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 4 DAY)) AND News.category_id=7",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>2, 'Feed.source_id not'=>$excludedSources),
@@ -180,7 +180,7 @@ SCR;
 						}
 					}
 					$blogsDepo = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=8",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 4 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 4 DAY)) AND News.category_id=8",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>2, 'Feed.source_id not'=>$excludedSources),
@@ -203,7 +203,7 @@ SCR;
 						}
 					}
 					$blogsTecno = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=11",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 4 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 4 DAY)) AND News.category_id=11",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>2, 'Feed.source_id not'=>$excludedSources),
@@ -226,7 +226,7 @@ SCR;
 						}
 					}
 					$blogsSoc = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR)) AND News.category_id=16",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 4 DAY) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 4 DAY)) AND News.category_id=16",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>2, 'Feed.source_id not'=>$excludedSources),
