@@ -24,6 +24,7 @@
 echo $scripts_for_layout;
 
 ?>
+<meta http-equiv="content-language" content="es-ar">
 <?php 
 	if(empty($nofollow) || $nofollow=false){
 		echo '<meta name="robots" content="index, follow"/>';
