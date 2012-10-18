@@ -429,7 +429,7 @@ div#tweets div#loading p{
 	width: 36%;
 	padding: 0px 15px 0px 15px;
 	min-height: 1200px;
-	max-height: 1655px;
+	max-height: 1910px;
 	overflow: hidden;
 	border-left-width: 2px;
 	border-left-style: dotted;
@@ -465,7 +465,7 @@ img.degradee{
 	width:32%;
 	/*background-color:#FF0000;*/
 	min-height: 768px;
-	max-height: 1655px;
+	max-height: 1910px;
 	margin-bottom: 0px;
 }
 .colRightSize{

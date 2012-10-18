@@ -80,7 +80,8 @@ SCR;
 				$newsPapers = Cache::read ( "newsPapers", 'long' );
 				if (empty($newsPapers)){
 				$newsPapers = $this->News->getHomeNews();
-				$newsPapers = array_slice($newsPapers, 0, 8);
+				$newsPapers = array_slice($newsPapers, 0, 12);
+				//debug($newsPapers);
 				shuffle($newsPapers);
 				Cache::write ( "newsPapers", $newsPapers, 'long' );
 				}
@@ -89,10 +90,10 @@ SCR;
 				//agrego publicidad en posición aleatoria
 				if(!empty($newsAds)){
 					$pos = rand(1, 4);
-					$items = array($newsAds[0], $newsPapers[$pos]);
+					$items = array($newsAds[0]);
 					array_splice($newsPapers, $pos, 0, $items);
 					$pos = rand(6, 8);
-					$items = array($newsAds[1], $newsPapers[$pos]);
+					$items = array($newsAds[1]);
 					array_splice($newsPapers, $pos, 0, $items);
 				}
 				//debug(count($newsPapers));
@@ -293,16 +294,17 @@ SCR;
 				//genero el conjunto de ids para el SQL
 				$this->set('shown',$shown);
 				
+				$blogs = array_slice($blogs, 0,12);
 				//agrego publicidad en posición aleatoria
 				if (!empty($blogsAds)) {
 					$pos = rand(1, 3);
-					$items = array($blogsAds[0], $blogs[$pos]);
+					$items = array($blogsAds[0]);
 					array_splice($blogs, $pos, 0, $items);
 					$pos = rand(5, 8);
-					$items = array($blogsAds[1], $blogs[$pos]);
+					$items = array($blogsAds[1]);
 					array_splice($blogs, $pos, 0, $items);
 				}
-				$blogs = array_slice($blogs, 0,12);
+				
 				$this->set('blogs',$blogs);
 				//debug($blogs);
 				$tweets = $this->requestAction(array('controller'=>"twtr",'action'=>"getTimeline"));
