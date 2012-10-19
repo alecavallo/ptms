@@ -17,7 +17,7 @@ var tWidget = new TWTR.Widget({
 	  title: "Temas del momento",
 	  subject: '',
 	  width: 261,
-	  height: 490,
+	  height: 300,
 	  theme: {
 	    shell: {
 	      background: '#838281',
@@ -49,7 +49,7 @@ var tWidget = new TWTR.Widget({
 	  title: "Temas del momento",
 	  subject: '',
 	  width: 261,
-	  height: 218,
+	  height: 300,
 	  theme: {
 	    shell: {
 	      background: '#838281',

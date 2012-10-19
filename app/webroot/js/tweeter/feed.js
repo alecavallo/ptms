@@ -24,7 +24,7 @@ function Twitter(){
 	var retFunction= function(data){
 		
 		var feedSpeed = 7500;
-		var tweetsPerColumn=11;
+		var tweetsPerColumn=17;
 		var initial=true;
 		var delay=1;
 		var delta=1; //se le da 1 tiempo de accion de margen
@@ -54,7 +54,7 @@ function Twitter(){
 				}else{
 					sinceId = data[0].id;
 				}
-				if(data.length < 10){
+				if(data.length < 16){
 					delta = 12;
 				}
 			}else{
@@ -64,7 +64,7 @@ function Twitter(){
 			data.reverse();
 			template = jQuery('#tweetRow').html();
 			var fSize = data.length;
-			console.log("A mostrar: "+fSize+" tuits;")
+			console.log("A mostrar: "+fSize+" tuits;");
 			data.each(function(elm, index){
 				if(typeof(elm) != 'undefined'){
 					var tmplData = {
@@ -124,7 +124,7 @@ function Twitter(){
 	};
 	
 	var renderHomeFeed = function(data){
-		var tweetsPerColumn=13;
+		var tweetsPerColumn=17;
 		sinceId = data[1];
 		var tweets = data[0];
 		//var container = jQuery('#tweets');
@@ -145,7 +145,7 @@ function Twitter(){
 				count++;				
 			}
 		});
-		if(count < 	13){
+		if(count < 	17){
 			delay=19;
 		}
 		setTimeout(function(){

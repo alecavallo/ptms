@@ -83,7 +83,7 @@ class CategoriesController extends AppController {
 					$newsPapers = array();
 					$i=0;
 					$news = $this->News->find('all',array(
-							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 16 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 16 HOUR)) AND News.category_id={$id}",
+							'conditions'=>"(News.created >= DATE_SUB(CURDATE(), INTERVAL 20 HOUR) or News.modified >= DATE_SUB(CURDATE(), INTERVAL 20 HOUR)) AND News.category_id={$id}",
 							'contain'	=>	array(
 								'Feed'	=>	array(
 									'conditions'	=>	array('Feed.content_type'=>1),
@@ -112,10 +112,10 @@ class CategoriesController extends AppController {
 						}						
 					}
 					
-					if (count($aux)<10 && count($aux)!=count($news)) {
+					if (count($aux) <= 12 && count($aux)!=count($news)) {
 						$aux = array_merge($aux,array_slice($news, count($aux), 10-count($aux)));
 					}
-					$news = array_slice($aux, 0, 8);
+					$news = array_slice($aux, 0, 12);
 					Cache::write ( "news{$id}", $news, 'long' );
 				}
 				$shown=array();
@@ -163,10 +163,10 @@ class CategoriesController extends AppController {
 							$aux[]=$value;
 						}						
 					}
-					if (count($aux)<10 && count($aux)!=count($blogs)) {
+					if (count($aux)<12 && count($aux)!=count($blogs)) {
 						$aux = array_merge($aux,array_slice($blogs, count($aux), 10-count($aux)));
 					}
-					$blogs = array_slice($aux, 0, 8);
+					$blogs = array_slice($aux, 0, 12);
 
 					Cache::write ( "blogs{$id}", $blogs, 'long' );
 				}
@@ -186,6 +186,7 @@ class CategoriesController extends AppController {
 
 				$this->Category->recursive=-1;
 				$category = $this->Category->find('first', array('conditions'=>array('id'=>$id)));
+				$ycategory = $category; 
 				switch ($id) {
 					case 3:
 						$this->set("title_for_layout","Política");
@@ -225,7 +226,7 @@ class CategoriesController extends AppController {
 					break;
 					case 11:
 						$this->set("title_for_layout","Tecno & Ciencia");
-						$category['Category']['name'] = "Tecnología & Ciencia";
+						$ycategory['Category']['name'] = "Tecnología & Ciencia";
 						$meta = array(
 							'keywords'	=>	"tecnologia,ciencia,iphone,apple,windows,android,diseño,blogs,twitter,diarios",
 							'description'	=> "twitters, blogs y diarios sobre tecnología y ciencia"

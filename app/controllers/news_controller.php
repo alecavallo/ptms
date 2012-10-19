@@ -245,7 +245,7 @@ SCR;
 					);
 
 					$i=0;
-					while ($i < 9){
+					while ($i < 12){
 						$j = rand(0, 5);
 						$aux = null;
 						switch ($j) {
