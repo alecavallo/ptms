@@ -3,6 +3,7 @@ div.img-widget{
 	height:283px;
 	width: 100%;
 	overflow: hidden;
+	clear: both;
 }
 div.rotator-container{
 	width: 100%;

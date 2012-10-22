@@ -35,10 +35,90 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
         	echo $this->element("templates".DS."timeline_twitter", array('cache'=>"1 hour"));
         	
         	switch ($category['Category']['id']) {
+        		case 3:
+        			$object = <<<OBJ
+<OBJECT ID="MediaPlayer" WIDTH=260 HEIGHT=380 classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"
+					STANDBY="Loading Windows Media Player components..."
+					type="application/x-oleobject">
+					    <PARAM NAME="FileName" VALUE="mms://hsn.telecomdatacenter.com.ar/hsn">
+					    <PARAM NAME="ShowControls" VALUE="1">
+					    <PARAM NAME="ShowDisplay" VALUE="1">
+					    <PARAM NAME="ShowStatusBar" VALUE="1">
+					    <PARAM NAME="AutoSize" VALUE="1">
+					<EMBED TYPE="application/x-mplayer2" 
+					SRC="mms://hsn.telecomdatacenter.com.ar/hsn"
+					pluginspage="http://www.microsoft.com/Windows/Downloads/Contents/Products/MediaPlayer/" 
+					NAME="MediaPlayer"
+					WIDTH="260"
+					HEIGHT="380" 
+					ShowControls="1" 
+					ShowStatusBar="1" 
+					ShowDisplay="1" 
+					autostart="0"> 
+					</EMBED>
+					
+					</OBJECT>
+OBJ;
+					echo "<div id=\"senadoVid\"><h2 class=\"greyTitle\">Senado en vivo!</h2><br/>{$object}</div>";
+        			break;
         		case 4:
-        			echo '<div style="float: left; margin-top: 548px;"><h1 class="greyTitle">Cotización de divisas</h1><br/><br/><iframe frameborder="0" scrolling="no" height="115" width="273" allowtransparency="true" marginwidth="0" marginheight="0" src="http://fxrates.forexpros.es/index.php?pairs_ids=1505;2090;10453;&header-text-color=%23FFFFFF&header-bg=%23979797&curr-name-color=%230059b0&inner-text-color=%23000000&green-text-color=%232A8215&green-background=%23B7F4C2&red-text-color=%23DC0001&red-background=%23FFE2E2&inner-border-color=%23CBCBCB&border-color=%23cbcbcb&bg1=%23F6F6F6&bg2=%23ffffff&bid=show&ask=show&last=hide&open=hide&high=hide&low=hide&change=hide&last_update=hide"></iframe><br /><div style="width:273"><span style="float:left"><span style="font-size: 11px;color: #333333;text-decoration: none;">Cambio de Divisas entregado por <a href="http://www.forexpros.es" target="_blank" style="font-size: 11px;color: #06529D; font-weight: bold;" class="underline_link">Forexpros.es</a></span></span></div></div>';
+        			echo '<div style="float: left; margin-top: 548px;"><h2 class="greyTitle">Cotización de divisas</h2><br/><br/><iframe frameborder="0" scrolling="no" height="115" width="273" allowtransparency="true" marginwidth="0" marginheight="0" src="http://fxrates.forexpros.es/index.php?pairs_ids=1505;2090;10453;&header-text-color=%23FFFFFF&header-bg=%23979797&curr-name-color=%230059b0&inner-text-color=%23000000&green-text-color=%232A8215&green-background=%23B7F4C2&red-text-color=%23DC0001&red-background=%23FFE2E2&inner-border-color=%23CBCBCB&border-color=%23cbcbcb&bg1=%23F6F6F6&bg2=%23ffffff&bid=show&ask=show&last=hide&open=hide&high=hide&low=hide&change=hide&last_update=hide"></iframe><br /><div style="width:273"><span style="float:left"><span style="font-size: 11px;color: #333333;text-decoration: none;">Cambio de Divisas entregado por <a href="http://www.forexpros.es" target="_blank" style="font-size: 11px;color: #06529D; font-weight: bold;" class="underline_link">Forexpros.es</a></span></span></div></div>';
         		break;
         		
+        		case 7:
+        			$object = <<<OBJ
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="260" height="230" id="tvChart" align="middle">
+        <param name="movie" value="http://www.ibope.com.ar/ibope/wp/wp-content/themes/ibope/swf/tv.swf?siteUrl=http://www.ibope.com.ar/ibope/wp/wp-content/files_mf/Cuartos_20111117.xml&showIt=true" />
+        <param name="FlashVars" value="siteUrl=http://www.ibope.com.ar/ibope/wp/wp-content/files_mf/Cuartos_20111117.xml&showIt=true" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="play" value="true" />
+        <param name="loop" value="true" />
+        <param name="wmode" value="transparent" />
+        <param name="scale" value="showall" />
+        <param name="menu" value="true" />
+        <param name="devicefont" value="false" />
+        <param name="salign" value="" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <!--[if !IE]>-->
+        <object type="application/x-shockwave-flash" data="http://www.ibope.com.ar/ibope/wp/wp-content/themes/ibope/swf/tv.swf?siteUrl=http://www.ibope.com.ar/ibope/wp/wp-content/files_mf/Cuartos_20111117.xml&showIt=true" width="260" height="230">
+            <param name="movie" value="http://www.ibope.com.ar/ibope/wp/wp-content/themes/ibope/swf/tv.swf?siteUrl=http://www.ibope.com.ar/ibope/wp/wp-content/files_mf/Cuartos_20111117.xml&showIt=true" />
+            <param name="FlashVars" value="siteUrl=http://www.ibope.com.ar/ibope/wp/wp-content/files_mf/Cuartos_20111117.xml&showIt=true" />
+            <param name="quality" value="high" />
+            <param name="bgcolor" value="#ffffff" />
+            <param name="play" value="true" />
+            <param name="loop" value="true" />
+            <param name="wmode" value="transparent" />
+            <param name="scale" value="showall" />
+            <param name="menu" value="true" />
+            <param name="devicefont" value="false" />
+            <param name="salign" value="" />
+            <param name="allowScriptAccess" value="sameDomain" />
+            <!--<![endif]-->
+            <a href="http://www.adobe.com/go/getflash">
+                <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+            </a>
+            <!--[if !IE]>-->
+        </object>
+        <!--<![endif]-->
+    </object>
+OBJ;
+					echo "<div id=\"rating-tv\"><h2 class=\"greyTitle\">Rating</h2><br/>{$object}<span>fuente: IBOPE</span></div>";
+        			break;
+        		case 8:
+        			echo "<div id=\"resultados-futbol\"><h2 class=\"greyTitle\">Resultados fútbol</h2><iframe frameborder=\"no\" scrolling=\"no\" style=\"border: 0px solid rgb(255, 255, 255); height: 352px; width: 220px;\" src=\"http://www.marcadoresonline.com/widgets/widget2.php?mantenerse=si&liga=ARGENTINA\"></iframe></div>";
+        			break;
+        		case 11:
+        			$twtr_object = <<<OBJ
+<a class="twitter-timeline" href="https://twitter.com/search?q=tecnolog%C3%ADa" data-widget-id="260418475439296513">Tweets sobre "tecnología"</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        			
+OBJ;
+					echo $twtr_object;
+					break;
+        		case 16:
+        			echo "<div id=\"clima\" style=\"clear:both;\"><div style='width: 240px; height: 218px; background-image: url( http://vortex.accuweather.com/adcbin/netweather_v2/backgrounds/silver_240x420_bg.jpg ); background-repeat: no-repeat; background-color: #86888B;' ><div id='NetweatherContainer' style='height: 405px;' ><script src='http://netweather.accuweather.com/adcbin/netweather_v2/netweatherV2ex.asp?partner=netweather&tStyle=whteYell&logo=1&zipcode=SAM|AR|AR022|ARGENTINA|&lang=esp&size=12&theme=silver&metric=1&target=_self'></script></div><div style='text-align: center; font-family: arial, helvetica, verdana, sans-serif; font-size: 10px; line-height: 15px; color: #FFFFFF;' ><a style='color: #FFFFFF' href='http://www.accuweather.com/world-index-forecast.asp?partner=netweather&locCode=SAM|AR|AR022|ARGENTINA|&metric=1' >Weather Forecast</a> | <a style='color: #FFFFFF' href='http://www.accuweather.com/maps-satellite.asp' >Weather Maps</a> | <a style='color: #FFFFFF' href='http://www.accuweather.com/index-radar.asp?partner=accuweather&zipcode=SAM|AR|AR022|ARGENTINA|' >Weather Radar</a></div></div></div>";
+        			break;
         		default:
         			echo $this->element("twitter_trends");
         		break;
