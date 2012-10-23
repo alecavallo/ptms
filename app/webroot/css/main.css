@@ -782,39 +782,7 @@ min-height: 45px;
 	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr="#ffffff", endColorStr="#dededd");
 	background-color: dededd;
 }
-.controls{
-display: block;
-float:right;
-margin-right: 15px;
-}
-.controls .configure {
-	display: block;
-	float: right;
-	height: 15px;
-	width: 15px;
-	background: transparent url(../img/configure.png) no-repeat;
-	margin: 0px 3px;
-}
-.controls .minimize {
-	display: block;
-	float: right;
-	height: 15px;
-	width: 15px;
-	background: transparent url(../img/colapse.png) no-repeat center;
-	margin: 0px 3px;
-}
 
-a.minimize, a.maximize{
-	outline: none;
-}
-.controls .maximize {
-	display: block;
-	float: right;
-	height: 15px;
-	width: 15px;
-	background: transparent url(../img/expand.png) no-repeat center;
-	margin: 0px 3px;
-}
 #container #content .longWidget .widgetContent {
 	background-color: white;
 	background-image: url(../img/wideWidgetBorders-02.png);
