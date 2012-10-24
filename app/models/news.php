@@ -369,7 +369,7 @@ from
 	@num2 := if(@group2 = user_id, @num2 + 1, 1) as usr_number,
 	@group2 := user_id as dummy2
 	from news
-	where news.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) and rating > 1
+	where news.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) and rating > 1 and news.content_type=1
 	order by news.feed_id, news.user_id, news.rating desc, news.votes desc, news.visits desc) as News
 left join feeds Feed on News.feed_id=Feed.id
 left join sources Source on Source.id=Feed.source_id
