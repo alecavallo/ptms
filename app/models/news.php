@@ -369,13 +369,13 @@ from
 	@num2 := if(@group2 = user_id, @num2 + 1, 1) as usr_number,
 	@group2 := user_id as dummy2
 	from news
-	where news.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) and rating > 1 and news.content_type=1
+	where news.created >= DATE_SUB(CURDATE(), INTERVAL 12 HOUR) and rating > 1
 	order by news.feed_id, news.user_id, news.rating desc, news.votes desc, news.visits desc) as News
 left join feeds Feed on News.feed_id=Feed.id
 left join sources Source on Source.id=Feed.source_id
 left join categories Category on News.category_id=Category.id
 left join users User on User.id=News.user_id
-where (News.row_number <={$feedCount} and dummy is not null and Feed.content_type=1) or (News.usr_number <={$feedCount} and dummy2 is not null)
+where Feed.content_type=1 and ((News.row_number <={$feedCount} and dummy is not null) or (News.usr_number <={$feedCount} and dummy2 is not null))
 order by News.rating desc, News.votes desc, News.visits desc, News.created desc, Feed.rating desc;
 QRY;
 
