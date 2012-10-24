@@ -59,6 +59,37 @@ a:hover{
 	text-decoration: underline;
 	color: rgb(137,195,63);
 }
+div#sn-bar {
+	position: relative;
+	float: right;
+	top: 18px;
+	margin-right: 20px;
+}
+div#sn-bar a.sn-button{
+	display:block;
+	height: 20px;
+	margin-right: 15px;
+	float: left;	
+}
+div#sn-bar a#facebook{
+	background: transparent url("/img/btn_facebook.png");
+	background-position: top;
+	width: 10px;
+}
+div#sn-bar a#facebook:hover{
+	background-position: bottom;
+}
+div#sn-bar a#twitter{
+	background: transparent url("/img/btn_twitter.png");
+	background-position: top;
+	width: 28px;
+}
+div#sn-bar a#twitter:hover{
+	background-position: bottom;
+}
+div#sn-bar a:hover{
+	background-position: bottom;
+}
 h3{
 	font-family: 'Ubuntu', sans-serif;
 	color:#171717;

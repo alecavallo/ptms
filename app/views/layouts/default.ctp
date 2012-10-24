@@ -61,7 +61,8 @@ echo $scripts_for_layout;
 <?php echo $this->Facebook->init();?>
 <div class="header" id="header">
 	<?php echo $html->link($html->image("logo_posteamos.png", array('alt'=>"Posteamos.com", 'id'=>"logo")),"/", array('escape'=>false))?>
-
+	
+	
 	<?php
 		$search = $form->create('News', array('id'=>"topSearch", 'type'=>"post", 'url'=>array('controller'=>"news", 'action'=>"search")));
 		$search .= $form->input('pattern', array('label'=>"",'size'=>25,'maxlength'=>150,'class'=>"search"));
@@ -69,8 +70,12 @@ echo $scripts_for_layout;
 		$search .= $form->end();
 		echo $this->Html->div('searchbox', $search, array('id'=>"searchContainer"));
 	?>
-	<?php echo $this->element('menu/generalMenu', array('city'=>$city/*, 'cache'=>'10 minutes'*/))?>
-
+	<div id="sn-bar">
+		<a id="facebook" href="http://www.facebook.com/posteamos.argentina" class="sn-button" target="_blank"></a>
+		<a id="twitter" href="http://twitter.com/posteamos" class="sn-button" target="_blank"></a>
+	</div>
+	<?php echo $this->element('menu/generalMenu', array('city'=>$city, 'cache'=>'10 minutes'))?>
+	
 </div>
 
 <?php 
@@ -85,12 +90,10 @@ echo $scripts_for_layout;
 	<div id="user">
 		<?php echo $this->element('users/loggedin', array('loggedUser'=>$loggedUser))?>
 	</div>
-	<div id="snetworks">
+	<!-- <div id="snetworks">
 		 <div>
-			<!-- Place this tag where you want the +1 button to render. -->
 			<div class="g-plusone" data-size="medium" data-href="http://www.posteamos.com/"></div>
 			
-			<!-- Place this tag after the last +1 button tag. -->
 			<script type="text/javascript">
 			  window.___gcfg = {lang: 'es-419'};
 			
@@ -100,7 +103,7 @@ echo $scripts_for_layout;
 			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 			  })();
 			</script>
-		</div> 
+		</div>  
 	
 		<div>
 			<div class="fb-like" data-href="http://www.posteamos.com" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false" data-font="segoe ui"></div>
@@ -110,7 +113,7 @@ echo $scripts_for_layout;
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 	</div>
-	</div>
+	</div>-->
 <div id="container">
 	
 	<?php echo $this->Session->flash('email'); ?>
