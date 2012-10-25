@@ -409,7 +409,7 @@ QRY;
 		return $result;
 	}
 	
-	function getRelated($newsId, $categoryId, $datetime, $title, $fulltext, $minRelevance=6, $contentType=0){
+	function getRelated($newsId, $categoryId, $datetime, $title, $fulltext, $minRelevance=10, $contentType=0){
 		if (!is_int($newsId) || !is_int($categoryId) || !is_numeric($minRelevance)) {
 			//return false;
 		}

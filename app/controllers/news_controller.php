@@ -816,7 +816,7 @@ function search(){
 			
 			/*se setean los datos para las noticias relacionadas*/
 			$datetime = date("Y-m-d", strtotime("-2 day"));
-			$related = $this->News->getRelated($noticia['News']['id'], $noticia['Category']['id'], $datetime, $noticia['News']['title'], $noticia['News']['title']." ".$noticia['News']['summary']." ".$noticia['News']['body'], 25,1);
+			$related = $this->News->getRelated($noticia['News']['id'], $noticia['Category']['id'], $datetime, $noticia['News']['title'], $noticia['News']['title']." ".$noticia['News']['summary']." ".$noticia['News']['body'], 27,1);
 			$this->set('related',$related);
 
 			$this->set("title_for_layout",$noticia['News']['title']);
