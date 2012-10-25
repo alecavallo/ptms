@@ -117,7 +117,7 @@ function Twitter(){
 			//jQuery.proxy(function(){
 				setTimeout(function(){
 					//alert('Recursion!!!!');
-					t.getList('posteamos',glistName,gresultsPerpage,1, tDomelm);
+					t.getList('posteamosArg',glistName,gresultsPerpage,1, tDomelm);
 				},feedSpeed*(delay+delta));
 			//}, this)
 		}

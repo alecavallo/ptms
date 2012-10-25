@@ -12,7 +12,7 @@ if($this->here == "/"){
 var tWidget = new TWTR.Widget({
 	  version: 2,
 	  type: 'search',
-	  search: "@posteamos",
+	  search: "@posteamosArg",
 	  interval: 30000,
 	  title: "Temas del momento",
 	  subject: '',
@@ -44,7 +44,7 @@ var tWidget = new TWTR.Widget({
 var tWidget = new TWTR.Widget({
 	  version: 2,
 	  type: 'search',
-	  search: "@posteamos",
+	  search: "@posteamosArg",
 	  interval: 30000,
 	  title: "Temas del momento",
 	  subject: '',
