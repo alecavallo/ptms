@@ -423,7 +423,7 @@ margin-bottom: 10px;
 position:relative;
 float:left;
 clear:left;
-width:67%;
+width:74%;
 padding-top: 20px;
 overflow: hidden;
 }	
@@ -495,7 +495,7 @@ img.degradee{
 #colRight{
 	position:relative;
 	float:right;
-	width:32%;
+	width:20%;
 	/*background-color:#FF0000;*/
 	min-height: 768px;
 	max-height: 1910px;
