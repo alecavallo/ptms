@@ -492,7 +492,7 @@ img.degradee{
 	position: relative;
 }
 
-#colRight{
+#container #content #news_content #colRight{
 	position:relative;
 	float:right;
 	width:20%;
@@ -501,10 +501,20 @@ img.degradee{
 	max-height: 1910px;
 	margin-bottom: 10px;
 }
+
+#container #content #colRight{
+	position:relative;
+	float:right;
+	width:32%;
+	/*background-color:#FF0000;*/
+	min-height: 768px;
+	max-height: 1910px;
+	margin-bottom: 10px;
+}
 .colRightSize{
 	width:264px;
 }
-}
+
 #container #content #colLeft #main {
 	min-height:320px;
 	background-color:#F7F7F7;
