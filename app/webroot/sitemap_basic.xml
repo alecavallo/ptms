@@ -4,10 +4,7 @@
 			<loc>http://www.posteamos.com/</loc><priority>1</priority><changefreq>daily</changefreq>
 		</url>
 		<url>
-			<loc>http://www.posteamos.com/postea.html</loc><priority>0.3</priority><changefreq>monthly</changefreq>
-		</url>
-		<url>
-			<loc>http://www.posteamos.com/columnas-pendientes.html</loc><priority>0.3</priority><changefreq>daily</changefreq>
+			<loc>http://www.posteamos.com/columnas-pendientes.html</loc><priority>1</priority><changefreq>daily</changefreq>
 		</url>
 		<url>
 			<loc>http://www.posteamos.com/seccion/politica.html</loc><priority>1</priority><changefreq>daily</changefreq>
@@ -32,7 +29,5 @@
 		</url>
 		<url>
 			<loc>http://www.posteamos.com/que-es-posteamos.html</loc><priority>1</priority><changefreq>yearly</changefreq>
-		</url>
-		
-	
+		</url>		
 	</urlset>

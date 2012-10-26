@@ -60,7 +60,7 @@
 	/**Registracion**/
 	Router::connect('/registracion', array('controller' => "Users", "action" => "register"));
 	
-	Router::parseExtensions('html');
+	Router::parseExtensions('html','xml');
 	Router::connect('/seccion/:name',
 		array('controller'=>"Categories", 'action'=>'view', '3'),
 		array('name'=>"politica")
@@ -127,3 +127,4 @@
 			'alias'	=>	"[a-zA-z0-9]+"
 		)
 	);
+	Router::connect('/sitemap', array('controller' => 'Sitemaps', 'action' => 'index'));
