@@ -372,7 +372,7 @@ class TwtrController extends AppController {
 		$followers = $this->Twitter->statuses_followers();*/
 		App::import('Vendor', 'tmhOAuth', array('file'=>"tmhOAuth".DS."tmhOAuth.php"));
 		$tmhOAuth = new tmhOAuth(array(
-		  'consumer_key' => 'posteamos',
+		  'consumer_key' => 'posteamosArg',
 		  'consumer_secret' => '27386066',
 		));
 		debug($tmhOAuth);

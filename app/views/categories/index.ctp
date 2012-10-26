@@ -26,7 +26,7 @@ echo $this->Html->script(array('effects', 'common'),array('inline'=>false, 'once
 				var section = "<?php echo str_ireplace(" & ", "-", $category['Category']['name']) ?>";
 				jQuery(document).ready(function(){
 					window.t = new Twitter();
-					t.getList('posteamos',section,50,1,'#tweets');
+					t.getList('posteamosArg',section,50,1,'#tweets');
 				});
 			</script>
 			
