@@ -74,6 +74,10 @@ class AppController extends Controller {
 	function beforeRender(){
 		$user = $this->Auth->user();
 		$this->set('loggedUser',$user);
+		//TODO mejorar para lograr configuración multisitios (españa, mexico, etc)
+		if (!empty($meta) && !array_key_exists('og:site_name')) {
+			$meta['og:site_name']="Posteamos.com";
+		}
 	}
 
 	function isAuthorized() {

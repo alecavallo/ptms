@@ -25,24 +25,35 @@ echo $scripts_for_layout;
 
 ?>
 <meta http-equiv="content-language" content="es-ar">
-<?php 
+
+<?php
+	//TODO mejorar la forma de aplicar metatags por defecto 
 	if(empty($nofollow) || $nofollow=false){
 		echo '<meta name="robots" content="index, follow"/>';
 	}
 	if(empty($meta) || !array_key_exists('description', $meta)){
-		//echo $this->Html->meta('description', "Un sitio de noticias interactivo y participativo");
 		echo '<meta name="description" content="Posteamos.com, un sitio de noticias interactivo y participativo donde encontraras noticias publicadas a traves de medios, blogs y twitter" />';
 	}else {
 		echo $this->Html->meta('description', $text->truncate($meta['description'], 160, array('ending'=>"", 'exact'=>true, 'html'=>true)));
+		unset($meta['description']);
 	}
 ?>
 <?php 
 	if(empty($meta) || !array_key_exists('keywords', $meta)){
-		//echo $this->Html->meta('keywords', "posteamos,noticias,blogs,diarios,argentina,deportes,empresas,politica,economia,sociedad,tecnologia");
 		echo '<meta name="keywords" content="posteamos,noticias,diarios,argentina,deportes,empresas,politica,economia,sociedad,tecnologia,twitter,medios,blogs,ultimas noticias" />';
 	}else {
 		echo $this->Html->meta('keywords', $meta['keywords']);
+		unset($meta['keywords']);
 	}
+?>
+
+<?php 
+//agrego el resto de los encabezados no predeterminados
+if (!empty($meta)) {
+	foreach ($meta as $key => $value) {
+		echo "<meta property='{$key}' content='{$value}'>";
+	}
+}
 ?>
 <!-- <meta itemprop="name" content="Posteamos.com">
 <meta itemprop="description" content="Un sitio de noticias interactivo y participativo">

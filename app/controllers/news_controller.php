@@ -821,7 +821,30 @@ function search(){
 
 			$this->set("title_for_layout",$noticia['News']['title']);
 			$aux['description'] = $noticia['News']['summary'];
-			$this->set("meta",$aux);
+			$meta = array();
+			if (!empty($noticia['News']['summary'])) {
+				$meta['description'] = $noticia['News']['summary'];
+			}
+			
+			if (!empty($noticia) && !empty($noticia['News']['title'])) {
+				$meta['og:title'] = $noticia['News']['title'];
+			}
+			if (!empty($images) && !empty($images[0]['Media']['url'])) {
+				$meta['og:image'] = $images[0]['Media']['url'];
+			}else {
+				$meta['og:image'] = Router::url("/",true)."img/logo-con-fondo.jpg";
+			}
+			$meta['og:type']="article";
+			$meta['article:published_time']=$noticia['News']['created'];
+			$category = array_key_exists(0, $noticia['Category'])?$noticia['Category'][0]['name']:$noticia['Category']['name'];
+			$meta['article:section']=$category;
+			if (!empty($noticia['News']['tags']) && false) {//deshabilitado por el momento
+				$aux = explode(",", $noticia['News']['tags']);
+				foreach ($aux as $value) {
+					$meta['article:tag']='';
+				}
+			}
+			$this->set("meta",$meta);
 			$this->set('category', $categoria);
 			$this->set('usr', $usuario);
 			$this->set('nVisits', $visitas);
@@ -1066,6 +1089,7 @@ function search(){
 			return ;
 		}
 		$news = $this->Session->read('newsAdd');
+		
 		switch ($action) {
 			case 'guardar':
 			 $news['News']['published']=0;
@@ -1083,7 +1107,7 @@ function search(){
 			case 'publicar':
 			 $news['News']['published']=1;
 			 $tmpimgurl = $news['Media']['url'];
-			 $news['Media']['url'] = str_ireplace("/tmp", "/", $news['Media']['url']);
+			 $news['Media']['url'] = str_ireplace("tmp_", "", $news['Media']['url']);
 			 rename(WWW_ROOT.str_ireplace("/", "\\", $tmpimgurl), WWW_ROOT.str_ireplace("/", "\\", $news['Media']['url']));
 			 if ($this->News->save($news)) {
 			 	$newsId =$this->News->id;
