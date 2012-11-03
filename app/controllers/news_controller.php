@@ -820,7 +820,7 @@ function search(){
 			$this->set('related',$related);
 
 			$this->set("title_for_layout",$noticia['News']['title']);
-			$aux['description'] = $noticia['News']['summary'];
+			$aux['description'] = Sanitize::html($noticia['News']['summary'], array('remove' => true));
 			$meta = array();
 			if (!empty($noticia['News']['summary'])) {
 				$meta['description'] = $noticia['News']['summary'];
