@@ -33,7 +33,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 0);
 
 	/**DEFINE EL TIEMPO DE SINCRONIZACION DE LAS NOTICIAS EN VIVO**/
 	Configure::write('liveSync', 50);
@@ -319,9 +319,9 @@
 		));
 	Cache::config('vShort', array(
 			'engine' => 'File',
-			'duration'=> '+30 seconds',
+			'duration'=> '+5 minutes',
 			'probability'=> 100,
-			'path' => CACHE . 'short' . DS,
+			'path' => CACHE . 'vshort' . DS,
 		));
 	Cache::config('long', array(
 			'engine' => 'File',

@@ -420,7 +420,7 @@ SCR;
 function getTweets($page=1, $trpp = 200, $resPage=0, $rpp=15){
 	$this->autoRender=false;
 
-	if (($timeline = Cache::read ( "twitterTl{$page}", 'short' )) === false) {
+	if (($timeline = Cache::read ( "twitterTl{$page}", 'short' ))) {
 				$twitters = $this->News->Feed->find('all', array(
 						'contain'	=>	array(
 							'Source'	=>	array(),
