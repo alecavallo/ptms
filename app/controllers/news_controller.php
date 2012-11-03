@@ -593,7 +593,7 @@ function search(){
 				'Media'		=>	array()
 
 			),
-			'limit'	=>	10,
+			'limit'	=>	13,
 			'order'	=>	"News.created desc, News.visits desc, News.rating desc"
 		)
 	);
@@ -611,7 +611,7 @@ function search(){
 				'Media'		=>	array()
 
 			),
-			'limit'	=>	10,
+			'limit'	=>	13,
 			'order'	=>	"News.created desc, News.visits desc, News.rating desc"
 		)
 	);

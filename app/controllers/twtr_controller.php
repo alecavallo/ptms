@@ -328,7 +328,7 @@ class TwtrController extends AppController {
 		$this->autoLayout=false;
 		$this->autoRender = false;
 
-		$results = $this->Twitter->search($qry);
+		$results = $this->Twitter->search($qry, null, 25);
 		return $results['results'];
 	}
 
