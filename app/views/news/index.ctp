@@ -1,11 +1,9 @@
 <?php
 echo $this->Html->script(array('tweeter/jquery',  'underscore', 'tweeter/feed', 'prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
-//echo $this->Html->script(array('prototype', 'Marquee'),array('inline'=>false, 'once'=>true));
-echo $this->Html->script(array('effects', 'common', 'scriptaculous'),array('inline'=>false, 'once'=>true));
+echo $this->Html->script(array('common'),array('inline'=>false, 'once'=>true));
 //echo $this->Html->script('scriptaculous',array('inline'=>false));
 //echo $this->Html->script('common',array('inline'=>false));
 ?>
-<?php echo $this->element('news'.DS.'popup'/*, array('cache'=>'30 minutes')*/)?>
 <script type="text/javascript">
 <!--
 var commentsId = new Array();
@@ -39,7 +37,7 @@ var commentsUrl = new Array();
 					t.getHomeFeed(0, '#tweets');
 				});
 			</script>
-        	<?php echo $this->element("twitter_trends", array('cache'=>'3 minutes'));?>
+        	<?php //echo $this->element("twitter_trends", array('cache'=>'3 minutes'));?>
        </section>
        </div>
         <div id="colCenter">
@@ -227,3 +225,4 @@ var commentsUrl = new Array();
             <br clear="all"/>
         <!-- <div id="otherNewsContainer" class="otherNewsContainer">
     </div> -->
+    <?php echo $this->element('news'.DS.'popup', array('cache'=>'30 minutes'))?>
