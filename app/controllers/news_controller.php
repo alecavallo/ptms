@@ -310,28 +310,32 @@ SCR;
 				$tweets = $this->requestAction(array('controller'=>"twtr",'action'=>"getTimeline"));
 				
 				/*obtengo las primeras imágenes de la semana*/
-				$imgs = $this->News->Media->imgListing(0);
-				$img_array=array();
-				for ($i = 0; $i <= count($imgs); $i=$i+3) {
-					$aux=array();
-					if (array_key_exists($i, $imgs)) {
-						$aux[0]=$imgs[$i];
-						$url = "/medios/".Inflector::slug($imgs[$i]['Source']['name'],"-")."/noticia/{$imgs[$i]['News']['id']}-".Inflector::slug($imgs[$i]['News']['title'],"-").".html";
-						$aux[0]['News']['url'] = $url;
+				$img_array = Cache::read ( "images", 'long' );
+				if($img_array===false){
+					$imgs = $this->News->Media->imgListing(0);
+					$img_array=array();
+					for ($i = 0; $i <= count($imgs); $i=$i+3) {
+						$aux=array();
+						if (array_key_exists($i, $imgs)) {
+							$aux[0]=$imgs[$i];
+							$url = "/medios/".Inflector::slug($imgs[$i]['Source']['name'],"-")."/noticia/{$imgs[$i]['News']['id']}-".Inflector::slug($imgs[$i]['News']['title'],"-").".html";
+							$aux[0]['News']['url'] = $url;
+						}
+						if (array_key_exists($i+1, $imgs)) {
+							$aux[1]=$imgs[$i+1];
+							$url = "/medios/".Inflector::slug($imgs[$i+1]['Source']['name'],"-")."/noticia/{$imgs[$i+1]['News']['id']}-".Inflector::slug($imgs[$i+1]['News']['title'],"-").".html";
+							$aux[1]['News']['url'] = $url;
+						}
+						if (array_key_exists($i+2, $imgs)) {
+							$aux[2]=$imgs[$i+2];
+							$url = "/medios/".Inflector::slug($imgs[$i+2]['Source']['name'],"-")."/noticia/{$imgs[$i+2]['News']['id']}-".Inflector::slug($imgs[$i+2]['News']['title'],"-").".html";
+							$aux[2]['News']['url'] = $url;
+						}
+						if(!empty($aux)){
+							$img_array[]=$aux;
+						}
 					}
-					if (array_key_exists($i+1, $imgs)) {
-						$aux[1]=$imgs[$i+1];
-						$url = "/medios/".Inflector::slug($imgs[$i+1]['Source']['name'],"-")."/noticia/{$imgs[$i+1]['News']['id']}-".Inflector::slug($imgs[$i+1]['News']['title'],"-").".html";
-						$aux[1]['News']['url'] = $url;
-					}
-					if (array_key_exists($i+2, $imgs)) {
-						$aux[2]=$imgs[$i+2];
-						$url = "/medios/".Inflector::slug($imgs[$i+2]['Source']['name'],"-")."/noticia/{$imgs[$i+2]['News']['id']}-".Inflector::slug($imgs[$i+2]['News']['title'],"-").".html";
-						$aux[2]['News']['url'] = $url;
-					}
-					if(!empty($aux)){
-						$img_array[]=$aux;
-					}
+					Cache::write ( "images", $img_array, 'long' );
 				}
 				
 				$this->set('images',$img_array);
