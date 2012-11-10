@@ -56,7 +56,7 @@ class media extends AppModel {
 		)
 	);
 
-	function imgListing($category_id=0, $count=100, $pag=1){
+	function imgListing($category_id=0, $count=7, $pag=1){
 		if ($category_id==0) {
 			$category_condition="";
 		}else {
@@ -72,7 +72,7 @@ inner join feeds as Feed on Feed.id=News.feed_id
 inner join sources as Source on Source.id=Feed.source_id
 where News.created >= DATE_SUB(CURDATE(), INTERVAL 3 DAY) and Media.type=1 {$category_condition} and (Media.url like "%.jpg" or Media.url like "%.png" or Media.url like "%.gif" or Media.url like "%.jpeg")
 order by News.rating desc, News.created desc, rand()
-limit 1,120;
+limit 1,{$count};
 QRY;
 		}
 		

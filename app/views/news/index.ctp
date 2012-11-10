@@ -15,7 +15,7 @@ var commentsUrl = new Array();
 		<?php echo $this->element('news'.DS.'marquee', array('cache'=>'30 minutes'))?>
 		<section>
 			<?php
-				echo $this->element("widgets".DS. "img_rotator", array(/*'cache'=>'1 hour'*/));
+				echo $this->element("widgets".DS. "img_rotator", array(/*'cache'=>'30 minutes'*/));
 			?>
 		</section>
 		<br/>
@@ -32,12 +32,10 @@ var commentsUrl = new Array();
         	</div>
         	</cake:nocache>
         	<script type="text/javascript">
-				jQuery(document).ready(function(){
 					window.t = new Twitter();
 					t.getHomeFeed(0, '#tweets');
-				});
 			</script>
-        	<?php //echo $this->element("twitter_trends", array('cache'=>'3 minutes'));?>
+        	<?php echo $this->element("twitter_trends", array('cache'=>'2 minutes'));?>
        </section>
        </div>
         <div id="colCenter">
@@ -173,31 +171,11 @@ var commentsUrl = new Array();
         	jQuery("div.news").hover(
                 function(){
                 	window.dflt = jQuery(this).html();
-                	//alert(window.dflt);
-                	var id = jQuery(this).attr('id');
-                    /*var link = document.createElement('span');
-                    link.innerHTML="ampliar &gt;&gt;";*/
-                    
+                	var id = jQuery(this).attr('id');   
                     jQuery('div#'+id+" h3 a").html(jQuery('div#'+id+" #title"+id).val());
-                    /*link.onclick = function(param1,param2){
-                        var id = jQuery(this).closest('div.news').attr('id');
-						//alert(jQuery(this).closest('div.news').attr('id'));
-						//jQuery('div#'+id+" h3 a").html(jQuery('div#'+id+" #title"+id).val());
-						jQuery(this).closest('div.news').addClass('expanded');
-						jQuery(this).closest('div.news').removeClass('collapsed');
-						jQuery('div.news').unbind('hover');
-                    	jQuery('div#'+id+" h3 a").html(jQuery('div#'+id+" #title"+id).val());
-                    	jQuery('div#'+id+" p.summary").html(jQuery('div#'+id+" #summary"+id).val());
-                    	//jQuery('div#'+id+" div.mainComments").html('');
-                    	jQuery('div#'+id+" div.mainComments").load("/news/getComment/"+id);
-                    	
-                    };*/
-                    //link.setAttribute('onclick',alert('hola'););
-                    
-					//jQuery(this).find("div.mainComments").append(link);
+  
         		},
         		function(){
-            		//alert(window.dflt);
 					jQuery(this).html(dflt);
         		}
            	);
@@ -213,9 +191,7 @@ var commentsUrl = new Array();
         
         <section>
 			<?php
-				//echo $this->element("widgets".DS. "img_rotator", array(/*'cache'=>'1 hour'*/));
-				
-				echo $this->element("widgets".DS. "video_rotator", array(/*'cache'=>'1 hour'*/));
+				echo $this->element("widgets".DS. "video_rotator", array(/*'cache'=>'30 minutes'*/));
         	?>
 
                 <br clear="all"/>

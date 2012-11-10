@@ -168,7 +168,7 @@ class YoutubeFavorite extends AppModel {
 		
 		$categorySlug = md5($conditions['country'].$conditions['type'].$conditions['time'].str_ireplace(" & ", "%7C",$conditions['category']));
 
-		if (($aux = Cache::read ( "youtube_list_{$categorySlug}", 'long' )) === false ) {
+		if (($aux = Cache::read ( "youtube_list_{$categorySlug}", 'long' )) === false) {
 			
 			App::import('Core', 'HttpSocket');
 			$HttpSocket = new HttpSocket();
@@ -201,7 +201,7 @@ class YoutubeFavorite extends AppModel {
 
 				foreach ($items as $row) {
 					if (!array_key_exists('Content', $row['Group'])) {
-						continue;
+						//continue;
 					}
 					$url = null;
 					if (array_key_exists(0, $row['Group']['Content'])) {
@@ -209,14 +209,15 @@ class YoutubeFavorite extends AppModel {
 					}elseif (array_key_exists('url', $row['Group']['Content'])){
 						$url=$row['Group']['Content']['url'];
 					}else {
-						continue;
+						$url="";
 					}
+					$videoId=$row['Group']['videoid'];
 					if (!is_array($row['title'])) {
 						$title = $row['title'];
 					}else{
 						$title = $row['title']['value'];
 					}
-					$aux[] = array('title'=>$title, 'url'=>$url);
+					$aux[] = array('title'=>$title, 'url'=>$url, 'videoid'=>$videoId);
 					
 				}
 			}else {

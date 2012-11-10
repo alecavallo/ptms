@@ -312,7 +312,7 @@ SCR;
 				/*obtengo las primeras imágenes de la semana*/
 				$img_array = Cache::read ( "images", 'long' );
 				if($img_array===false){
-					$imgs = $this->News->Media->imgListing(0);
+					$imgs = $this->News->Media->imgListing(0, 60);
 					$img_array=array();
 					for ($i = 0; $i <= count($imgs); $i=$i+3) {
 						$aux=array();

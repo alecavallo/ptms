@@ -75,21 +75,22 @@ var tWidget = new TWTR.Widget({
 <?php } ?>
 
 function parseTrends(twitterTrends){
-
-	if(twitterTrends && tI == -1){
-		glbTwitter = twitterTrends[0];
-		glbTCount = glbTwitter.trends.length;
-		tWidget.footerText = "";
-	}
-	if(tI < glbTCount-1){
-		tI ++;
-	}else{
-		tI = 0;
-	}
-
-	renderWidget(glbTwitter.trends[tI].name, glbTwitter.trends[tI].name);
-
-	window.setTimeout(parseTrends, 300000);
+	jQuery(window).load(function() {
+		if(twitterTrends && tI == -1){
+			glbTwitter = twitterTrends[0];
+			glbTCount = glbTwitter.trends.length;
+			tWidget.footerText = "";
+		}
+		if(tI < glbTCount-1){
+			tI ++;
+		}else{
+			tI = 0;
+		}
+	
+		renderWidget(glbTwitter.trends[tI].name, glbTwitter.trends[tI].name);
+	
+		window.setTimeout(parseTrends, 300000);
+	});
 }
 
 function renderWidget(search, title){

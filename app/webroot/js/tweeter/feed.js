@@ -136,11 +136,13 @@ function Twitter(){
 				if(count < tweetsPerColumn){
 					tDomelm.prepend(row);
 				}else{
+					jQuery(document).ready(function(){
 					setTimeout(function(){
 						tDomelm.prepend(row);
 						jQuery('div.twitterNews:last').remove();
 					}, feedSpeed*delay);
 					delay++;
+					});
 				}
 				count++;				
 			}
@@ -148,9 +150,11 @@ function Twitter(){
 		if(count < 	17){
 			delay=19;
 		}
-		setTimeout(function(){
-			t.getHomeFeed(sinceId);
-		}, feedSpeed*(delay+1));
+		jQuery(document).ready(function(){
+			setTimeout(function(){
+				t.getHomeFeed(sinceId);
+			}, feedSpeed*(delay+1));
+		});
 		
 	};
 	

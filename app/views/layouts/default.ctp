@@ -1,18 +1,33 @@
 <!DOCTYPE html>
+<html lang="es" >
 <?php $city = $session->read('City');?>
-<?php echo $this->Facebook->html();?>
+<?php //echo $this->Facebook->html();?>
 <head>
 <?php echo $this->Html->charset('utf-8'); ?>
 <title>
 <?php __("{$title_for_layout}")?>
 </title>
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Arimo:400,400italic:latin', 'Ubuntu:700:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); </script>
 
-<!-- <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
-<link href='http://fonts.googleapis.com/css?family=Arimo:400,400italic|Ubuntu:700' rel='stylesheet' type='text/css'>
 <?php
 
 		echo $this->Html->meta('favicon.ico','favicon.ico',array('type' => 'icon'));
 
+?>
+<!-- <link href='http://fonts.googleapis.com/css?family=Arimo:400,400italic|Ubuntu:700' rel='stylesheet' type='text/css'> -->
+<?php 
 		echo $this->Html->css('main');
 
 		echo $this->Html->css('menu');
