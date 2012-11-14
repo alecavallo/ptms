@@ -27,6 +27,9 @@ div.rotator-container div.img-row div.img-container{
 	overflow: hidden;
 	background-color: #555555;
 }
+div.rotator-container div.img-row div.img-container img{
+	width: 100%
+}
 div.rotator-container div.img-row div.img-container img.news-img{
 	margin-top: auto;
 	margin-bottom:auto;
