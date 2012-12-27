@@ -15,7 +15,12 @@ if (isset($loggedUser) && !empty($loggedUser)) {
 	
 	<span id="u-data">
 		<?php echo $html->link($loggedUser['User']['first_name']." ".$loggedUser['User']['last_name'],array('controller'=>"users",'action'=>"edit", $loggedUser['User']['id']),array('escape'=>false))?>&nbsp;
-		<span style='color:rgb(100,100,100);font-weight: normal;'>(<?php echo $html->link("editar",array('controller'=>"users",'action'=>"edit", $loggedUser['User']['id']),array('escape'=>false))?> / <?php echo $facebook->logout(array('redirect' => '/users/logout'), 'cerrar sesión');?>)</span>	
+		<?php if($facebook_user){?>
+			<span style='color:rgb(100,100,100);font-weight: normal;'>(<?php echo $html->link("editar",array('controller'=>"users",'action'=>"edit", $loggedUser['User']['id']),array('escape'=>false))?> / <?php echo $facebook->logout(array('redirect' => '/users/logout'), 'cerrar sesión');?>)</span>
+		<?php }else{?>
+			<span style='color:rgb(100,100,100);font-weight: normal;'>(<?php echo $html->link("editar",array('controller'=>"users",'action'=>"edit", $loggedUser['User']['id']),array('escape'=>false))?> / <?php echo $html->link('cerrar sesión',"/users/logout");?>)</span>
+		<?php }
+		?>	
 	</span>
 <?php 
 }
