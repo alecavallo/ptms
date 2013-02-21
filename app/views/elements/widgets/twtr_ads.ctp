@@ -11,7 +11,7 @@
 	<div class="tContent">
 		<h4 class="section grey">
 			<span style="font-weight: 400;">Anuncios</span>		</h4>
-		<h3><?php echo $html->link($ad['name'],$ad['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"new Ajax.Request('/ads/click/{$ad['id']}'); return true;"));?></h3>
+		<h3><?php echo $html->link($ad['name'],$ad['link'], array('escape'=>false, 'target'=>"_blank", 'onclick'=>"_gaq.push(['_trackEvent', 'Publicidad', 'Click', '{$ad['name']}']); new Ajax.Request('/ads/click/{$ad['id']}'); return true;"));?></h3>
 		<div class="photo">
 			<?php 
 				if (array_key_exists('photo', $ad) && !empty($ad['photo'])) {
