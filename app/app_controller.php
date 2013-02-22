@@ -43,6 +43,8 @@ class AppController extends Controller {
             'username' => 'email',
             'password' => 'password'
         );
+        $this->Auth->authError = "Acceso restringido. Por favor inicie sesión.";
+        $this->Auth->loginError = "Usuario o contraseña incorrectos";
         //$this->Auth->loginRedirect = array('controller' => 'sources', 'action' => 'index', 'admin'=>true);
 		$admin = Configure::read('Routing.prefixes');
 		$admin=$admin[0];
